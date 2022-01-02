@@ -1,4 +1,4 @@
-local library = {...} or {title = "H3x"; description = "Loaded!"}
+local library = (...) or {title = "H3x"; description = "Loaded for Lumber Tycoon 2"}
 
 do -- loadup
 	if library.title == nil then
@@ -257,25 +257,67 @@ do -- loadup
 		TextXAlignment = Enum.TextXAlignment.Left;
 		TextYAlignment = Enum.TextYAlignment.Top
 	})
+    if not isfolder("H3x") then makefolder("H3x") end
+    if not isfolder("H3x/Modules") then makefolder("H3x/Modules") end
+    if not isfolder("H3x/Config") then makefolder("H3x/Config") end
+    if not isfile("H3x/Config/UISettings.txt") then writefile("H3x/Config/UISettings.txt", "P") end
+    key = (readfile("H3x/Config/UISettings.txt")) 
 	local toggle = true
-    function onKeyPress(actionName, userInputState, inputObject)
-        if userInputState == Enum.UserInputState.Begin and not game:GetService("UserInputService"):GetFocusedTextBox() then
-            if toggle == false then
-                toggle = true
-                library.Holder.Visible = true;
-            else
-                toggle = false
-				library.Holder.Visible = false;
+	game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+        if input.KeyCode == Enum.KeyCode[key] then
+            if game:GetService("UserInputService"):GetFocusedTextBox() == nil then
+                if toggle == false then
+                    toggle = true
+                    library.Holder.Visible = true;
+                else
+                    toggle = false
+    				library.Holder.Visible = false;
+                end
             end
         end
-    end
+    end)
+    
+	spawn(function()
+		while wait() do
+			local finish = "discord.gg/mxbqfEjKSP"
+			for i = 1, #finish do
+				library.GuiDescription.Text = library.description.."\n"..string.sub(finish, 1, i)
+				wait(0.1) --This is the speed of the text
+			end
+			wait(3)
+		end
+	end)
+	
+	local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
+	local inputService = game:GetService('UserInputService');
+	local heartbeat    = game:GetService("RunService").Heartbeat;
+	-- // credits to Ririchi / Inori for this cute drag function :)
+		local s, event = pcall(function()
+			return library.Holder.MouseEnter
+		end)
 
-    if isfolder("H3x") then return else makefolder("H3x") end
-    if isfolder("H3x/Modules") then return else makefolder("H3x/Modules") end
-    if isfolder("H3x/Config") then return else makefolder("H3x/Config") end
-    if isfile("H3x/Config/UISettings.txt") then return else writefile("H3x/Config/UISettings.txt", Enum.KeyCode.P) end
+		if s then
+			library.Holder.Active = true;
 
-    game.ContextActionService:BindAction("keyPress", onKeyPress, false, readfile("H3x/Config/UISettings.txt"))
+			event:connect(function()
+			local input = library.Holder.InputBegan:connect(function(key)
+					if key.UserInputType == Enum.UserInputType.MouseButton1 then
+					local objectPosition = Vector2.new(mouse.X - library.Holder.AbsolutePosition.X, mouse.Y - library.Holder.AbsolutePosition.Y);
+						while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+							pcall(function()
+							library.Holder:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X, 0, mouse.Y - objectPosition.Y + game:GetService("GuiService"):GetGuiInset().Y), 'Out', 'Linear', 0.1, true);
+							end)
+						end
+					end
+				end)
+
+				local leave;
+			leave = library.Holder.MouseLeave:connect(function()
+					input:disconnect();
+					leave:disconnect();
+				end)
+			end)
+		end
 end
 
 function library:Tab(name)
@@ -5953,48 +5995,6 @@ function library:Tab(name)
 		Window.SideTabSide.Visible = true;
 		library.active = name
 	end
-	
-	spawn(function()
-		while wait() do
-			local finish = "discord.gg/mxbqfEjKSP"
-			for i = 1, #finish do
-				library.GuiDescription.Text = library.description.."\n"..string.sub(finish, 1, i)
-				wait(0.1) --This is the speed of the text
-			end
-			wait(3)
-		end
-	end)
-	
-	local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
-	local inputService = game:GetService('UserInputService');
-	local heartbeat    = game:GetService("RunService").Heartbeat;
-	-- // credits to Ririchi / Inori for this cute drag function :)
-		local s, event = pcall(function()
-			return library.Holder.MouseEnter
-		end)
-
-		if s then
-			library.Holder.Active = true;
-
-			event:connect(function()
-			local input = library.Holder.InputBegan:connect(function(key)
-					if key.UserInputType == Enum.UserInputType.MouseButton1 then
-					local objectPosition = Vector2.new(mouse.X - library.Holder.AbsolutePosition.X, mouse.Y - library.Holder.AbsolutePosition.Y);
-						while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-							pcall(function()
-							library.Holder:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X, 0, mouse.Y - objectPosition.Y + game:GetService("GuiService"):GetGuiInset().Y), 'Out', 'Linear', 0.1, true);
-							end)
-						end
-					end
-				end)
-
-				local leave;
-			leave = library.Holder.MouseLeave:connect(function()
-					input:disconnect();
-					leave:disconnect();
-				end)
-			end)
-		end
 	return Window;
 end
 return library;

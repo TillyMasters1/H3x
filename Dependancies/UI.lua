@@ -1,4 +1,4 @@
-local library = (...) or {title = "H3x"; description = "Loaded for Lumber Tycoon 2"}
+local library = {...} or {title = "H3x"; description = "Loaded!"}
 
 do -- loadup
 	if library.title == nil then

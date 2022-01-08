@@ -519,9 +519,11 @@ function library:Tab(name)
 		end
 	end)
 	
-	function Window:Button(name,description,image,clicktext,callback)
+	function Window:Button(name,description,image,clicktext,imagerectoffset,imagerectsize,callback)
 		image = image or "rbxassetid://3926305904";
 		callback = callback or function() end;
+		imagerectoffset = imagerectoffset or Vector2.new(0, 0);
+		imagerectsize = imagerectsize or Vector2.new(0, 0)
 
 		local button = {};
 
@@ -623,8 +625,8 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = imagerectoffset
+			ImageRectSize = imagerectsize
 		})
 
 		local held = false;

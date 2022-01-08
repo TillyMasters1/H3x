@@ -523,7 +523,7 @@ function library:Tab(name)
 		image = image or "rbxassetid://3926305904";
 		callback = callback or function() end;
 		imagerectoffset = imagerectoffset or Vector2.new(0, 0);
-		imagerectsize = imagerectsize or Vector2.new(0, 0)
+		imagerectsize = imagerectsize or Vector2.new(0, 0);
 
 		local button = {};
 

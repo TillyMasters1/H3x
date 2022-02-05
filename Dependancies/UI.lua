@@ -43,7 +43,7 @@ do -- loadup
 	function tween(obj,ti,prop)
 		local twe = game:GetService("TweenService"):Create(obj,TweenInfo.new(ti),prop):Play();
 	end
-	function library:create(class, properties) 
+	function library:create(class, properties)
 		local inst = Instance.new(class)
 		for property, value in pairs(properties) do
 			inst[property] = value
@@ -257,11 +257,14 @@ do -- loadup
 		TextXAlignment = Enum.TextXAlignment.Left;
 		TextYAlignment = Enum.TextYAlignment.Top
 	})
+
+
     if not isfolder("H3x") then makefolder("H3x") end
     if not isfolder("H3x/Modules") then makefolder("H3x/Modules") end
     if not isfolder("H3x/Config") then makefolder("H3x/Config") end
     if not isfile("H3x/Config/UISettings.txt") then writefile("H3x/Config/UISettings.txt", "P") end
-    key = (readfile("H3x/Config/UISettings.txt")) 
+    key = (readfile("H3x/Config/UISettings.txt"))
+
 	local toggle = true
 	game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
         if input.KeyCode == Enum.KeyCode[key] then
@@ -276,7 +279,7 @@ do -- loadup
             end
         end
     end)
-    
+
 	spawn(function()
 		while wait() do
 			local finish = "discord.gg/mxbqfEjKSP"
@@ -287,7 +290,7 @@ do -- loadup
 			wait(3)
 		end
 	end)
-	
+
 	local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
 	local inputService = game:GetService('UserInputService');
 	local heartbeat    = game:GetService("RunService").Heartbeat;
@@ -397,14 +400,14 @@ function library:Tab(name)
 		TextSize = 24.000;
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
-	
+
 	Window.SideTabList = library:create("UIListLayout",{
 		Parent = library.SettingsList;
 		HorizontalAlignment = Enum.HorizontalAlignment.Right;
 		SortOrder = Enum.SortOrder.LayoutOrder;
 		Padding = UDim.new(0, 4)
 	})
-	
+
 	Window.SideTab = library:create("ImageButton",{
 		Name = name;
 		Parent = library.SettingsList;
@@ -416,7 +419,7 @@ function library:Tab(name)
 		ScaleType = Enum.ScaleType.Slice;
 		SliceCenter = Rect.new(4, 4, 252, 252)
 	})
-	
+
 	Window.SideTabName = library:create("TextLabel",{
 		Name = "Name";
 		Parent = Window.SideTab;
@@ -433,7 +436,7 @@ function library:Tab(name)
 		TextStrokeTransparency = 0.300;
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
-	
+
 	Window.SideTabSide = library:create("ImageLabel",{
 		Name = "Side";
 		Parent = Window.SideTab;
@@ -450,7 +453,7 @@ function library:Tab(name)
 		ScaleType = Enum.ScaleType.Slice;
 		SliceCenter = Rect.new(4, 4, 252, 252)
 	})
-	
+
 	Window.SideTabImg = library:create("ImageLabel",{
 		Name = "Img";
 		Parent = Window.SideTab;
@@ -480,7 +483,7 @@ function library:Tab(name)
 			else
 				Window.SideTabSide.Visible = true;
 				tween(Window.SideTab,0.2,{ImageColor3 = Color3.fromRGB(45, 45, 45)});
-				tween(Window.Holder,0.3,{Position=UDim2.new(0,0,-1.25,0)}); 
+				tween(Window.Holder,0.3,{Position=UDim2.new(0,0,-1.25,0)});
 				for herp,ies in pairs(library.SettingsList:GetChildren()) do
 					if ies:IsA("ImageButton") and ies.Name ~= name then
 						ies.Side.Visible = false;
@@ -518,7 +521,7 @@ function library:Tab(name)
 			tween(Window.SideTab,0.2,{ImageColor3 = Color3.fromRGB(35, 35, 35)});
 		end
 	end)
-	
+
 	function Window:Button(name,description,image,clicktext,callback)
 		image = image or "rbxassetid://3926305904";
 		callback = callback or function() end;
@@ -1102,7 +1105,7 @@ function library:Tab(name)
 			Font = Enum.Font.ArialBold;
 			Text = default.Name;
 			TextColor3 = Color3.fromRGB(255, 255, 255);
-			TextSize = 16.000	
+			TextSize = 16.000
 		})
 
 		function bind:Set(key)
@@ -1677,7 +1680,7 @@ function library:Tab(name)
 			local Side = Instance.new("ImageLabel")
 			dropdown.List[value].ImageColor3 = Color3.fromRGB(85,85,85)
 			Side.Name = "Side"
-			Side.Parent = dropdown.List[value] 
+			Side.Parent = dropdown.List[value]
 			Side.Active = true
 			Side.AnchorPoint = Vector2.new(0, 0.5)
 			Side.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1724,12 +1727,12 @@ function library:Tab(name)
 				BTNText.Text = v
 				BTNText.TextColor3 = Color3.fromRGB(255, 255, 255)
 				BTNText.TextSize = 16.000
-				
+
 				if v == default then
 					local Side = Instance.new("ImageLabel")
 					Press.ImageColor3 = Color3.fromRGB(85,85,85)
 					Side.Name = "Side"
-					Side.Parent = Press 
+					Side.Parent = Press
 					Side.Active = true
 					Side.AnchorPoint = Vector2.new(0, 0.5)
 					Side.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -2502,7 +2505,7 @@ function library:Tab(name)
 			ZIndex = 9;
 			Image = "rbxassetid://3570695787";
 			ImageColor3 = Color3.fromRGB(157, 55, 63);
-			ScaleType = Enum.ScaleType.Slice; 
+			ScaleType = Enum.ScaleType.Slice;
 			SliceCenter = Rect.new(100, 100, 100, 100)
 		})
 
@@ -2549,7 +2552,7 @@ function library:Tab(name)
 		local function UpdateCursorPosition(h, s)
 			local gradientSize = colorpicker.Gradient.AbsoluteSize
 			local sizeScale = 360 / gradientSize.X
-			colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (h * 360) / sizeScale, 0, (gradientSize.Y - (s * 360) / sizeScale))
+			colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 		end
 
 		local function InBounds()
@@ -2578,7 +2581,7 @@ function library:Tab(name)
 			local gradientSize = colorpicker.Gradient.AbsoluteSize
 			local sizeScale = 360 / gradientSize.X
 			local h,s,v = hsv(color.R,color.G,color.B)
-			colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
+			colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 			colorpicker.HueSub.Text = h; colorpicker.SatSub.Text = s; colorpicker.ValSub.Text = v;
 			colorpicker.Dark:WaitForChild("Display").Position = UDim2.new(0.5,0,v,0)
 			return color
@@ -2592,7 +2595,7 @@ function library:Tab(name)
 			local color = Color3.fromRGB(Tonumber(colorpicker.RSub.Text), Tonumber(colorpicker.GSub.Text), Tonumber(colorpicker.BSub.Text))
 			local h,s,v = hsv(color.R,color.G,color.B)
 			colorpicker.Dark:WaitForChild("Display").Position = UDim2.new(0.5,0,v,0)
-			colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
+			colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 			return color
 		end
 
@@ -2601,8 +2604,8 @@ function library:Tab(name)
 				local h, s, v = hsv(color.r,color.g,color.b)
 				local r, g, b = Floor(color.r * 255 + 0.5), Floor(color.g * 255 + 0.5), Floor(color.b * 255 + 0.5)
 
-				colorpicker.HueSub.Text = Floor(h * 360 + 0.5)
-				colorpicker.SatSub.Text = Floor(s * 1000 + 0.5) / 1000
+				colorpicker.HueSub.Text = Floor(h + 0.5)
+				colorpicker.SatSub.Text = Floor(s + 0.5)
 				colorpicker.ValSub.Text = Floor(v * 1000 + 0.5) / 1000
 
 				colorpicker.RSub.Text = r
@@ -2642,7 +2645,7 @@ function library:Tab(name)
 				local color = Color3.fromHSV(hue, saturation, 1)
 
 				colorpicker.Press.ImageColor3 = color
-				colorpicker.Cursor.Position = UDim2.new(0, Clamp(offset.X + gradientSize.X / 2, 0, gradientSize.X), 0, Clamp(offset.Y + gradientSize.Y / 2, 0, gradientSize.Y))
+				colorpicker.RGBCursor.Position = UDim2.new(0, Clamp(offset.X + gradientSize.X / 2, 0, gradientSize.X), 0, Clamp(offset.Y + gradientSize.Y / 2, 0, gradientSize.Y))
 
 				return color
 			else
@@ -3145,7 +3148,7 @@ function library:Tab(name)
 
 			return toggle;
 		end
-		
+
 		local held = false;
 		section.Main.MouseButton1Down:Connect(function()
 			held = true;
@@ -3178,7 +3181,7 @@ function library:Tab(name)
 		return section;
 
 	end
-	
+
 	function Window:SubTab(name,description,image)
 		image = image or "rbxassetid://3926305904";
 
@@ -3215,7 +3218,7 @@ function library:Tab(name)
 			ScaleType = Enum.ScaleType.Slice;
 			SliceCenter = Rect.new(4, 4, 252, 252)
 		})
-		
+
 		Sub.Title = library:create("TextLabel",{
 			Name = "Title";
 			Parent = Sub.Main;
@@ -3230,7 +3233,7 @@ function library:Tab(name)
 			TextSize = 17.000;
 			TextXAlignment = Enum.TextXAlignment.Left
 		})
-		
+
 		Sub.Description = library:create("TextLabel",{
 			Name = "Description";
 			Parent = Sub.Main;
@@ -3246,7 +3249,7 @@ function library:Tab(name)
 			TextXAlignment = Enum.TextXAlignment.Left;
 			TextYAlignment = Enum.TextYAlignment.Top
 		})
-		
+
 		Sub.Image = library:create("ImageButton",{
 			Name = "img";
 			Parent = Sub.Main;
@@ -3259,7 +3262,7 @@ function library:Tab(name)
 			ImageRectOffset = Vector2.new(124, 484);
 			ImageRectSize = Vector2.new(36, 36)
 		})
-		
+
 		Sub.Open = library:create("ImageButton",{
 			Name = "Open";
 			Parent = Sub.Main;
@@ -3271,7 +3274,7 @@ function library:Tab(name)
 			ZIndex = 2;
 			Image = "http://www.roblox.com/asset/?id=1902936388"
 		})
-		
+
 		local held = false;
 		Sub.Main.MouseButton1Down:Connect(function()
 			held = true;
@@ -3282,7 +3285,9 @@ function library:Tab(name)
 				tween(Sub.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 				Sub.SubTab.Visible = true;
 				Window.Container.Visible = false;
-				Window.SubTitle.Text = "> "..name
+				Window.SubTitle.Text = " "..name
+				local bounds = game:GetService('TextService'):GetTextSize(Window.Title.Text, 24, Enum.Font.ArialBold, Vector2.new(math.huge, math.huge)).X+8
+				Window.SubTitle.Position = UDim2.new(0,bounds+20,0.0340000018,0)
 				Window.SubTitle.Visible = true;
 				Window.Title.TextColor3 = Color3.fromRGB(175,175,175);
 				Window.Title.MouseEnter:Connect(function()
@@ -3314,7 +3319,7 @@ function library:Tab(name)
 			held = false;
 			tween(Sub.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 		end)
-		
+
 		function Sub:Button(name,description,image,clicktext,callback)
 			image = image or "rbxassetid://3926305904";
 			callback = callback or function() end;
@@ -3634,7 +3639,7 @@ function library:Tab(name)
 				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			end)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return switch;
@@ -3789,7 +3794,7 @@ function library:Tab(name)
 				end
 			end)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return box;
@@ -3900,7 +3905,7 @@ function library:Tab(name)
 				Font = Enum.Font.ArialBold;
 				Text = default.Name;
 				TextColor3 = Color3.fromRGB(255, 255, 255);
-				TextSize = 16.000	
+				TextSize = 16.000
 			})
 
 			function bind:Set(key)
@@ -3993,7 +3998,7 @@ function library:Tab(name)
 				end
 			end)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return bind;
@@ -4256,7 +4261,7 @@ function library:Tab(name)
 
 			slider:Set(default)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return slider;
@@ -4283,7 +4288,7 @@ function library:Tab(name)
 				txt.Main.Text = val;
 			end
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return txt;
@@ -4478,7 +4483,7 @@ function library:Tab(name)
 				local Side = Instance.new("ImageLabel")
 				dropdown.List[value].ImageColor3 = Color3.fromRGB(85,85,85)
 				Side.Name = "Side"
-				Side.Parent = dropdown.List[value] 
+				Side.Parent = dropdown.List[value]
 				Side.Active = true
 				Side.AnchorPoint = Vector2.new(0, 0.5)
 				Side.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4530,7 +4535,7 @@ function library:Tab(name)
 						local Side = Instance.new("ImageLabel")
 						Press.ImageColor3 = Color3.fromRGB(85,85,85)
 						Side.Name = "Side"
-						Side.Parent = Press 
+						Side.Parent = Press
 						Side.Active = true
 						Side.AnchorPoint = Vector2.new(0, 0.5)
 						Side.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4628,7 +4633,7 @@ function library:Tab(name)
 				end
 			end)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return dropdown;
@@ -4666,7 +4671,7 @@ function library:Tab(name)
 					s = (diff/cmax)*100
 				end
 				--// value
-				local v = cmax*100
+				local v = cmax
 				return h,s,v
 			end
 
@@ -4707,9 +4712,9 @@ function library:Tab(name)
 				return "#" .. DecimalToHex(r) .. DecimalToHex(g) .. DecimalToHex(b)
 			end
 
-			local r = ((colorpicker.value).R)*255
-			local g = ((colorpicker.value).G)*255
-			local b = ((colorpicker.value).B)*255
+			local r = math.floor(((colorpicker.value).R)*255)
+			local g = math.floor(((colorpicker.value).G)*255)
+			local b = math.floor(((colorpicker.value).B)*255)
 			local h,s,v = hsv(r,g,b)
 			local hx = RGBToHex(r,g,b)
 			colorpicker.Main = library:create("ImageButton",{
@@ -4845,7 +4850,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = tostring(r);
+				Text = tostring(math.floor(b));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -4908,7 +4913,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = tostring(g);
+				Text = tostring(math.floor(g));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -5035,7 +5040,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = h;
+				Text = tostring(math.floor(tonumber(h)));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -5099,7 +5104,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = r;
+				Text = tostring(math.floor(r));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -5162,7 +5167,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = s;
+				Text = tostring(math.floor(tonumber(s)));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -5225,7 +5230,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 1, 0);
 				ZIndex = 6;
 				Font = Enum.Font.Arial;
-				Text = v;
+				Text = tostring(math.floor(tonumber(v)));
 				TextColor3 = Color3.fromRGB(152, 152, 152);
 				TextSize = 16.000
 			})
@@ -5278,7 +5283,7 @@ function library:Tab(name)
 				Size = UDim2.new(1, 0, 0, 1)
 			})
 
-			colorpicker.Gradient = library:create("ImageLabel",{
+			colorpicker.Gradient = library:create("ImageButton",{
 				Name = "RGB";
 				Parent = colorpicker.Main;
 				AnchorPoint = Vector2.new(0.5, 0.5);
@@ -5304,7 +5309,7 @@ function library:Tab(name)
 				ZIndex = 9;
 				Image = "rbxassetid://3570695787";
 				ImageColor3 = Color3.fromRGB(157, 55, 63);
-				ScaleType = Enum.ScaleType.Slice; 
+				ScaleType = Enum.ScaleType.Slice;
 				SliceCenter = Rect.new(100, 100, 100, 100)
 			})
 
@@ -5351,7 +5356,7 @@ function library:Tab(name)
 			local function UpdateCursorPosition(h, s)
 				local gradientSize = colorpicker.Gradient.AbsoluteSize
 				local sizeScale = 360 / gradientSize.X
-				colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (h * 360) / sizeScale, 0, (gradientSize.Y - (s * 360) / sizeScale))
+				colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 			end
 
 			local function InBounds()
@@ -5380,7 +5385,7 @@ function library:Tab(name)
 				local gradientSize = colorpicker.Gradient.AbsoluteSize
 				local sizeScale = 360 / gradientSize.X
 				local h,s,v = hsv(color.R,color.G,color.B)
-				colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
+				colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 				colorpicker.HueSub.Text = h; colorpicker.SatSub.Text = s; colorpicker.ValSub.Text = v;
 				colorpicker.Dark:WaitForChild("Display").Position = UDim2.new(0.5,0,v,0)
 				return color
@@ -5394,7 +5399,7 @@ function library:Tab(name)
 				local color = Color3.fromRGB(Tonumber(colorpicker.RSub.Text), Tonumber(colorpicker.GSub.Text), Tonumber(colorpicker.BSub.Text))
 				local h,s,v = hsv(color.R,color.G,color.B)
 				colorpicker.Dark:WaitForChild("Display").Position = UDim2.new(0.5,0,v,0)
-				colorpicker.Cursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
+				colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 				return color
 			end
 
@@ -5403,8 +5408,8 @@ function library:Tab(name)
 					local h, s, v = hsv(color.r,color.g,color.b)
 					local r, g, b = Floor(color.r * 255 + 0.5), Floor(color.g * 255 + 0.5), Floor(color.b * 255 + 0.5)
 
-					colorpicker.HueSub.Text = Floor(h * 360 + 0.5)
-					colorpicker.SatSub.Text = Floor(s * 1000 + 0.5) / 1000
+					colorpicker.HueSub.Text = Floor(h + 0.5)
+					colorpicker.SatSub.Text = Floor(s + 0.5)
 					colorpicker.ValSub.Text = Floor(v * 1000 + 0.5) / 1000
 
 					colorpicker.RSub.Text = r
@@ -5444,7 +5449,7 @@ function library:Tab(name)
 					local color = Color3.fromHSV(hue, saturation, 1)
 
 					colorpicker.Press.ImageColor3 = color
-					colorpicker.Cursor.Position = UDim2.new(0, Clamp(offset.X + gradientSize.X / 2, 0, gradientSize.X), 0, Clamp(offset.Y + gradientSize.Y / 2, 0, gradientSize.Y))
+					colorpicker.RGBCursor.Position = UDim2.new(0, Clamp(offset.X + gradientSize.X / 2, 0, gradientSize.X), 0, Clamp(offset.Y + gradientSize.Y / 2, 0, gradientSize.Y))
 
 					return color
 				else
@@ -5611,7 +5616,7 @@ function library:Tab(name)
 				tween(colorpicker.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			end)
 
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return colorpicker;
@@ -5827,7 +5832,7 @@ function library:Tab(name)
 					tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 				end)
 
-				
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 				return button;
@@ -5945,7 +5950,7 @@ function library:Tab(name)
 					tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 				end)
 
-				
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 				return toggle;
@@ -5961,11 +5966,12 @@ function library:Tab(name)
 					tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 					if section.Open.Rotation == 180 then
 						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
-						tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize + UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 0})
 					else
 						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
 						tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize - UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 180})
 					end
 					held = false;
@@ -5978,13 +5984,13 @@ function library:Tab(name)
 				tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 				held = false;
 			end)
-			
+
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return section;
 
 		end
-		
+
 		return Sub;
 
 	end
@@ -5996,5 +6002,99 @@ function library:Tab(name)
 		library.active = name
 	end
 	return Window;
+end
+
+local Size = workspace.CurrentCamera.ViewportSize - Vector2.new(5,30)
+local lasty = 40;
+local texts = {};
+function library:List(name,enabled)
+	local Lister = {}
+
+    Lister.text = Drawing.new("Text");
+    Lister.text.Text = name;
+	Lister.text.Size = 20;
+	Lister.text.Center = false;
+	Lister.text.Outline = true;
+	Lister.text.Color = Color3.fromRGB(170,170,170);
+	Lister.text.Font = 2;
+	Lister.text.Visible = enabled;
+	Lister.text.Position = Vector2.new(Size.X - Lister.text.TextBounds.X, lasty + Lister.text.TextBounds.Y);
+
+    Lister.side = Drawing.new("Line");
+	Lister.side.Thickness = 2;
+	Lister.side.From = Vector2.new(Size.X - Lister.text.TextBounds.X - 4,(lasty+(Lister.text.TextBounds.Y)) + Lister.text.TextBounds.Y);
+	Lister.side.To = Vector2.new(Size.X - Lister.text.TextBounds.X - 4,(lasty+(Lister.text.TextBounds.Y)) + Lister.text.TextBounds.Y*2);
+	Lister.side.Visible = enabled;
+
+    Lister.bottom = Drawing.new("Line");
+	Lister.bottom.Thickness = 2;
+	Lister.bottom.From = Vector2.new(Size.X - Lister.text.TextBounds.X - 4,(lasty+(Lister.text.TextBounds.Y)) + Lister.text.TextBounds.Y*2);
+	Lister.bottom.To = Vector2.new(Size.X,(40+(Lister.text.TextBounds.Y)) + Lister.text.TextBounds.Y*2);
+	Lister.bottom.Visible = enabled;
+
+	table.insert(texts,Lister);
+
+	local n = {};
+
+	for i,v in pairs(texts) do
+	 if v.text.Visible then
+	  table.insert(n,v);
+	 end
+	end
+
+	  table.sort(n,function(a,b) return a.text.TextBounds.X+4 > b.text.TextBounds.X+4 end)
+    lasty = 40;
+    for i,v in pairs(n) do
+     v.text.Position = Vector2.new(Size.X - v.text.TextBounds.X, lasty + v.text.TextBounds.Y);
+     v.side.From = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)));
+	 v.side.To = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)) + v.text.TextBounds.Y);
+	 v.bottom.From = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)) + v.text.TextBounds.Y);
+	 if n[i+1] ~= nil then
+	  v.bottom.To = Vector2.new(Size.X - n[i+1].text.TextBounds.X - 4,(lasty+v.text.TextBounds.Y) + v.text.TextBounds.Y);
+     else
+      v.bottom.To = Vector2.new(Size.X,(lasty+v.text.TextBounds.Y) + v.text.TextBounds.Y);
+     end
+     lasty = lasty + v.text.TextBounds.Y
+    end
+
+	function Lister:Set(arg)
+		local old;
+		if type(arg) == "boolean" then
+			old = Lister.text.Visible;
+			Lister.text.Visible = arg;
+			Lister.side.Visible = arg;
+			Lister.bottom.Visible=arg;
+		else
+			old = Lister.text.Text;
+			Lister.text.Text = arg;
+		end
+
+		if type(old) == "boolean" then if Lister.text.Visible == old then return elseif Lister.text.Text == old then return end end
+
+		local n = {};
+
+    	for i,v in pairs(texts) do
+    	 if v.text.Visible then
+    	  table.insert(n,v);
+    	 end
+    	end
+
+    	table.sort(n,function(a,b) return a.text.TextBounds.X+4 > b.text.TextBounds.X+4 end)
+        lasty = 40;
+        for i,v in pairs(n) do
+         v.text.Position = Vector2.new(Size.X - v.text.TextBounds.X, lasty + v.text.TextBounds.Y);
+         v.side.From = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)));
+    	 v.side.To = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)) + v.text.TextBounds.Y);
+    	 v.bottom.From = Vector2.new(Size.X - v.text.TextBounds.X - 4,(lasty+(v.text.TextBounds.Y)) + v.text.TextBounds.Y);
+    	 if n[i+1] ~= nil then
+    	  v.bottom.To = Vector2.new(Size.X - n[i+1].text.TextBounds.X - 4,(lasty+v.text.TextBounds.Y) + v.text.TextBounds.Y);
+         else
+          v.bottom.To = Vector2.new(Size.X,(lasty+v.text.TextBounds.Y) + v.text.TextBounds.Y);
+         end
+         lasty = lasty + v.text.TextBounds.Y
+        end
+	end
+
+	return Lister;
 end
 return library;

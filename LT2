@@ -3,6 +3,15 @@ local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 if game.PlaceId == 13822889 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TillyMasters1/H3x/main/Install.lua"))(); loadstring(readfile("H3x/Modules/ENV.lua"))()
     local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!"});
+    repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Torso") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
+    local FlyToggle = Enum.KeyCode.Q
+    local plr = game.Players.LocalPlayer
+    local torso = plr.Character.Torso
+    local flying = false
+    local ctrl = {f = 0, b = 0, l = 0, r = 0}
+    local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+    local maxspeed = 100
+    local speed = 0
     local HoldToSelect  = Enum.KeyCode.LeftControl
     local HoldToUndoAll = Enum.KeyCode.LeftAlt
     local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
@@ -79,7 +88,7 @@ if game.PlaceId == 13822889 then
     
 
     local Player = library:Tab("Player");
-
+        -- DeleteTool
         Player:Text("Delete Tool")
 
         Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,function(e)
@@ -93,13 +102,25 @@ if game.PlaceId == 13822889 then
                 HoldToUndoAll = e
             end
         end)
+
+
+        -- Fly
+        Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
+            if e ~= true and e ~= false then
+                FlyToggle = e
+            end
+        end)
+
+        Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxassetid://3926305904",0,100,600,function(e)
+            maxspeed = e
+        end)
     
 
     local Credits = library:Tab("Credits");
     
         Credits:Text("⸻⸻ H3X Credits ⸻⸻");
-	
-	Credits:Text("Owners: Dakota#0826 | Carillon#1958");
+
+        Credits:Text("Owners: Dakota#0826 | Carillon#1958");
         
         Credits:Text("⸻ Script Credits ⸻")
         
@@ -126,7 +147,9 @@ if game.PlaceId == 13822889 then
     	end
     end)
     
+    
     -- Delete Tool
+    spawn(function()
         for a,b in pairs(game.Workspace:GetDescendants()) do
             if b.ClassName == "Part" then 
                 b.Locked = false 
@@ -159,7 +182,73 @@ if game.PlaceId == 13822889 then
                 wait(.1)
             end 
         end
+    end)
     
+    
+    -- Fly
+    function Fly()
+        local bg = Instance.new("BodyGyro", torso)
+        bg.P = 5e4
+        bg.maxTorque = Vector3.new(9e8, 9e8, 9e8)
+        bg.cframe = torso.CFrame
+        local bv = Instance.new("BodyVelocity", torso)
+        bv.velocity = Vector3.new(0,0.1,0)
+        bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+        repeat wait()
+            plr.Character.Humanoid.PlatformStand = true
+            if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+                speed = maxspeed
+            elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+                speed = 0
+            end
+            if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+                lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+            elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+                bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+            else
+                bv.velocity = Vector3.new(0,0.1,0)
+            end
+            bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame
+        until not flying
+        ctrl = {f = 0, b = 0, l = 0, r = 0}
+        lastctrl = {f = 0, b = 0, l = 0, r = 0}
+        speed = 0
+        bg:Destroy()
+        bv:Destroy()
+        plr.Character.Humanoid.PlatformStand = false
+    end
+
+    game:GetService("UserInputService").InputBegan:Connect(function(key)
+        if key.KeyCode == FlyToggle then
+            if flying then 
+                flying = false
+            else
+                flying = true
+                Fly()
+            end
+        elseif key.KeyCode == Enum.KeyCode.W then
+            ctrl.f = 1
+        elseif key.KeyCode == Enum.KeyCode.S then
+            ctrl.b = -1
+        elseif key.KeyCode == Enum.KeyCode.A then
+            ctrl.l = -1
+        elseif key.KeyCode == Enum.KeyCode.D then
+            ctrl.r = 1
+        end
+    end)
+    game:GetService("UserInputService").InputEnded:Connect(function(key)
+        if key.KeyCode == Enum.KeyCode.W then
+            ctrl.f = 0
+        elseif key.KeyCode == Enum.KeyCode.S then
+            ctrl.b = 0
+        elseif key.KeyCode == Enum.KeyCode.A then
+            ctrl.l = 0
+        elseif key.KeyCode == Enum.KeyCode.D then
+            ctrl.r = 0
+        end
+    end)
+    Fly()
 
 else
     notify.push({

@@ -98,14 +98,12 @@ if game.PlaceId == 13822889 then
     local Credits = library:Tab("Credits");
     
         Credits:Text("⸻⸻ H3X Credits ⸻⸻");
+	
+	Credits:Text("Owners: Dakota#0826 | Carillon#1958");
         
         Credits:Text("⸻ Script Credits ⸻")
         
-        Credits:Text("Owners: Dakota#0826 | Carillon#1958");
-        
-        Credits:Text("Devs: One Shot#0001 | nearepick#1234");
-
-        Credits:Text("⎯⎯ Credit to Wally for parts of script ⎯⎯")
+        Credits:Text("Devs: Carillon#1958");
         
         Credits:Text("⸻ UI Credits ⸻")
             

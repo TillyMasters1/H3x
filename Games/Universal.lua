@@ -3,8 +3,12 @@ local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", descr
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
 repeat wait() until game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
 local plr = game.Players.LocalPlayer
-local torso
-if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then torso = plr.Character.Torso else plr.Character.UpperTorso end
+local torso = torso
+if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then 
+    torso = "UpperTorso" 
+else 
+    torso = "Torso"
+end
 local flying = false
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
@@ -186,11 +190,11 @@ end)
 
 -- Fly
 function Fly()
-    local bg = Instance.new("BodyGyro", torso)
+    local bg = Instance.new("BodyGyro", game.Players.LocalPlayer.Character:findFirstChild(torso))
     bg.P = 5e4
     bg.maxTorque = Vector3.new(9e8, 9e8, 9e8)
-    bg.cframe = torso.CFrame
-    local bv = Instance.new("BodyVelocity", torso)
+    bg.cframe = game.Players.LocalPlayer.Character:findFirstChild(torso).CFrame
+    local bv = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character:findFirstChild(torso))
     bv.velocity = Vector3.new(0,0.1,0)
     bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
     repeat wait()

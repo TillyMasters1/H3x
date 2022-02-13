@@ -3,7 +3,8 @@ local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", descr
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
 repeat wait() until game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
 local plr = game.Players.LocalPlayer
-local torso = plr.Character.Torso or plr.Character.UpperTorso
+local torso
+if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then torso = plr.Character.Torso else plr.Character.UpperTorso end
 local flying = false
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}

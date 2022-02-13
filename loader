@@ -26,4 +26,10 @@ if ingame == false then
 		Text = "We do not currently support this game",
 		Duration = 5;
   })
+  loadstring(game:HttpGet("https://h3x.wtf/Games/Universal.lua"))()
+  notify.push({
+	Title = "H3x",
+	Text = "Loaded Universal script",
+	Duration = 5;
+  })
 end

@@ -1,3 +1,3 @@
 _G.Games = {
-    --["4623386862"] = {Name = "Piggy", Script = "Piggy.lua",ID = 4623386862,Status = 4},
+    ["13822889"] = {Name = "LumberTycoon2", Script = "LT2.lua", ID = 13822889, Status = 4},
 }

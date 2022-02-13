@@ -1,1 +1,29 @@
+loadstring(game:HttpGet('https://h3x.wtf/GamesList.lua'))()
+local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 
+local ingame = false
+
+for _,Game in pairs(_G.Games) do
+  if game.PlaceId == Game.ID then
+    ingame = true
+    loadstring(game:HttpGet("https://h3x.wtf/Games/"..Game.Script))()
+    spawn(function()
+        notify.push({
+    		Title = "H3x",
+    		Text = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." Script",
+    		Duration = 5;
+	    })
+    end)
+    return
+  else
+    ingame = false
+  end
+end
+
+if ingame == false then
+  notify.push({
+		Title = "H3x",
+		Text = "We do not currently support this game",
+		Duration = 5;
+  })
+end

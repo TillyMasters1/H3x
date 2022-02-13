@@ -1,4 +1,4 @@
-loadstring(game:HttpGet('https://h3x.wtf/GamesList.lua'))()
+loadstring(game:HttpGet('https://h3x.wtf/GameList.lua'))()
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 
 local ingame = false

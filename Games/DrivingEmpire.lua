@@ -357,7 +357,7 @@ end)
 
 --Anti AFK
 
-LocalPlayer.Idled:Connect(function()
+plr.Idled:Connect(function()
     VirtualUser:CaptureController()
     VirtualUser:ClickButton2(Vector2.new(), Camera.CFrame)
 end)

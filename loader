@@ -6,14 +6,14 @@ local ingame = false
 for _,Game in pairs(_G.Games) do
   if game.PlaceId == Game.ID then
     ingame = true
-    loadstring(game:HttpGet("https://h3x.wtf/Games/"..Game.Script))()
     spawn(function()
         notify.push({
-    		Title = "H3x",
-    		Text = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." Script",
-    		Duration = 5;
-	    })
+		Title = "H3x",
+		Text = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." Script",
+		Duration = 5;
+    	})
     end)
+    loadstring(game:HttpGet("https://h3x.wtf/Games/"..Game.Script))()
     return
   else
     ingame = false

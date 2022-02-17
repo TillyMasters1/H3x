@@ -21,15 +21,13 @@ for _,Game in pairs(_G.Games) do
 end
 
 if ingame == false then
-  notify.push({
-		Title = "H3x",
-		Text = "We do not currently support this game",
-		Duration = 5;
-  })
-  loadstring(game:HttpGet("https://h3x.wtf/Games/Universal.lua"))()
-  notify.push({
-	Title = "H3x",
-	Text = "Loaded Universal script",
-	Duration = 5;
-  })
+    notify.push({
+        Title = "H3x",
+        Text = "We do not currently support this game",
+        Duration = 30,
+        Button1 = "Load Universal script",
+        callback = function()
+            loadstring(game:HttpGet("https://h3x.wtf/Games/Universal.lua"))()
+        end
+    })
 end

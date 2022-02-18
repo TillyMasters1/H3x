@@ -115,7 +115,7 @@ local Player = library:Tab("Player");
 
 local Slot = library:Tab("Slot");
     Slot:Text("Pink Car Spawner")
-    Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns",""rbxassetid://3926305904"","Spawn",function()
+    Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid://3926305904","Spawn",function()
         if _G.Executed == false or _G.Executed == nil then
             _G.Executed = true
             Spawned = false

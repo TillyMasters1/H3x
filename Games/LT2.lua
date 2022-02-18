@@ -113,6 +113,75 @@ local Player = library:Tab("Player");
     end)
 
 
+local Slot = library:Tab("Slot");
+    Slot:Text("Pink Car Spawner")
+    Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns",function()
+        if _G.Executed == false or _G.Executed == nil then
+            _G.Executed = true
+            Spawned = false
+            Spawning = false
+            SpawnPad = nil
+            workspace.PlayerModels.ChildAdded:connect(function(Added)
+                if Spawned == false and Spawning == false then 
+                    Owner = nil
+                    CheckSuccess = false
+                    repeat wait() 
+                        if Added:FindFirstChild("Owner") and Added:FindFirstChild("Type") and Added.Type.Value == "Vehicle" and Added:FindFirstChild("Settings") and Added.Settings:FindFirstChild("Color") then 
+                            CheckSuccess = true
+                            print("IsCar")
+                            Owner = Added.Owner.Value
+                        end
+                    until CheckSuccess == true
+                    if Owner == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(Owner) == true and CheckSuccess == true then
+                        CheckSuccess = false
+                        Spawning = true
+                        Added:FindFirstChild("Settings")
+                        Added.Settings:FindFirstChild("Color")
+                        if tostring(Added.Settings.Color.Value) == tostring(1032) then
+                            Spawned = true
+                            Spawning = false
+                            print(Spawned)
+                        elseif tostring(Added.Settings.Color.Value) ~= tostring(1032) then
+                            if SpawnPad:FindFirstChild("ButtonRemote_SpawnButton") and SpawnPad:FindFirstChild("Owner") then 
+                                if SpawnPad.Owner.Value == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(SpawnPad.Owner.Value) == true then 
+                                    Spawning = false
+                                    game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(SpawnPad.ButtonRemote_SpawnButton)
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        
+            mouse = game.Players.LocalPlayer:GetMouse()
+            mouse.KeyDown:connect(function(key)
+                if key:lower() == "c" then
+                    if mouse.Target.Parent:FindFirstChild("ButtonRemote_SpawnButton") then 
+                        SpawnPad = mouse.Target.Parent
+                        Spawned = false
+                        Spawning = false
+                        game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(mouse.Target.Parent.ButtonRemote_SpawnButton)
+                    else 
+                        Spawned = true
+                        Spawning = false
+                    end
+                end
+            end)
+            spawn(function()
+                repeat wait()
+                    if Spawned == true then
+                        Spawning = false
+                        notify.push({
+                            Title = "H3x",
+                            Text = "Pink Car\nSuccessfully Spawned",
+                            Duration = 5,
+                        })
+                    end
+                until Spawned == true
+            end)
+        end
+    end)
+
 local Credits = library:Tab("Credits");
 
     Credits:Text("⸻⸻ H3X Credits ⸻⸻");

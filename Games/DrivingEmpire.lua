@@ -257,7 +257,8 @@ function Fly()
     plr.Character.Humanoid.PlatformStand = false
 end
 
-game:GetService("UserInputService").InputBegan:Connect(function(key)
+game:GetService("UserInputService").InputBegan:Connect(function(key,gameProcessedEvent)
+    if gameProcessedEvent then return end
     if key.KeyCode == FlyToggle then
         if flying then 
             flying = false
@@ -275,7 +276,8 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         ctrl.r = 1
     end
 end)
-game:GetService("UserInputService").InputEnded:Connect(function(key)
+game:GetService("UserInputService").InputEnded:Connect(function(key,gameProcessedEvent)
+    if gameProcessedEvent then return end
     if key.KeyCode == Enum.KeyCode.W then
         ctrl.f = 0
     elseif key.KeyCode == Enum.KeyCode.S then

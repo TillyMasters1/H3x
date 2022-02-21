@@ -14,6 +14,7 @@ local Parts = {}
 local Box = Instance.new("SelectionBox",game.Workspace)
 local Sound0 = Instance.new("Sound")
 local Sound1 = Instance.new("Sound")
+local LoopDupeInventory = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.Q
@@ -183,6 +184,13 @@ local Slot = library:Tab("Slot");
         end
     end)
 
+    Slot:Text("Dupe")
+    Slot:Switch("Dupe Inventory","Toggles Dupe Inventory loop","rbxassetid://3926305904",false,function(e)
+        if e == true or e == false then
+            LoopDupeInventory = e
+        end
+    end)
+
 local Credits = library:Tab("Credits");
 
     Credits:Text("⸻⸻ H3X Credits ⸻⸻");
@@ -318,3 +326,31 @@ game:GetService("UserInputService").InputEnded:Connect(function(key,gameProcesse
     end
 end)
 Fly()
+
+
+-- Dupe Inventory
+
+spawn(function()
+    while wait() do
+        if LoopDupeInventory then
+            local pos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+            local plr = game.Players.LocalPlayer
+            for i,v in pairs(plr.Character:GetChildren()) do
+                if v.ClassName == "Part" then
+                    v:Destroy()
+                end
+            end
+            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if v.Name ~= "BlueprintTool" and v.Name == "Tool" then
+                    game.ReplicatedStorage.Interaction.ClientInteracted:FireServer(v, "Drop tool", pos)
+                end
+            end
+            plr.CharacterAdded:Wait()    
+            plr.Character:WaitForChild('HumanoidRootPart')
+            wait(0.05)
+            plr.Character.HumanoidRootPart.CFrame = pos
+            plr.Backpack:WaitForChild("Tool")
+            plr.Character.HumanoidRootPart.CFrame = pos
+        end
+    end
+end)

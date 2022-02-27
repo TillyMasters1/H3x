@@ -274,17 +274,17 @@ spawn(function()
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame
                     wait(0.2)
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 20)
-                    v.CashSpawnSpot.Touched:connect(function(part)
+                    local Touched = v.CashSpawnSpot.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
                             fireproximityprompt(part.ProximityPrompt, 20)
-                            return
+                            Touched:Disconnect()
                         end
                     end)
-                    v.CashSpawnSpot2.Touched:connect(function(part)
+                    local Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
                             fireproximityprompt(part.ProximityPrompt, 20)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
-                            return
+                            Touched2:Disconnect()
                         end
                     end)
                 end

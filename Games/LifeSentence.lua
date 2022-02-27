@@ -23,6 +23,12 @@ local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
 
+game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Changed:Connect(function()
+    if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
+        game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
+    end
+end)
+
 Box.Name = "Box"
 Box.LineThickness = 0.01;
 Box.Adornee = nil;
@@ -265,10 +271,6 @@ Fly()
 spawn(function()
     while wait() do
         if AutoCollectVault then
-            if game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value == false then
-                game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
-            end
-            
             for _,v in ipairs(game:GetService("Workspace").Robbable:GetChildren()) do
                 if v.Door.Attachment.ProximityPrompt.Enabled == true then
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame

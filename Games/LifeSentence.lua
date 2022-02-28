@@ -23,7 +23,7 @@ local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
 
-game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Changed:Connect(function()
+game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value.Changed:Connect(function()
     if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
         game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
     end

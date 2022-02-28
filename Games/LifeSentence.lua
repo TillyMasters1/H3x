@@ -24,12 +24,11 @@ local HoldToSelect  = Enum.KeyCode.LeftControl
 local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
-game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
-game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Changed:Connect(function()
+while wait() do
     if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
         game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
     end
-end)
+end
 
 local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"

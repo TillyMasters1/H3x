@@ -2,18 +2,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/TillyMasters1/H3x/mai
 local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!"});
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Torso") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
+
+-- Variables
 local plr = game.Players.LocalPlayer
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local torso = plr.Character.Torso
-local flying = false
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100
 local speed = 0
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local Parts = {}
-local Box = Instance.new("SelectionBox",game.Workspace)
-local Sound0 = Instance.new("Sound")
-local Sound1 = Instance.new("Sound")
+
+-- Bool Variables
+local flying = false
 local AutoCollectVault = false
 
 -- KeyBinds
@@ -29,12 +29,14 @@ game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value.Changed
     end
 end)
 
+local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"
 Box.LineThickness = 0.01;
 Box.Adornee = nil;
 Box.Color3 = Color3.fromRGB(255,0,0)
 Box.Visible = true;
 
+local Sound0 = Instance.new("Sound")
 Sound1.Name = "Sound"
 Sound1.SoundId = "http://www.roblox.com/asset/?id=773858658"
 Sound1.Volume = 1;
@@ -42,6 +44,8 @@ Sound1.Looped = false;
 Sound1.archivable = false;
 Sound1.Parent = game.Workspace;
 
+
+local Sound1 = Instance.new("Sound")
 Sound0.Name = "Sound"
 Sound0.SoundId = "http://www.roblox.com/asset/?id=4676738150"
 Sound0.Volume = 1;
@@ -163,6 +167,7 @@ end)
 
 -- Delete Tool
 spawn(function()
+    local Parts = {}
     for a,b in pairs(game.Workspace:GetDescendants()) do
         if b.ClassName == "Part" then 
             b.Locked = false 

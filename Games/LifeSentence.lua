@@ -12,7 +12,7 @@ local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100
 local speed = 0
 local Touched
-local Touched2
+local Touched2 = "a"
 
 -- Bool Variables
 local flying = false

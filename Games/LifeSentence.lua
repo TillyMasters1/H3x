@@ -11,6 +11,8 @@ local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100
 local speed = 0
+local Touched
+local Touched2
 
 -- Bool Variables
 local flying = false
@@ -23,7 +25,7 @@ local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
 
-game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value.Changed:Connect(function()
+game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Changed:Connect(function()
     if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
         game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
     end
@@ -36,7 +38,7 @@ Box.Adornee = nil;
 Box.Color3 = Color3.fromRGB(255,0,0)
 Box.Visible = true;
 
-local Sound0 = Instance.new("Sound")
+local Sound1 = Instance.new("Sound")
 Sound1.Name = "Sound"
 Sound1.SoundId = "http://www.roblox.com/asset/?id=773858658"
 Sound1.Volume = 1;
@@ -44,8 +46,7 @@ Sound1.Looped = false;
 Sound1.archivable = false;
 Sound1.Parent = game.Workspace;
 
-
-local Sound1 = Instance.new("Sound")
+local Sound0 = Instance.new("Sound")
 Sound0.Name = "Sound"
 Sound0.SoundId = "http://www.roblox.com/asset/?id=4676738150"
 Sound0.Volume = 1;
@@ -281,13 +282,13 @@ spawn(function()
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame
                     wait(0.2)
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 20)
-                    local Touched = v.CashSpawnSpot.Touched:connect(function(part)
+                    Touched = v.CashSpawnSpot.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
                             fireproximityprompt(part.ProximityPrompt, 20)
                             Touched:Disconnect()
                         end
                     end)
-                    local Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
+                    Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
                             fireproximityprompt(part.ProximityPrompt, 20)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)

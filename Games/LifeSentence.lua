@@ -12,7 +12,7 @@ local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100
 local speed = 0
 local Touched
-local Touched2 = "a"
+local Touched2
 
 -- Bool Variables
 local flying = false
@@ -24,7 +24,7 @@ local HoldToSelect  = Enum.KeyCode.LeftControl
 local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
-
+game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
 game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Changed:Connect(function()
     if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
         game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true

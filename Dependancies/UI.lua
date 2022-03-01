@@ -215,14 +215,17 @@ do -- loadup
 		BackgroundTransparency = 1.000;
 		Size = UDim2.new(0, 259, 0, 91)
 	})
-
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local content, isReady = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+	print(content)
 	library.AccCircle = library:create("ImageLabel",{
 		Name = "Selected: account_circle";
 		Parent = library.Character;
 		BackgroundTransparency = 1.000;
 		Position = UDim2.new(0.0386100374, 0, 0.109987423, 0);
 		Size = UDim2.new(0, 70, 0, 70);
-		Image = "rbxassetid://2790547157"
+		Image = content
 	})
 
 	library.GuiTitle = library:create("TextLabel",{

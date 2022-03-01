@@ -62,101 +62,93 @@ Sound0.Looped = false;
 Sound0.archivable = false;
 Sound0.Parent = game.Workspace;
 
+
 local Home = library:Tab("Home");
 
-  Home:Activate();
-
-  Home:Text("Welcome to H3x! You've successfully loaded H3x for "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!");
-
-  Home:Text("We want you to have the best experience here, so please join our Discord!");
-
-  Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!", function()
-      spawn(function()
-          local b = 6452;
-          local Conn = game:GetService("RunService").Stepped:Connect(function()
-              b = b + 1;
-              spawn(function()
-                  local c = requestfunc({
-                      Url = string.format("http://127.0.0.1:%s/rpc?v=1", b),
-                      Method = "POST",
-                      Headers = {
-                          ["Origin"] = "https://discord.com",
-                          ["Content-Type"] = "application/json"
-                      },
-                      Body = HttpService:JSONEncode({
-                          ["nonce"] = HttpService:GenerateGUID(false),
-                          ["args"] = {
-                              ["invite"] = {["code"] = "mxbqfEjKSP"},
-                              ["code"] = "mxbqfEjKSP"
-                      },
-                          ["cmd"] = "INVITE_BROWSER"
-                      })
-                  });
-              end);
-              if b == 6465 then
-                  Conn:Disconnect();
-              end;
+Home:Activate();
+Home:Text("Welcome to H3x! You've successfully loaded H3x for "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!");
+Home:Text("We want you to have the best experience here, so please join our Discord!");
+Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!", function()
+  spawn(function()
+      local b = 6452;
+      local Conn = game:GetService("RunService").Stepped:Connect(function()
+          b = b + 1;
+          spawn(function()
+              local c = requestfunc({
+                  Url = string.format("http://127.0.0.1:%s/rpc?v=1", b),
+                  Method = "POST",
+                  Headers = {
+                      ["Origin"] = "https://discord.com",
+                      ["Content-Type"] = "application/json"
+                  },
+                  Body = HttpService:JSONEncode({
+                      ["nonce"] = HttpService:GenerateGUID(false),
+                      ["args"] = {
+                          ["invite"] = {["code"] = "mxbqfEjKSP"},
+                          ["code"] = "mxbqfEjKSP"
+                  },
+                      ["cmd"] = "INVITE_BROWSER"
+                  })
+              });
           end);
+          if b == 6465 then
+              Conn:Disconnect();
+          end;
       end);
   end);
-
-  Home:Bind("ToggleUI","KeyBind to toggle the ui","rbxassetid://3926305904",Enum.KeyCode.RightControl,function(e)
+end);
+Home:Bind("ToggleUI","KeyBind to toggle the ui","rbxassetid://3926305904",Enum.KeyCode.RightControl,function(e)
     if e ~= true and e ~= false then
         ToggleUI = e
     end
-  end)
+end)
 
 
 local Player = library:Tab("Player");
-    -- DeleteTool
-    Player:Text("Delete Tool")
-    Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,function(e)
-        if e ~= true and e ~= false then
-            HoldToSelect = e
-        end
-    end)
-    Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,function(e)
-        if e ~= true and e ~= false then
-            HoldToUndoAll = e
-        end
-    end)
 
+-- DeleteTool
+Player:Text("Delete Tool")
+Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,function(e)
+    if e ~= true and e ~= false then
+        HoldToSelect = e
+    end
+end)
+Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,function(e)
+    if e ~= true and e ~= false then
+        HoldToUndoAll = e
+    end
+end)
 
-    -- Fly
-    Player:Text("Fly")
-    Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
-        if e ~= true and e ~= false then
-            FlyToggle = e
-        end
-    end)
-    Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxassetid://3926305904",0,100,600,function(e)
-        maxspeed = e
-    end)
+-- Fly
+Player:Text("Fly")
+Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
+    if e ~= true and e ~= false then
+        FlyToggle = e
+    end
+end)
+Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxassetid://3926305904",0,100,600,function(e)
+    maxspeed = e
+end)
 
 
 local AutoFarm = library:Tab("AutoFarm");
 
-    AutoFarm:Switch("AutoFarm Vaults","Toggles AutoFarming vaults","rbxassetid://3926305904",false,function(e)
-        if e == true or e == false then
-            AutoCollectVault = e
-        end
-    end)
+AutoFarm:Switch("AutoFarm Vaults","Toggles AutoFarming vaults","rbxassetid://3926305904",false,function(e)
+    if e == true or e == false then
+        AutoCollectVault = e
+    end
+end)
+
 
 local Credits = library:Tab("Credits");
 
-    Credits:Text("⸻⸻ H3X Credits ⸻⸻");
-
-    Credits:Text("Owners: Dakota#0826 | Carillon#1958");
-    
-    Credits:Text("⸻ Script Credits ⸻")
-    
-    Credits:Text("Devs: Carillon#1958");
-    
-    Credits:Text("⸻ UI Credits ⸻")
-        
-    Credits:Text("Creator: Dakota#0826");
-    
-    Credits:Text("Inspired from Windows 11 Settings");
+Credits:Text("⸻⸻ H3X Credits ⸻⸻");
+Credits:Text("Owners: Dakota#0826 | Carillon#1958");
+Credits:Text("⸻ Script Credits ⸻")
+Credits:Text("Devs: Carillon#1958");
+Credits:Text("⸻ UI Credits ⸻")
+Credits:Text("Creator: Dakota#0826");
+Credits:Text("Inspired from Windows 11 Settings");
       
 
 
@@ -214,11 +206,11 @@ end)
 
 -- Fly
 function Fly()
-    local bg = Instance.new("BodyGyro", torso)
+    local bg = Instance.new("BodyGyro", game.Players.LocalPlayer.Character:findFirstChild(torso))
     bg.P = 5e4
     bg.maxTorque = Vector3.new(9e8, 9e8, 9e8)
-    bg.cframe = torso.CFrame
-    local bv = Instance.new("BodyVelocity", torso)
+    bg.cframe = game.Players.LocalPlayer.Character:findFirstChild(torso).CFrame
+    local bv = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character:findFirstChild(torso))
     bv.velocity = Vector3.new(0,0.1,0)
     bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
     repeat wait()
@@ -281,7 +273,6 @@ Fly()
 
 
 -- AutoFarm Vaults
-
 spawn(function()
     while wait() do
         if AutoCollectVault then

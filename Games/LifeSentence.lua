@@ -13,6 +13,7 @@ local maxspeed = 100
 local speed = 0
 local Touched
 local Touched2
+local torso
 
 -- Bool Variables
 local flying = false
@@ -31,6 +32,12 @@ spawn(function()
         end
     end
 end)
+
+if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then 
+    torso = "UpperTorso" 
+else 
+    torso = "Torso"
+end
 
 local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"

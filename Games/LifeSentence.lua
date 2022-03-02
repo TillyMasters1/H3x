@@ -68,8 +68,8 @@ spawn(function()
         if Ranks[A_1:GetRoleInGroup(Group_ID)] > 2 then 
             plr:Kick("Mod " .. A_1.Name .. " joined your game.")
         else
-            print("Checked ".. A_1.Name ..": Not mod")
             print("--------------------------------------------------")
+            print("Checked ".. A_1.Name ..": Not mod")
         end
     end
     for _, A_1 in next, plrs:GetPlayers() do

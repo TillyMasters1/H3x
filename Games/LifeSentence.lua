@@ -40,6 +40,24 @@ else
     torso = "Torso"
 end
 
+-- Anti-Mod
+local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
+local Group_ID = PlaceInfo.Creator.CreatorTargetId
+local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
+local Ranks = {}
+Ranks.Guest = 0
+for Name, Rank in next, Roles do
+    Ranks[Name] = Rank
+end
+function ModCheck(A_1)
+    if Ranks[A_1:GetRoleInGroup(Group_ID)] > 2 then 
+        plr:Kick("Mod " .. A_1.Name .. " joined your game.")
+    end
+end
+for _, A_1 in next, Players:GetPlayers() do
+    ModCheck(A_1)
+end
+
 local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"
 Box.LineThickness = 0.01;
@@ -166,6 +184,10 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
   end
 end)
 
+-- Anti-Mod
+Players.PlayerAdded:Connect(function(A_1)
+    ModCheck(A_1)
+end)
 
 -- Delete Tool
 spawn(function()

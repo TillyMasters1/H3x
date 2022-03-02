@@ -5,6 +5,7 @@ repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Charac
 game:GetService("Players").LocalPlayer.Backpack.Local.Dead.Disabled = true
 
 -- Variables
+local plrs = game.Players
 local plr = game.Players.LocalPlayer
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -42,24 +43,39 @@ else
 end
 
 -- Anti-Mod
-local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
-local Group_ID = PlaceInfo.Creator.CreatorTargetId
-local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
-local Ranks = {}
-Ranks.Guest = 0
-for Name, Rank in next, Roles do
-    Ranks[Name] = Rank
-end
-function ModCheck(A_1)
-    if Ranks[A_1:GetRoleInGroup(Group_ID)] > 2 then 
-        plr:Kick("Mod " .. A_1.Name .. " joined your game.")
-    else
-        print("Checked ".. A_1.Name ..": Not mod")
+spawn(function()
+    print("------------------------------------------------------------------------------------")
+    local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
+    local Group_ID = PlaceInfo.Creator.CreatorTargetId
+    local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
+    local Ranks = {}
+    Ranks.Guest = 0
+    for _,v in next, Roles do
+        local Name
+        local Rank
+        for i,v in pairs(v) do
+            if typeof(v) == "number" then
+                Rank = v
+            else
+                Name = v
+            end
+        end
+        Ranks[Name] = Rank
+        Name = nil
+        Rank = nil
     end
-end
-for _, A_1 in next, Players:GetPlayers() do
-    ModCheck(A_1)
-end
+    function ModCheck(A_1)
+        if Ranks[A_1:GetRoleInGroup(Group_ID)] > 2 then 
+            plr:Kick("Mod " .. A_1.Name .. " joined your game.")
+        else
+            print("Checked ".. A_1.Name ..": Not mod")
+            print("--------------------------------------------------")
+        end
+    end
+    for _, A_1 in next, plrs:GetPlayers() do
+        ModCheck(A_1)
+    end
+end)
 
 local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"

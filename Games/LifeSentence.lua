@@ -8,7 +8,6 @@ game:GetService("Players").LocalPlayer.Backpack.Local.Dead.Disabled = true
 local plr = game.Players.LocalPlayer
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local GroupService = game:GetService("GroupService") 
-local torso = plr.Character.Torso
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100

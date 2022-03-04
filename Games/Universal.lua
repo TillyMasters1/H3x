@@ -17,6 +17,7 @@ local torso
 
 -- Bool Variables
 local flying = false
+local InfJump = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.Q
@@ -109,6 +110,11 @@ end)
 Player:Slider("JumpPower","Changes your JumpPower via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,function(e)
     JumpPower = e
 end)
+Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926305904",false,function(e)
+    if e == true or e == false then
+        InfJump = e
+    end
+end)
 Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
     if e ~= true and e ~= false then
         FlyToggle = e
@@ -195,6 +201,8 @@ spawn(function()
     end
 end)
 
+
+-- Keep WalkSpeed/JumpPower Changed
 spawn(function()
     while wait() do
        pcall(function()
@@ -204,6 +212,15 @@ spawn(function()
        end)
     end
 end)
+
+
+-- InfJump
+game:GetService("UserInputService").JumpRequest:connect(function()
+   if InfJump then
+       game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+   end
+end)
+
 
 -- Fly
 function Fly()

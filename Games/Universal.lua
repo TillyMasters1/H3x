@@ -1,24 +1,22 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TillyMasters1/H3x/main/Install.lua"))(); loadstring(readfile("H3x/Modules/ENV.lua"))()
-local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded Universal Script!"});
-repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
-repeat wait() until game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
-local plr = game.Players.LocalPlayer
-local torso = torso
-if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then 
-    torso = "UpperTorso" 
-else 
-    torso = "Torso"
-end
-local flying = false
+local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!"});
+local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
+repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") and game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
+
+-- Variables
+local plrs = game.Players
+local plr = plrs.LocalPlayer
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 100
 local speed = 0
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local Parts = {}
-local Box = Instance.new("SelectionBox",game.Workspace)
-local Sound0 = Instance.new("Sound")
-local Sound1 = Instance.new("Sound")
+local WalkSpeed = plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
+local JumpPower = plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
+local torso
+
+-- Bool Variables
+local flying = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.Q
@@ -26,13 +24,20 @@ local HoldToSelect  = Enum.KeyCode.LeftControl
 local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
 
+if game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") then 
+    torso = "UpperTorso" 
+else 
+    torso = "Torso"
+end
 
+local Box = Instance.new("SelectionBox",game.Workspace)
 Box.Name = "Box"
 Box.LineThickness = 0.01;
 Box.Adornee = nil;
 Box.Color3 = Color3.fromRGB(255,0,0)
 Box.Visible = true;
 
+local Sound1 = Instance.new("Sound")
 Sound1.Name = "Sound"
 Sound1.SoundId = "http://www.roblox.com/asset/?id=773858658"
 Sound1.Volume = 1;
@@ -40,6 +45,7 @@ Sound1.Looped = false;
 Sound1.archivable = false;
 Sound1.Parent = game.Workspace;
 
+local Sound0 = Instance.new("Sound")
 Sound0.Name = "Sound"
 Sound0.SoundId = "http://www.roblox.com/asset/?id=4676738150"
 Sound0.Volume = 1;
@@ -47,93 +53,94 @@ Sound0.Looped = false;
 Sound0.archivable = false;
 Sound0.Parent = game.Workspace;
 
+
 local Home = library:Tab("Home");
 
-  Home:Activate();
-
-  Home:Text("Welcome to H3x! You've successfully loaded H3x Universal!");
-
-  Home:Text("We want you to have the best experience here, so please join our Discord!");
-
-  Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!", function()
-      spawn(function()
-          local b = 6452;
-          local Conn = game:GetService("RunService").Stepped:Connect(function()
-              b = b + 1;
-              spawn(function()
-                  local c = requestfunc({
-                      Url = string.format("http://127.0.0.1:%s/rpc?v=1", b),
-                      Method = "POST",
-                      Headers = {
-                          ["Origin"] = "https://discord.com",
-                          ["Content-Type"] = "application/json"
-                      },
-                      Body = HttpService:JSONEncode({
-                          ["nonce"] = HttpService:GenerateGUID(false),
-                          ["args"] = {
-                              ["invite"] = {["code"] = "mxbqfEjKSP"},
-                              ["code"] = "mxbqfEjKSP"
-                      },
-                          ["cmd"] = "INVITE_BROWSER"
-                      })
-                  });
-              end);
-              if b == 6465 then
-                  Conn:Disconnect();
-              end;
+Home:Activate();
+Home:Text("Welcome to H3x! You've successfully loaded H3x for "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!");
+Home:Text("We want you to have the best experience here, so please join our Discord!");
+Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!", function()
+  spawn(function()
+      local b = 6452;
+      local Conn = game:GetService("RunService").Stepped:Connect(function()
+          b = b + 1;
+          spawn(function()
+              local c = requestfunc({
+                  Url = string.format("http://127.0.0.1:%s/rpc?v=1", b),
+                  Method = "POST",
+                  Headers = {
+                      ["Origin"] = "https://discord.com",
+                      ["Content-Type"] = "application/json"
+                  },
+                  Body = HttpService:JSONEncode({
+                      ["nonce"] = HttpService:GenerateGUID(false),
+                      ["args"] = {
+                          ["invite"] = {["code"] = "mxbqfEjKSP"},
+                          ["code"] = "mxbqfEjKSP"
+                  },
+                      ["cmd"] = "INVITE_BROWSER"
+                  })
+              });
           end);
+          if b == 6465 then
+              Conn:Disconnect();
+          end;
       end);
   end);
-
-  Home:Bind("ToggleUI","KeyBind to toggle the ui","rbxassetid://3926305904",Enum.KeyCode.RightControl,function(e)
+end);
+Home:Bind("ToggleUI","KeyBind to toggle the ui","rbxassetid://3926305904",Enum.KeyCode.RightControl,function(e)
     if e ~= true and e ~= false then
         ToggleUI = e
     end
-  end)
+end)
+Home:Button("Rejoin Server", "Rejoin's the same server your in.", "rbxassetid://3926305904", "Rejoin", function()
+    local ts = game:GetService("TeleportService")
+    ts:Teleport(game.PlaceId, plr)
+end)
 
 
 local Player = library:Tab("Player");
-    -- DeleteTool
-    Player:Text("Delete Tool")
-    Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,function(e)
-        if e ~= true and e ~= false then
-            HoldToSelect = e
-        end
-    end)
-    Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,function(e)
-        if e ~= true and e ~= false then
-            HoldToUndoAll = e
-        end
-    end)
 
+-- Movement
+Player:Text("Movement")
+Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,function(e)
+    WalkSpeed = e
+end)
+Player:Slider("JumpPower","Changes your JumpPower via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,function(e)
+    JumpPower = e
+end)
+Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
+    if e ~= true and e ~= false then
+        FlyToggle = e
+    end
+end)
+Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxassetid://3926305904",0,100,600,function(e)
+    maxspeed = e
+end)
 
-    -- Fly
-    Player:Text("Fly")
-    Player:Bind("Fly","Key to toggle flying","rbxassetid://3926305904",Enum.KeyCode.Q,function(e)
-        if e ~= true and e ~= false then
-            FlyToggle = e
-        end
-    end)
-    Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxassetid://3926305904",0,100,600,function(e)
-        maxspeed = e
-    end)
+-- DeleteTool
+Player:Text("Delete Tool")
+Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,function(e)
+    if e ~= true and e ~= false then
+        HoldToSelect = e
+    end
+end)
+Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,function(e)
+    if e ~= true and e ~= false then
+        HoldToUndoAll = e
+    end
+end)
 
 
 local Credits = library:Tab("Credits");
 
-    Credits:Text("⸻⸻ H3X Credits ⸻⸻");
-
-    Credits:Text("Owners: Dakota#0826 | Carillon#1958");
-    
-    Credits:Text("⸻ Script Credits ⸻")
-    
-    Credits:Text("Devs: Carillon#1958");
-    
-    Credits:Text("⸻ UI Credits ⸻")
-        
-    Credits:Text("Creator: Dakota#0826");
-    
-    Credits:Text("Inspired from Windows 11 Settings");
+Credits:Text("⸻⸻ H3X Credits ⸻⸻");
+Credits:Text("Owners: Dakota#0826 | Carillon#1958");
+Credits:Text("⸻ Script Credits ⸻")
+Credits:Text("Devs: Carillon#1958");
+Credits:Text("⸻ UI Credits ⸻")
+Credits:Text("Creator: Dakota#0826");
+Credits:Text("Inspired from Windows 11 Settings");
       
 
 
@@ -153,6 +160,7 @@ end)
 
 -- Delete Tool
 spawn(function()
+    local Parts = {}
     for a,b in pairs(game.Workspace:GetDescendants()) do
         if b.ClassName == "Part" then 
             b.Locked = false 
@@ -187,6 +195,15 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+       pcall(function()
+          repeat wait() until plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= WalkSpeed or plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower ~= JumpPower
+          plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = WalkSpeed
+          plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
+       end)
+    end
+end)
 
 -- Fly
 function Fly()

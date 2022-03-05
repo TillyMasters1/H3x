@@ -228,7 +228,7 @@ do -- loadup
 	})
 	
 	library.AccCircle = library:create("UICorner",{
-		CornerRadius = UDim.new(0, 100)
+		CornerRadius = UDim.new(0, 100);
 		Parent = library.AccImage
 	})
 

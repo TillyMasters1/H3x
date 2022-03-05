@@ -330,7 +330,9 @@ do -- loadup
 		end
 end
 
-function library:Tab(name)
+function library:Tab(name,IRO,IRS)
+    IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+    IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 
 	local Window = {};
 
@@ -473,8 +475,8 @@ function library:Tab(name)
 		Selectable = true;
 		Size = UDim2.new(0, 20, 0, 20);
 		Image = "rbxassetid://3926305904";
-		ImageRectOffset = Vector2.new(124, 484);
-		ImageRectSize = Vector2.new(36, 36);
+		ImageRectOffset = IRO;
+		ImageRectSize = IRS;
 		ScaleType = Enum.ScaleType.Fit
 	})
 
@@ -664,7 +666,9 @@ function library:Tab(name)
 		return button;
 	end
 
-	function Window:Switch(name,description,image,default,callback)
+	function Window:Switch(name,description,image,default,IRO,IRS,callback)
+        IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 		default = default or false;
 		callback = callback or function() end;
@@ -777,8 +781,8 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
 		})
 
 		switch.SwitchText = library:create("TextLabel",{
@@ -1009,7 +1013,9 @@ function library:Tab(name)
 		return box;
 	end
 
-	function Window:Bind(name,description,image,default,callback)
+	function Window:Bind(name,description,image,default,IRO,IRS,callback)
+        IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 		default = default or Enum.KeyCode.Period;
 		callback = callback or function() end;
@@ -1069,8 +1075,8 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = "rbxassetid://3926305904";
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
 		})
 
 		bind.Press = library:create("ImageButton",{
@@ -1212,7 +1218,9 @@ function library:Tab(name)
 		return bind;
 	end
 
-	function Window:Slider(name,description,image,min,default,max,callback)
+	function Window:Slider(name,description,image,min,default,max,IRO,IRS,callback)
+        IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 		min = min or 0;
 		default = default or 50;
@@ -1274,8 +1282,8 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
 		})
 
 		slider.Bar = library:create("ImageButton",{
@@ -3358,7 +3366,9 @@ function library:Tab(name)
 			tween(Sub.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 		end)
 
-		function Sub:Button(name,description,image,clicktext,callback)
+		function Sub:Button(name,description,image,clicktext,IRO,IRS,callback)
+            IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		    IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 			image = image or "rbxassetid://3926305904";
 			callback = callback or function() end;
 
@@ -3462,8 +3472,8 @@ function library:Tab(name)
 				Size = UDim2.new(0, 32, 0, 32);
 				ZIndex = 2;
 				Image = image;
-				ImageRectOffset = Vector2.new(124, 484);
-				ImageRectSize = Vector2.new(36, 36)
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
 			})
 
 			local held = false;
@@ -3491,7 +3501,9 @@ function library:Tab(name)
 			return button;
 		end
 
-		function Sub:Switch(name,description,image,default,callback)
+		function Sub:Switch(name,description,image,default,IRO,IRS,callback)
+            IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		    IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 			image = image or "rbxassetid://3926305904";
 			default = default or false;
 			callback = callback or function() end;
@@ -3604,8 +3616,8 @@ function library:Tab(name)
 				Size = UDim2.new(0, 32, 0, 32);
 				ZIndex = 2;
 				Image = image;
-				ImageRectOffset = Vector2.new(124, 484);
-				ImageRectSize = Vector2.new(36, 36)
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
 			})
 
 			switch.SwitchText = library:create("TextLabel",{
@@ -3838,7 +3850,9 @@ function library:Tab(name)
 			return box;
 		end
 
-		function Sub:Bind(name,description,image,default,callback)
+		function Sub:Bind(name,description,image,default,IRO,IRS,callback)
+            IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		    IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 			image = image or "rbxassetid://3926305904";
 			default = default or Enum.KeyCode.Period;
 			callback = callback or function() end;
@@ -3898,8 +3912,8 @@ function library:Tab(name)
 				Size = UDim2.new(0, 32, 0, 32);
 				ZIndex = 2;
 				Image = "rbxassetid://3926305904";
-				ImageRectOffset = Vector2.new(124, 484);
-				ImageRectSize = Vector2.new(36, 36)
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
 			})
 
 			bind.Press = library:create("ImageButton",{
@@ -4042,7 +4056,9 @@ function library:Tab(name)
 			return bind;
 		end
 
-		function Sub:Slider(name,description,image,min,default,max,callback)
+		function Sub:Slider(name,description,image,min,default,max,IRO,IRS,callback)
+            IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		    IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 			image = image or "rbxassetid://3926305904";
 			min = min or 0;
 			default = default or 50;
@@ -4104,8 +4120,8 @@ function library:Tab(name)
 				Size = UDim2.new(0, 32, 0, 32);
 				ZIndex = 2;
 				Image = image;
-				ImageRectOffset = Vector2.new(124, 484);
-				ImageRectSize = Vector2.new(36, 36)
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
 			})
 
 			slider.Bar = library:create("ImageButton",{

@@ -630,8 +630,8 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = IRO
+			ImageRectSize = IRS
 		})
 
 		local held = false;

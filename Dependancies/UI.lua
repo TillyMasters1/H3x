@@ -218,7 +218,6 @@ do -- loadup
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	local content, isReady = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
-	print(content)
 	library.AccCircle = library:create("ImageLabel",{
 		Name = "Selected: account_circle";
 		Parent = library.Character;

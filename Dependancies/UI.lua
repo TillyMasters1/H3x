@@ -525,10 +525,10 @@ function library:Tab(name)
 	end)
 
 	function Window:Button(table)
-		IRO = table["IRO"] or Vector2.new(0, 0);
-		IRS = table["IRS"] or Vector2.new(0, 0);
-		image = table["image"] or "rbxassetid://3926305904";
-		callback = table["callback"] or function() end;
+		IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
+		image = image or "rbxassetid://3926305904";
+		callback = callback or function() end;
 
 		local button = {};
 
@@ -585,7 +585,7 @@ function library:Tab(name)
 			Size = UDim2.new(1, 0, 1, 0);
 			ZIndex = 3;
 			Font = Enum.Font.ArialBold;
-			Text = table["clicktext"];
+			Text = clicktext;
 			TextColor3 = Color3.fromRGB(255, 255, 255);
 			TextSize = 16.000
 		})
@@ -599,7 +599,7 @@ function library:Tab(name)
 			Position = UDim2.new(0.0862212181, 0, 0.587748051, 0);
 			Size = UDim2.new(0, 591, 0, 20);
 			Font = Enum.Font.ArialBold;
-			Text = table["description"];
+			Text = description;
 			TextColor3 = Color3.fromRGB(216, 216, 216);
 			TextSize = 14.000;
 			TextXAlignment = Enum.TextXAlignment.Left;

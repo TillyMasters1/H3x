@@ -3034,6 +3034,33 @@ function library:Tab(name)
 
 			return button;
 		end
+		
+		function section:Text(text)
+
+			local txt = {}
+
+			txt.Main = library:create("TextLabel",{
+				Name = "Text";
+				Parent = section.Held;
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+				BackgroundTransparency = 1.000;
+				Position = UDim2.new(0, 0, 0.70247072, 0);
+				Size = UDim2.new(0, 788, 0, 24);
+				Font = Enum.Font.ArialBold;
+				Text = text;
+				TextColor3 = Color3.fromRGB(255, 255, 255);
+				TextSize = 17.000
+			})
+
+			function txt:Set(val)
+				txt.Main.Text = val;
+			end
+
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+
+			return txt;
+
+		end
 
 		function section:Toggle(name,default,callback)
 			default = default or false;

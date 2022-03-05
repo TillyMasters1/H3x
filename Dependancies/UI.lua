@@ -3231,7 +3231,9 @@ function library:Tab(name,image,IRO,IRS)
 
 	end
 
-	function Window:SubTab(name,description,image)
+	function Window:SubTab(name,description,image,IRO,IRS)
+		IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 
 		local Sub = {};
@@ -3308,8 +3310,8 @@ function library:Tab(name,image,IRO,IRS)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = Vector2.new(124, 484);
-			ImageRectSize = Vector2.new(36, 36)
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
 		})
 
 		Sub.Open = library:create("ImageButton",{
@@ -5679,7 +5681,9 @@ function library:Tab(name,image,IRO,IRS)
 			return colorpicker;
 		end
 
-		function Sub:Section(name,description,image)
+		function Sub:Section(name,description,image,IRO,IRS)
+			IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+			IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 			image = image or "rbxassetid://3926305904";
 
 			local section = {};
@@ -5716,9 +5720,9 @@ function library:Tab(name,image,IRO,IRS)
 				Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
 				Size = UDim2.new(0, 32, 0, 32);
 				ZIndex = 2;
-				Image = "rbxassetid://3926305904";
-				ImageRectOffset = Vector2.new(124, 484);
-				ImageRectSize = Vector2.new(36, 36)
+				Image = image;
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
 			})
 
 			section.Title = library:create("TextLabel",{

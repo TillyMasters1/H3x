@@ -524,7 +524,9 @@ function library:Tab(name)
 		end
 	end)
 
-	function Window:Button(name,description,image,clicktext,callback)
+	function Window:Button(name,description,image,clicktext,IRO,IRS,callback)
+		IRO = IRO or Vector2.new(0, 0);
+		IRS = IRS or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 		callback = callback or function() end;
 

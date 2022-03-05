@@ -5692,7 +5692,7 @@ function library:Tab(name,image,IRO,IRS)
 
 		section.SectionHolder = library:create("Frame",{
 			Name = "SectionHolder";
-			Parent = Window.Container;
+			Parent = Sub.SubTab;
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 			BackgroundTransparency = 1.0000;
 			BorderSizePixel = 0;

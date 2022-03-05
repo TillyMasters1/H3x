@@ -524,7 +524,7 @@ function library:Tab(name)
 		end
 	end)
 
-	function Window:Button(table)
+	function Window:Button(name,description,image,clicktext,IRO,IRS,callback)
 		IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
 		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";

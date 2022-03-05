@@ -5684,128 +5684,95 @@ function library:Tab(name,image,IRO,IRS)
 		end
 
 		function Sub:Section(name,description,image,IRO,IRS)
-		IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
-		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
-		image = image or "rbxassetid://3926305904";
+			IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+			IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
+			image = image or "rbxassetid://3926305904";
 
-		local section = {};
+			local section = {};
 
-		section.SectionHolder = library:create("Frame",{
-			Name = "SectionHolder";
-			Parent = Sub.SubTab;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.0000;
-			BorderSizePixel = 0;
-			ClipsDescendants = true;
-			Position = UDim2.new(0, 0, 0.253818899, 0);
-			Size = UDim2.new(0, 788, 0, 67)
-		})
+			section.SectionHolder = library:create("Frame",{
+				Name = "SectionHolder";
+				Parent = Sub.SubTab;
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+				BackgroundTransparency = 1.0000;
+				BorderSizePixel = 0;
+				ClipsDescendants = true;
+				Position = UDim2.new(0, 0, 0.253818899, 0);
+				Size = UDim2.new(0, 788, 0, 67)
+			})
 
-		section.Main = library:create("ImageButton",{
-			Name = "Section";
-			Parent = section.SectionHolder;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.000;
-			BorderColor3 = Color3.fromRGB(27, 42, 53);
-			Size = UDim2.new(0, 788, 0, 67);
-			Image = "rbxassetid://2790382281";
-			ImageColor3 = Color3.fromRGB(43, 43, 43);
-			ScaleType = Enum.ScaleType.Slice;
-			SliceCenter = Rect.new(4, 4, 252, 252)
-		})
+			section.Main = library:create("ImageButton",{
+				Name = "Section";
+				Parent = section.SectionHolder;
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+				BackgroundTransparency = 1.000;
+				BorderColor3 = Color3.fromRGB(27, 42, 53);
+				Size = UDim2.new(0, 788, 0, 67);
+				Image = "rbxassetid://2790382281";
+				ImageColor3 = Color3.fromRGB(43, 43, 43);
+				ScaleType = Enum.ScaleType.Slice;
+				SliceCenter = Rect.new(4, 4, 252, 252)
+			})
 
-		section.Image = library:create("ImageButton",{
-			Name = "img";
-			Parent = section.Main;
-			BackgroundTransparency = 1.000;
-			LayoutOrder = 15;
-			Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
-			Size = UDim2.new(0, 32, 0, 32);
-			ZIndex = 2;
-			Image = image;
-			ImageRectOffset = IRO;
-			ImageRectSize = IRS
-		})
+			section.Image = library:create("ImageButton",{
+				Name = "img";
+				Parent = section.Main;
+				BackgroundTransparency = 1.000;
+				LayoutOrder = 15;
+				Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
+				Size = UDim2.new(0, 32, 0, 32);
+				ZIndex = 2;
+				Image = image;
+				ImageRectOffset = IRO;
+				ImageRectSize = IRS
+			})
 
-		section.Title = library:create("TextLabel",{
-			Name = "Title";
-			Parent = section.Main;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.000;
-			BorderSizePixel = 0;
-			Position = UDim2.new(0, 67, 0, 4);
-			Size = UDim2.new(0, 376, 0, 35);
-			Font = Enum.Font.ArialBold;
-			Text = name;
-			TextColor3 = Color3.fromRGB(255, 255, 255);
-			TextSize = 17.000;
-			TextXAlignment = Enum.TextXAlignment.Left
-		})
+			section.Title = library:create("TextLabel",{
+				Name = "Title";
+				Parent = section.Main;
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+				BackgroundTransparency = 1.000;
+				BorderSizePixel = 0;
+				Position = UDim2.new(0, 67, 0, 4);
+				Size = UDim2.new(0, 376, 0, 35);
+				Font = Enum.Font.ArialBold;
+				Text = name;
+				TextColor3 = Color3.fromRGB(255, 255, 255);
+				TextSize = 17.000;
+				TextXAlignment = Enum.TextXAlignment.Left
+			})
 
-		section.Description = library:create("TextLabel",{
-			Name = "Description";
-			Parent = section.Main;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.000;
-			BorderSizePixel = 0;
-			Position = UDim2.new(0, 67, 0, 39);
-			Size = UDim2.new(0, 376, 0, 35);
-			Font = Enum.Font.ArialBold;
-			Text = description;
-			TextColor3 = Color3.fromRGB(216, 216, 216);
-			TextSize = 14.000;
-			TextXAlignment = Enum.TextXAlignment.Left;
-			TextYAlignment = Enum.TextYAlignment.Top
-		})
+			section.Description = library:create("TextLabel",{
+				Name = "Description";
+				Parent = section.Main;
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+				BackgroundTransparency = 1.000;
+				BorderSizePixel = 0;
+				Position = UDim2.new(0, 67, 0, 39);
+				Size = UDim2.new(0, 376, 0, 35);
+				Font = Enum.Font.ArialBold;
+				Text = description;
+				TextColor3 = Color3.fromRGB(216, 216, 216);
+				TextSize = 14.000;
+				TextXAlignment = Enum.TextXAlignment.Left;
+				TextYAlignment = Enum.TextYAlignment.Top
+			})
 
-		section.Open = library:create("ImageButton",{
-			Name = "Open";
-			Parent = section.Main;
-			BackgroundTransparency = 1.000;
-			LayoutOrder = 15;
-			Position = UDim2.new(0, 751, 0, 19);
-			Rotation = 180.000;
-			Size = UDim2.new(0, 26, 0, 26);
-			ZIndex = 2;
-			Image = "http://www.roblox.com/asset/?id=1902936388"
-		})
+			section.Open = library:create("ImageButton",{
+				Name = "Open";
+				Parent = section.Main;
+				BackgroundTransparency = 1.000;
+				LayoutOrder = 15;
+				Position = UDim2.new(0, 751, 0, 19);
+				Rotation = 180.000;
+				Size = UDim2.new(0, 26, 0, 26);
+				ZIndex = 2;
+				Image = "http://www.roblox.com/asset/?id=1902936388"
+			})
 
-		section.Holder = library:create("ImageButton",{
-			Name = "Holder";
-			Parent = section.Main;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.000;
-			BorderColor3 = Color3.fromRGB(27, 42, 53);
-			Position = UDim2.new(0, 0, 1, 1);
-			Size = UDim2.new(1, 0, 0, 53);
-			Image = "rbxassetid://2790382281";
-			ImageColor3 = Color3.fromRGB(43, 43, 43);
-			ScaleType = Enum.ScaleType.Slice;
-			SliceCenter = Rect.new(4, 4, 252, 252)
-		})
-
-		section.Held = library:create("Frame",{
-			Name = "Held";
-			Parent = section.Holder;
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-			BackgroundTransparency = 1.000;
-			Size = UDim2.new(1, 0, 1, 0)
-		})
-
-		section.HeldList = library:create("UIListLayout",{
-			Parent = section.Held;
-			SortOrder = Enum.SortOrder.LayoutOrder;
-			Padding = UDim.new(0, 1)
-		})
-
-		function section:Button(name,clicktext,callback)
-			callback = callback or function() end;
-
-			local button = {};
-
-			button.Main = library:create("ImageButton",{
-				Name = "Button";
-				Parent = section.Held;
+			section.Holder = library:create("ImageButton",{
+				Name = "Holder";
+				Parent = section.Main;
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 				BackgroundTransparency = 1.000;
 				BorderColor3 = Color3.fromRGB(27, 42, 53);
@@ -5817,90 +5784,124 @@ function library:Tab(name,image,IRO,IRS)
 				SliceCenter = Rect.new(4, 4, 252, 252)
 			})
 
-			button.Title = library:create("TextLabel",{
-				Name = "Title";
-				Parent = button.Main;
+			section.Held = library:create("Frame",{
+				Name = "Held";
+				Parent = section.Holder;
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 				BackgroundTransparency = 1.000;
-				BorderSizePixel = 0;
-				Position = UDim2.new(0, 16, 0, 8);
-				Size = UDim2.new(0, 376, 0, 35);
-				Font = Enum.Font.ArialBold;
-				Text = name;
-				TextColor3 = Color3.fromRGB(255, 255, 255);
-				TextSize = 15.000;
-				TextXAlignment = Enum.TextXAlignment.Left
+				Size = UDim2.new(1, 0, 1, 0)
 			})
 
-			button.Press = library:create("ImageButton",{
-				Name = "Press";
-				Parent = button.Main;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderColor3 = Color3.fromRGB(27, 42, 53);
-				Position = UDim2.new(0, 625, 0, 11);
-				Size = UDim2.new(0, 133, 0, 30);
-				ZIndex = 2;
-				Image = "rbxassetid://2790382281";
-				ImageColor3 = Color3.fromRGB(43, 43, 43);
-				ScaleType = Enum.ScaleType.Slice;
-				SliceCenter = Rect.new(4, 4, 252, 252)
+			section.HeldList = library:create("UIListLayout",{
+				Parent = section.Held;
+				SortOrder = Enum.SortOrder.LayoutOrder;
+				Padding = UDim.new(0, 1)
 			})
 
-			button.Outline = library:create("ImageButton",{
-				Name = "Outline";
-				Parent = button.Press;
-				AnchorPoint = Vector2.new(0.5, 0.5);
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderColor3 = Color3.fromRGB(27, 42, 53);
-				Position = UDim2.new(0.5, 0, 0.5, 0);
-				Size = UDim2.new(1, 2, 1, 2);
-				Image = "rbxassetid://2790382281";
-				ImageColor3 = Color3.fromRGB(170, 170, 170);
-				ScaleType = Enum.ScaleType.Slice;
-				SliceCenter = Rect.new(4, 4, 252, 252)
-			})
+			function section:Button(name,clicktext,callback)
+				callback = callback or function() end;
 
-			button.BTNText = library:create("TextLabel",{
-				Name = "BTNText";
-				Parent = button.Press;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				Size = UDim2.new(1, 0, 1, 0);
-				ZIndex = 3;
-				Font = Enum.Font.ArialBold;
-				Text = clicktext;
-				TextColor3 = Color3.fromRGB(255, 255, 255);
-				TextSize = 16.000
-			})
+				local button = {};
 
-			local held = false;
-			button.Main.MouseButton1Down:Connect(function()
-				held = true;
-				tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(100,100,100)})
-			end)
-			button.Main.MouseButton1Up:Connect(function()
-				if held then
+				button.Main = library:create("ImageButton",{
+					Name = "Button";
+					Parent = section.Held;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0, 0, 1, 1);
+					Size = UDim2.new(1, 0, 0, 53);
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(43, 43, 43);
+					ScaleType = Enum.ScaleType.Slice;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
+
+				button.Title = library:create("TextLabel",{
+					Name = "Title";
+					Parent = button.Main;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 16, 0, 8);
+					Size = UDim2.new(0, 376, 0, 35);
+					Font = Enum.Font.ArialBold;
+					Text = name;
+					TextColor3 = Color3.fromRGB(255, 255, 255);
+					TextSize = 15.000;
+					TextXAlignment = Enum.TextXAlignment.Left
+				})
+
+				button.Press = library:create("ImageButton",{
+					Name = "Press";
+					Parent = button.Main;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0, 625, 0, 11);
+					Size = UDim2.new(0, 133, 0, 30);
+					ZIndex = 2;
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(43, 43, 43);
+					ScaleType = Enum.ScaleType.Slice;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
+
+				button.Outline = library:create("ImageButton",{
+					Name = "Outline";
+					Parent = button.Press;
+					AnchorPoint = Vector2.new(0.5, 0.5);
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0.5, 0, 0.5, 0);
+					Size = UDim2.new(1, 2, 1, 2);
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(170, 170, 170);
+					ScaleType = Enum.ScaleType.Slice;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
+
+				button.BTNText = library:create("TextLabel",{
+					Name = "BTNText";
+					Parent = button.Press;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					Size = UDim2.new(1, 0, 1, 0);
+					ZIndex = 3;
+					Font = Enum.Font.ArialBold;
+					Text = clicktext;
+					TextColor3 = Color3.fromRGB(255, 255, 255);
+					TextSize = 16.000
+				})
+
+				local held = false;
+				button.Main.MouseButton1Down:Connect(function()
+					held = true;
+					tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(100,100,100)})
+				end)
+				button.Main.MouseButton1Up:Connect(function()
+					if held then
+						tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+						library:ripple(button.Outline)
+						callback()
+					end
+				end)
+				button.Main.MouseEnter:Connect(function()
+					tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
+				end)
+				button.Main.MouseLeave:Connect(function()
+					held = false;
 					tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-					library:ripple(button.Outline)
-					callback()
-				end
-			end)
-			button.Main.MouseEnter:Connect(function()
-				tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
-			end)
-			button.Main.MouseLeave:Connect(function()
-				held = false;
-				tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-			end)
+				end)
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
 
-			return button;
-		end
-		
-		function section:Text(text,align)
+			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
+
+				return button;
+			end
+			
+			function section:Text(text,align)
 			align = align or Enum.TextXAlignment.Center
 			
 			local txt = {}
@@ -5923,161 +5924,164 @@ function library:Tab(name,image,IRO,IRS)
 				txt.Main.Text = val;
 			end
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
 			return txt;
 
 		end
 
-		function section:Toggle(name,default,callback)
-			default = default or false;
-			callback = callback or function() end;
+			function section:Toggle(name,default,callback)
+				default = default or false;
+				callback = callback or function() end;
 
-			local toggle = {value = default}
+				local toggle = {value = default}
 
-			toggle.Main = library:create("ImageButton",{
-				Name = "Toggle";
-				Parent = section.Held;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderColor3 = Color3.fromRGB(27, 42, 53);
-				Position = UDim2.new(0, 0, 1, 1);
-				Size = UDim2.new(0, 788, 0, 53);
-				Image = "rbxassetid://2790382281";
-				ImageColor3 = Color3.fromRGB(43, 43, 43);
-				ScaleType = Enum.ScaleType.Slice;
-				ClipsDescendants = true;
-				SliceCenter = Rect.new(4, 4, 252, 252)
-			})
+				toggle.Main = library:create("ImageButton",{
+					Name = "Toggle";
+					Parent = section.Held;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0, 0, 1, 1);
+					Size = UDim2.new(0, 788, 0, 53);
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(43, 43, 43);
+					ScaleType = Enum.ScaleType.Slice;
+					ClipsDescendants = true;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
 
-			toggle.Description = library:create("TextLabel",{
-				Name = "Description";
-				Parent = toggle.Main;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderSizePixel = 0;
-				Position = UDim2.new(0.0709927827, 0, 0.13491787, 0);
-				Size = UDim2.new(0, 376, 0, 35);
-				Font = Enum.Font.ArialBold;
-				Text = name;
-				TextColor3 = Color3.fromRGB(255, 255, 255);
-				TextSize = 15.000;
-				TextXAlignment = Enum.TextXAlignment.Left
-			})
+				toggle.Description = library:create("TextLabel",{
+					Name = "Description";
+					Parent = toggle.Main;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderSizePixel = 0;
+					Position = UDim2.new(0.0709927827, 0, 0.13491787, 0);
+					Size = UDim2.new(0, 376, 0, 35);
+					Font = Enum.Font.ArialBold;
+					Text = name;
+					TextColor3 = Color3.fromRGB(255, 255, 255);
+					TextSize = 15.000;
+					TextXAlignment = Enum.TextXAlignment.Left
+				})
 
-			toggle.Box = library:create("ImageButton",{
-				Name = "Box";
-				Parent = toggle.Main;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderColor3 = Color3.fromRGB(27, 42, 53);
-				Position = UDim2.new(0, 20, 0, 13);
-				Size = UDim2.new(0, 23, 0, 23);
-				ZIndex = 2;
-				Image = "rbxassetid://2790382281";
-				ImageColor3 = Color3.fromRGB(43, 43, 43);
-				ScaleType = Enum.ScaleType.Slice;
-				SliceCenter = Rect.new(4, 4, 252, 252)
-			})
+				toggle.Box = library:create("ImageButton",{
+					Name = "Box";
+					Parent = toggle.Main;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0, 20, 0, 13);
+					Size = UDim2.new(0, 23, 0, 23);
+					ZIndex = 2;
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(43, 43, 43);
+					ScaleType = Enum.ScaleType.Slice;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
 
-			toggle.Check = library:create("ImageButton",{
-				Name = "Check";
-				Parent = toggle.Box;
-				Active = false;
-				AnchorPoint = Vector2.new(0.5, 0.5);
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				Position = UDim2.new(0, 11, 0, 11);
-				Selectable = false;
-				Size = UDim2.new(0.6, 0, 0.6, 0);
-				Visible = true;
-				ImageTransparency = 1;
-				ZIndex = 3;
-				Image = "http://www.roblox.com/asset/?id=1489284025"
-			})
+				toggle.Check = library:create("ImageButton",{
+					Name = "Check";
+					Parent = toggle.Box;
+					Active = false;
+					AnchorPoint = Vector2.new(0.5, 0.5);
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					Position = UDim2.new(0, 11, 0, 11);
+					Selectable = false;
+					Size = UDim2.new(0.6, 0, 0.6, 0);
+					Visible = true;
+					ImageTransparency = 1;
+					ZIndex = 3;
+					Image = "http://www.roblox.com/asset/?id=1489284025"
+				})
 
-			toggle.Outline = library:create("ImageButton",{
-				Name = "Outline";
-				Parent = toggle.Box;
-				AnchorPoint = Vector2.new(0.5, 0.5);
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				BorderColor3 = Color3.fromRGB(27, 42, 53);
-				Position = UDim2.new(0, 12, 0, 11);
-				Size = UDim2.new(0, 25, 0, 25);
-				Image = "rbxassetid://2790382281";
-				ImageColor3 = Color3.fromRGB(170, 170, 170);
-				ScaleType = Enum.ScaleType.Slice;
-				SliceCenter = Rect.new(4, 4, 252, 252)
-			})
+				toggle.Outline = library:create("ImageButton",{
+					Name = "Outline";
+					Parent = toggle.Box;
+					AnchorPoint = Vector2.new(0.5, 0.5);
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					BorderColor3 = Color3.fromRGB(27, 42, 53);
+					Position = UDim2.new(0, 12, 0, 11);
+					Size = UDim2.new(0, 25, 0, 25);
+					Image = "rbxassetid://2790382281";
+					ImageColor3 = Color3.fromRGB(170, 170, 170);
+					ScaleType = Enum.ScaleType.Slice;
+					SliceCenter = Rect.new(4, 4, 252, 252)
+				})
 
-			function toggle:Set(value)
-				toggle.value = value
-				if value then
-					tween(toggle.Check,0.2,{ImageTransparency = 0});
-					callback(true)
-				else
-					tween(toggle.Check,0.2,{ImageTransparency = 1});
-					callback(false)
+				function toggle:Set(value)
+					toggle.value = value
+					if value then
+						tween(toggle.Check,0.2,{ImageTransparency = 0});
+						callback(true)
+					else
+						tween(toggle.Check,0.2,{ImageTransparency = 1});
+						callback(false)
+					end
 				end
+
+				local held = false;
+				toggle.Main.MouseButton1Down:Connect(function()
+					held = true;
+					tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(100,100,100)})
+				end)
+				toggle.Main.MouseButton1Up:Connect(function()
+					if held then
+						tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+						toggle:Set(not toggle.value)
+					end
+				end)
+				toggle.Main.MouseEnter:Connect(function()
+					tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
+				end)
+				toggle.Main.MouseLeave:Connect(function()
+					held = false;
+					tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+				end)
+
+
+			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
+
+				return toggle;
 			end
 
 			local held = false;
-			toggle.Main.MouseButton1Down:Connect(function()
+			section.Main.MouseButton1Down:Connect(function()
 				held = true;
-				tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(100,100,100)})
+				tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(170,170,170)})
 			end)
-			toggle.Main.MouseButton1Up:Connect(function()
+			section.Main.MouseButton1Up:Connect(function()
 				if held then
-					tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-					toggle:Set(not toggle.value)
+					tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+					if section.Open.Rotation == 180 then
+						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
+						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize + UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(section.Open,0.3,{Rotation = 0})
+					else
+						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
+						tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize - UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(section.Open,0.3,{Rotation = 180})
+					end
+					held = false;
 				end
 			end)
-			toggle.Main.MouseEnter:Connect(function()
-				tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
+			section.Main.MouseEnter:Connect(function()
+				tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
 			end)
-			toggle.Main.MouseLeave:Connect(function()
-				held = false;
-				tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-			end)
-
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
-
-			return toggle;
-		end
-
-		local held = false;
-		section.Main.MouseButton1Down:Connect(function()
-			held = true;
-			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(170,170,170)})
-		end)
-		section.Main.MouseButton1Up:Connect(function()
-			if held then
+			section.Main.MouseLeave:Connect(function()
 				tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-				if section.Open.Rotation == 180 then
-					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
-					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
-					tween(section.Open,0.3,{Rotation = 0})
-				else
-					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
-					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
-					tween(section.Open,0.3,{Rotation = 180})
-				end
 				held = false;
-			end
-		end)
-		section.Main.MouseEnter:Connect(function()
-			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
-		end)
-		section.Main.MouseLeave:Connect(function()
-			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-			held = false;
-		end)
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			end)
 
-		return section;
+			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 
-	end
+			return section;
+
+		end
 
 		return Sub;
 

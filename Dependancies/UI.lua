@@ -5683,6 +5683,121 @@ function library:Tab(name,image,IRO,IRS)
 			return colorpicker;
 		end
 
+		function Sub:Section(name,description,image,IRO,IRS)
+		IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
+		image = image or "rbxassetid://3926305904";
+
+		local section = {};
+
+		section.SectionHolder = library:create("Frame",{
+			Name = "SectionHolder";
+			Parent = Window.Container;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.0000;
+			BorderSizePixel = 0;
+			ClipsDescendants = true;
+			Position = UDim2.new(0, 0, 0.253818899, 0);
+			Size = UDim2.new(0, 788, 0, 67)
+		})
+
+		section.Main = library:create("ImageButton",{
+			Name = "Section";
+			Parent = section.SectionHolder;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			Size = UDim2.new(0, 788, 0, 67);
+			Image = "rbxassetid://2790382281";
+			ImageColor3 = Color3.fromRGB(43, 43, 43);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(4, 4, 252, 252)
+		})
+
+		section.Image = library:create("ImageButton",{
+			Name = "img";
+			Parent = section.Main;
+			BackgroundTransparency = 1.000;
+			LayoutOrder = 15;
+			Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
+			Size = UDim2.new(0, 32, 0, 32);
+			ZIndex = 2;
+			Image = image;
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
+		})
+
+		section.Title = library:create("TextLabel",{
+			Name = "Title";
+			Parent = section.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderSizePixel = 0;
+			Position = UDim2.new(0, 67, 0, 4);
+			Size = UDim2.new(0, 376, 0, 35);
+			Font = Enum.Font.ArialBold;
+			Text = name;
+			TextColor3 = Color3.fromRGB(255, 255, 255);
+			TextSize = 17.000;
+			TextXAlignment = Enum.TextXAlignment.Left
+		})
+
+		section.Description = library:create("TextLabel",{
+			Name = "Description";
+			Parent = section.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderSizePixel = 0;
+			Position = UDim2.new(0, 67, 0, 39);
+			Size = UDim2.new(0, 376, 0, 35);
+			Font = Enum.Font.ArialBold;
+			Text = description;
+			TextColor3 = Color3.fromRGB(216, 216, 216);
+			TextSize = 14.000;
+			TextXAlignment = Enum.TextXAlignment.Left;
+			TextYAlignment = Enum.TextYAlignment.Top
+		})
+
+		section.Open = library:create("ImageButton",{
+			Name = "Open";
+			Parent = section.Main;
+			BackgroundTransparency = 1.000;
+			LayoutOrder = 15;
+			Position = UDim2.new(0, 751, 0, 19);
+			Rotation = 180.000;
+			Size = UDim2.new(0, 26, 0, 26);
+			ZIndex = 2;
+			Image = "http://www.roblox.com/asset/?id=1902936388"
+		})
+
+		section.Holder = library:create("ImageButton",{
+			Name = "Holder";
+			Parent = section.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			Position = UDim2.new(0, 0, 1, 1);
+			Size = UDim2.new(1, 0, 0, 53);
+			Image = "rbxassetid://2790382281";
+			ImageColor3 = Color3.fromRGB(43, 43, 43);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(4, 4, 252, 252)
+		})
+
+		section.Held = library:create("Frame",{
+			Name = "Held";
+			Parent = section.Holder;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			Size = UDim2.new(1, 0, 1, 0)
+		})
+
+		section.HeldList = library:create("UIListLayout",{
+			Parent = section.Held;
+			SortOrder = Enum.SortOrder.LayoutOrder;
+			Padding = UDim.new(0, 1)
+		})
+
 		function section:Button(name,clicktext,callback)
 			callback = callback or function() end;
 

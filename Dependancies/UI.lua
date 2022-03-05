@@ -330,9 +330,10 @@ do -- loadup
 		end
 end
 
-function library:Tab(name,IRO,IRS)
+function library:Tab(name,image,IRO,IRS)
     IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
     IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
+    image = image or "rbxassetid://3926305904";
 
 	local Window = {};
 
@@ -474,7 +475,7 @@ function library:Tab(name,IRO,IRS)
 		Position = UDim2.new(0, 13, 0, 16);
 		Selectable = true;
 		Size = UDim2.new(0, 20, 0, 20);
-		Image = "rbxassetid://3926305904";
+		Image = image;
 		ImageRectOffset = IRO;
 		ImageRectSize = IRS;
 		ScaleType = Enum.ScaleType.Fit

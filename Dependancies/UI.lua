@@ -3034,8 +3034,9 @@ function library:Tab(name)
 			return button;
 		end
 		
-		function section:Text(text)
-
+		function section:Text(text,align)
+			align = align or Enum.TextXAlignment.Center
+			
 			local txt = {}
 
 			txt.Main = library:create("TextLabel",{
@@ -3044,6 +3045,7 @@ function library:Tab(name)
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 				BackgroundTransparency = 1.000;
 				Position = UDim2.new(0, 0, 0.70247072, 0);
+				TextXAlignment = align
 				Size = UDim2.new(0, 788, 0, 24);
 				Font = Enum.Font.ArialBold;
 				Text = text;

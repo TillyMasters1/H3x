@@ -630,7 +630,7 @@ function library:Tab(name)
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
 			Image = image;
-			ImageRectOffset = IRO
+			ImageRectOffset = IRO;
 			ImageRectSize = IRS
 		})
 

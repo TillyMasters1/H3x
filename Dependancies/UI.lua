@@ -178,6 +178,7 @@ do -- loadup
 		Size = UDim2.new(0, 232, 0, 31);
 		Font = Enum.Font.ArialBold;
 		PlaceholderText = "Find a setting";
+	        Text = "Find a setting";
 		TextColor3 = Color3.fromRGB(185, 185, 185);
 		TextSize = 14.000;
 		TextXAlignment = Enum.TextXAlignment.Left

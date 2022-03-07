@@ -221,15 +221,29 @@ do -- loadup
 	library.AccImage = library:create("ImageLabel",{
 		Name = "Selected: account_circle";
 		Parent = library.Character;
-		BackgroundTransparency = 1.000;
+		BackgroundColor3 = Color3.fromRGB(35, 35, 35);
 		Position = UDim2.new(0.0386100374, 0, 0.109987423, 0);
 		Size = UDim2.new(0, 70, 0, 70);
+		ZIndex = 2;
 		Image = content
 	})
 	
 	library.AccCircle = library:create("UICorner",{
 		CornerRadius = UDim.new(0, 100);
 		Parent = library.AccImage
+	})
+	
+	library.AccImageOutLine = library:create("Frame",{
+		Name = "Selected: account_circle";
+		Parent = library.Character;
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+		Position = UDim2.new(0.0350000001, 0, 0.100000001, 0);
+		Size = UDim2.new(0, 72, 0, 72);
+	})
+	
+	library.AccCircleOutLine = library:create("UICorner",{
+		CornerRadius = UDim.new(0, 100);
+		Parent = library.AccImageOutLine
 	})
 
 	library.GuiTitle = library:create("TextLabel",{
@@ -238,7 +252,7 @@ do -- loadup
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 		BackgroundTransparency = 1.000;
 		BorderSizePixel = 0;
-		Position = UDim2.new(0.305891693, 0, 0.220521033, 0);
+		Position = UDim2.new(0.336779714, 0, 0.220521033, 0);
 		Size = UDim2.new(0, 187, 0, 20);
 		Font = Enum.Font.ArialBold;
 		Text = library.title;
@@ -254,7 +268,7 @@ do -- loadup
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255);
 		BackgroundTransparency = 1.000;
 		BorderSizePixel = 0;
-		Position = UDim2.new(0, 79, 0, 45);
+		Position = UDim2.new(0, 87, 0, 45);
 		Selectable = false;
 		Size = UDim2.new(0, 181, 0, 35);
 		Font = Enum.Font.ArialBold;

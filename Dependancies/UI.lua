@@ -1030,7 +1030,7 @@ function library:Tab(name,image,IRO,IRS)
 	end
 
 	function Window:Bind(name,description,image,default,IRO,IRS,callback)
-        IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+        	IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
 		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";
 		default = default or Enum.KeyCode.Period;
@@ -1090,7 +1090,7 @@ function library:Tab(name,image,IRO,IRS)
 			Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
 			Size = UDim2.new(0, 32, 0, 32);
 			ZIndex = 2;
-			Image = "rbxassetid://3926305904";
+			Image = image;
 			ImageRectOffset = IRO;
 			ImageRectSize = IRS
 		})

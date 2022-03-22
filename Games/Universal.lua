@@ -98,11 +98,20 @@ Home:Button("Rejoin Server", "Rejoin's the same server your in.", "rbxassetid://
     local ts = game:GetService("TeleportService")
     ts:Teleport(game.PlaceId, plr)
 end)
-local About = Home:SubTab("About","Menu specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
-local Credit = About:Section("Credits","","rbxassetid://3926305904","524, 444","36, 36")
-Credit:Text("               Owners:         Dakota#0826 | Carillon#1958",Enum.TextXAlignment.Left)
-Credit:Text("               Devs:              Carillon#1958",Enum.TextXAlignment.Left)
-Credit:Text("               UI Creator: Dakota#0826",Enum.TextXAlignment.Left)
+local About = Home:SubTab("About","Menu specifications, Game specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
+local MenuInfo = About:Section("Menu specifications","","rbxassetid://3926305904","44, 644","36, 36")
+MenuInfo:Text("               Version:            1",Enum.TextXAlignment.Left)
+
+local ExperienceInfo = About:Section("Game specifications","","rbxassetid://6764432408","200, 100","50, 50")
+ExperienceInfo:Text("               Name:            "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,Enum.TextXAlignment.Left)
+ExperienceInfo:Text("               Id:                   "..game.PlaceId,Enum.TextXAlignment.Left)
+ExperienceInfo:Text("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers,Enum.TextXAlignment.Left)
+
+local Credit = About:Section("Credits","","rbxassetid://3926305904","204, 444","36, 36")
+Credit:Text("               Owners:            Dakota#0826 | Carillon#1958",Enum.TextXAlignment.Left)
+Credit:Text("               Devs:                Carillon#1958",Enum.TextXAlignment.Left)
+Credit:Text("               UI Creator:       Dakota#0826",Enum.TextXAlignment.Left)
+Credit:Text("Inspired from Windows 11 Settings")
 
 
 local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36");

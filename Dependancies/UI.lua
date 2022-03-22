@@ -5810,7 +5810,7 @@ function library:Tab(name,image,IRO,IRS)
 			section.HeldList = library:create("UIListLayout",{
 				Parent = section.Held;
 				SortOrder = Enum.SortOrder.LayoutOrder;
-				Padding = UDim.new(0, 1)
+				Padding = UDim.new(0, 3)
 			})
 
 			function section:Button(name,clicktext,callback)
@@ -5917,33 +5917,33 @@ function library:Tab(name,image,IRO,IRS)
 			end
 			
 			function section:Text(text,align)
-			align = align or Enum.TextXAlignment.Center
-			
-			local txt = {}
+				align = align or Enum.TextXAlignment.Center
+				
+				local txt = {}
 
-			txt.Main = library:create("TextLabel",{
-				Name = "Text";
-				Parent = section.Held;
-				BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-				BackgroundTransparency = 1.000;
-				Position = UDim2.new(0, 0, 0.70247072, 0);
-				TextXAlignment = align;
-				Size = UDim2.new(0, 788, 0, 24);
-				Font = Enum.Font.ArialBold;
-				Text = text;
-				TextColor3 = Color3.fromRGB(255, 255, 255);
-				TextSize = 17.000
-			})
+				txt.Main = library:create("TextLabel",{
+					Name = "Text";
+					Parent = section.Held;
+					BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+					BackgroundTransparency = 1.000;
+					Position = UDim2.new(0, 0, 0.70247072, 0);
+					TextXAlignment = align;
+					Size = UDim2.new(0, 788, 0, 24);
+					Font = Enum.Font.ArialBold;
+					Text = text;
+					TextColor3 = Color3.fromRGB(255, 255, 255);
+					TextSize = 17.000
+				})
 
-			function txt:Set(val)
-				txt.Main.Text = val;
-			end
+				function txt:Set(val)
+					txt.Main.Text = val;
+				end
+
+				section.Holder.Size = UDim2.new(0,788,0,section.HeldList.AbsoluteContentSize.Y+67);
 
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
-
-			return txt;
-
-		end
+				return txt;
+			end
 
 			function section:Toggle(name,default,callback)
 				default = default or false;
@@ -6073,12 +6073,12 @@ function library:Tab(name,image,IRO,IRS)
 					tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 					if section.Open.Rotation == 180 then
 						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
-						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize + UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(Sub.SubTab,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 0})
 					else
 						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
 						tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
-						tween(Sub.SubTab,0.3,{CanvasSize = Sub.SubTab.CanvasSize - UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+						tween(Sub.SubTab,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 180})
 					end
 					held = false;

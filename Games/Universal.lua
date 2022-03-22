@@ -101,7 +101,7 @@ end)
 local About = Home:SubTab("About","Menu specifications, Game specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
 local MenuInfo = About:Section("Menu specifications","","rbxassetid://3926305904","44, 644","36, 36")
 MenuInfo:Text("               Version:            1",Enum.TextXAlignment.Left)
-MenuInfo:Text("               UI Version:            572fa1e",Enum.TextXAlignment.Left)
+MenuInfo:Text("               UI Version:       572fa1e",Enum.TextXAlignment.Left)
 
 local ExperienceInfo = About:Section("Game specifications","","rbxassetid://6764432408","200, 100","50, 50")
 ExperienceInfo:Text("               Name:            "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,Enum.TextXAlignment.Left)

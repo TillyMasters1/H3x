@@ -106,7 +106,7 @@ MenuInfo:Text("               UI Version:       572fa1e",Enum.TextXAlignment.Lef
 local ExperienceInfo = About:Section("Game specifications","","rbxassetid://6764432408","200, 100","50, 50")
 ExperienceInfo:Text("               Name:            "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,Enum.TextXAlignment.Left)
 ExperienceInfo:Text("               Id:                   "..game.PlaceId,Enum.TextXAlignment.Left)
-ExperienceInfo:Text("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers,Enum.TextXAlignment.Left)
+local PlayerNum = ExperienceInfo:Text("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers,Enum.TextXAlignment.Left)
 
 local Credit = About:Section("Credits","","rbxassetid://3926305904","204, 444","36, 36")
 Credit:Text("               Owners:            Dakota#0826 | Carillon#1958",Enum.TextXAlignment.Left)
@@ -156,6 +156,15 @@ end)
 
 
 -- Scripts
+
+-- Update Player Count
+plrs.PlayerAdded:Connect(function()
+    PlayerNum:Set("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers)
+end)
+plrs.PlayerRemoving:Connect(function()
+    PlayerNum:Set("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers)
+end)
+
 
 -- Toggle ui Visiblity 
 game:GetService("UserInputService").InputBegan:Connect(function(key)

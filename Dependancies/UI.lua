@@ -5939,7 +5939,7 @@ function library:Tab(name,image,IRO,IRS)
 				function txt:Set(val)
 					txt.Main.Text = val;
 				end
-				section.Holder.Size = UDim2.new(0,788,0,section.HeldList.AbsoluteContentSize.Y+10);
+				section.Holder.Size = UDim2.new(0,788,0,section.HeldList.AbsoluteContentSize.Y+8);
 
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 				return txt;

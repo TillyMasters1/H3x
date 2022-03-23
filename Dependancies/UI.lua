@@ -3351,7 +3351,7 @@ function library:Tab(name,image,IRO,IRS)
 				tween(Sub.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 				Sub.SubTab.Visible = true;
 				Window.Container.Visible = false;
-				Window.SubTitle.Text = "< "..name
+				Window.SubTitle.Text = "> "..name
 				local bounds = game:GetService('TextService'):GetTextSize(Window.Title.Text, 24, Enum.Font.ArialBold, Vector2.new(math.huge, math.huge)).X+8
 				Window.SubTitle.Position = UDim2.new(0,bounds+20,0.0340000018,0)
 				Window.SubTitle.Visible = true;

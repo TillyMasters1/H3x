@@ -5810,7 +5810,8 @@ function library:Tab(name,image,IRO,IRS)
 			section.HeldList = library:create("UIListLayout",{
 				Parent = section.Held;
 				SortOrder = Enum.SortOrder.LayoutOrder;
-				Padding = UDim.new(0, 3)
+				Padding = UDim.new(0, 3);
+				VerticalAlignment = Enum.VerticalAlignment.Center
 			})
 
 			function section:Button(name,clicktext,callback)
@@ -5938,8 +5939,7 @@ function library:Tab(name,image,IRO,IRS)
 				function txt:Set(val)
 					txt.Main.Text = val;
 				end
-
-				section.Holder.Size = UDim2.new(0,788,0,section.HeldList.AbsoluteContentSize.Y+67);
+				section.Holder.Size = UDim2.new(0,788,0,section.HeldList.AbsoluteContentSize.Y+10);
 
 			Sub.SubTab.CanvasSize = UDim2.new(0,0,0,Sub.SubTabList.AbsoluteContentSize.Y);
 				return txt;
@@ -6072,11 +6072,11 @@ function library:Tab(name,image,IRO,IRS)
 				if held then
 					tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 					if section.Open.Rotation == 180 then
-						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
+						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+77)})
 						tween(Sub.SubTab,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 0})
 					else
-						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
+						tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 77)})
 						tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(Sub.SubTab,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 						tween(section.Open,0.3,{Rotation = 180})

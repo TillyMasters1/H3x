@@ -402,25 +402,26 @@ spawn(function()
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame
                     wait(0.2)
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 20)
-                    local Cash1Collect
+                    local Cash1Detected
                     Touched = v.CashSpawnSpot.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
                             print("Cash 1 Detected")
+                            part.Name = "Cash1"
+                            Cash1Detected = true
                             fireproximityprompt(part.ProximityPrompt, 20)
                             print("--Collected Cash 1")
-                            Cash1Collect = true
                             Touched:Disconnect()
                         end
                     end)
                     Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
+                        repeat wait() until Cash1Detected == true
                         if part.Name == "DroppedCash" then
-                            repeat wait() until Cash1Collect == true
                             print("Cash 2 Detected")
                             fireproximityprompt(part.ProximityPrompt, 20)
                             print("--Collected Cash 2")
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
                             debouce = false
-                            Cash1Collect = false
+                            Cash1Detected = false
                             Touched2:Disconnect()
                         end
                     end)

@@ -2,7 +2,6 @@ loadstring(game:HttpGet("https://h3x.wtf/Install.lua"))(); loadstring(readfile("
 local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded Life Sentence Script!"});
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") and game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
-game:GetService("Players").LocalPlayer.Backpack.Local.Dead.Disabled = true
 
 -- Variables
 local plrs = game.Players
@@ -38,6 +37,9 @@ spawn(function()
     while wait() do
         if not game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value then
             game:GetService("Players").LocalPlayer.Backpack.Stats.TeleportPass.Value = true
+        end
+        if not game:GetService("Players").LocalPlayer.Backpack.Local.Dead.Disabled then
+            game:GetService("Players").LocalPlayer.Backpack.Local.Dead.Disabled = true
         end
     end
 end)

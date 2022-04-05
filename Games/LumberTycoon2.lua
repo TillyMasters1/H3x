@@ -281,7 +281,7 @@ end)
 
 
 -- Wood Category
-local Wood = library:Tab("Wood","rbxthumb://type=Asset&id=" .. 9291062955 .. "&w=420&h=420","","");
+local Wood = library:Tab("Wood","rbxthumb://type=Asset&id=" .. 9291254189 .. "&w=420&h=420","","");
 
 Wood:Text("Bring Tree")
 Wood:Button("Bring Tree","Brings Tree Type to you, requires axe","rbxthumb://type=Asset&id=" .. 9290993421 .. "&w=420&h=420","Spawn","","",function()

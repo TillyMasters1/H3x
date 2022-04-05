@@ -189,13 +189,13 @@ end)
 local Slot = library:Tab("Slot","rbxthumb://type=Asset&id=" .. 9074783212 .. "&w=420&h=420","","");
 
 Slot:Text("Land")
-Slot:Button("Free Land","Gives you Free Land","rbxassetid://3926305904","Give","","",function()
+Slot:Button("Free Land","Gives you Free Land","rbxthumb://type=Asset&id=" .. 9107894276 .. "&w=420&h=420","Give","","",function()
     FreeLand()
 end)
-Slot:Button("Max Land","Gives you Max Land","rbxassetid://3926305904","Give","","",function()
+Slot:Button("Max Land","Gives you Max Land","rbxthumb://type=Asset&id=" .. 9107894276 .. "&w=420&h=420","Give","","",function()
     MaxLand(getPlayersBase(tostring(plr)))
 end)
-Slot:Button("All BluePrints (Temp)","Gives you All BluePrints temporarily","rbxthumb://type=Asset&id=" .. 9287217542 .. "&w=420&h=420","Give","340, 4","24, 24",function()
+Slot:Button("All BluePrints (Temp)","Gives you All BluePrints temporarily","rbxthumb://type=Asset&id=" .. 9287217542 .. "&w=420&h=420","Give","","",function()
     getAllBP()
 end)
 

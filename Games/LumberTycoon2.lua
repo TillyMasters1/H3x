@@ -460,7 +460,7 @@ spawn(function()
     while wait() do
         if LoopDupeInventory then
             local pos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
-            local plr = game.Players.LocalPlayer
+            plr.Character.Humanoid:UnequipTools()
             for i,v in pairs(plr.Character:GetChildren()) do
                 if v.ClassName == "Part" then
                     v:Destroy()

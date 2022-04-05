@@ -1,5 +1,5 @@
 loadstring(game:HttpGet("https://h3x.wtf/Install.lua"))(); loadstring(readfile("H3x/Modules/ENV.lua"))()
-local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded Universal Script!"});
+local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."Script!"});
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") and game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
 
@@ -195,7 +195,7 @@ end)
 Slot:Button("Max Land","Gives you Max Land","rbxassetid://3926305904","Give","","",function()
     MaxLand(getPlayersBase(tostring(plr)))
 end)
-Slot:Button("All BluePrints (Temp)","Gives you All BluePrints temporarily","rbxassetid://3926305904","Give","340, 4","24, 24",function()
+Slot:Button("All BluePrints (Temp)","Gives you All BluePrints temporarily","rbxthumb://type=Asset&id=" .. 9287217542 .. "&w=420&h=420","Give","340, 4","24, 24",function()
     getAllBP()
 end)
 

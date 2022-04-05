@@ -171,7 +171,7 @@ end)
 
 
 -- Environment Category
-local Environment = library:Tab("Environment","rbxthumb://type=Asset&id=" .. 9087769772 .. "&w=420&h=420","","");
+local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
 
 Environment:Switch("Always Day","Toggles Always Day","rbxassetid://3926307971",false,"364, 524","36, 36",function(e)
     if e == true or e == false then

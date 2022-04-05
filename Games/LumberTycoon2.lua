@@ -380,8 +380,18 @@ function Fly()
     local bv = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character:findFirstChild(torso))
     bv.velocity = Vector3.new(0,0.1,0)
     bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+    if game.Players.LocalPlayer.Character.Humanoid.SeatPart then
+        Car = game.Players.LocalPlayer.Character.Humanoid.SeatPart;
+        WeldOne = Instance.new('Weld',game.Players.LocalPlayer.Character.Humanoid.SeatPart); 
+        WeldTwo = Instance.new('Weld',game.Players.LocalPlayer.Character.HumanoidRootPart);
+        WeldOne.Part0 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        WeldOne.Part1 = game.Players.LocalPlayer.Character.Humanoid.SeatPart
+        WeldTwo.Part0 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        WeldTwo.Part1 = game.Players.LocalPlayer.Character.Humanoid.SeatPart			
+    else 
+        plr.Character.Humanoid.PlatformStand = true    
+    end;
     repeat wait()
-        plr.Character.Humanoid.PlatformStand = true
         if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
             speed = maxspeed
         elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
@@ -402,13 +412,18 @@ function Fly()
     speed = 0
     bg:Destroy()
     bv:Destroy()
+    if WeldOne and WeldTwo and game.Players.LocalPlayer.Character.Humanoid.SeatPart then 
+        WeldOne:Destroy();
+        WeldTwo:Destroy();
+        teleport(CFrame.new(Car.CFrame.p));
+    end;
     plr.Character.Humanoid.PlatformStand = false
 end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key,gameProcessedEvent)
     if gameProcessedEvent then return end
     if key.KeyCode == FlyToggle then
-        if flying then 
+        if flying then
             flying = false
         else
             flying = true

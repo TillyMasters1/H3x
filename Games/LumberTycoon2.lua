@@ -219,6 +219,11 @@ Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid:
         Spawning = false
         SpawnPad = nil
         SelectingSpawnPad = true
+        notify.push({
+            Title = "H3x",
+            Text = "Select SpawnPad",
+            Duration = 5,
+        })
         workspace.PlayerModels.ChildAdded:connect(function(Added)
             if Spawned == false and Spawning == false then 
                 Owner = nil

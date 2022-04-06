@@ -219,11 +219,13 @@ Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid:
         Spawning = false
         SpawnPad = nil
         SelectingSpawnPad = true
-        notify.push({
-            Title = "H3x",
-            Text = "Select SpawnPad",
-            Duration = 5,
-        })
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Select SpawnPad",
+                Duration = 5,
+            })
+        end)
         workspace.PlayerModels.ChildAdded:connect(function(Added)
             if Spawned == false and Spawning == false then 
 		print("-----------------------")
@@ -262,11 +264,14 @@ Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid:
             repeat wait()
                 if Spawned == true then
                     Spawning = false
-                    notify.push({
+                    spawn(function()				
+                        notify.push({
                         Title = "H3x",
                         Text = "Pink Car\nSuccessfully Spawned",
                         Duration = 5,
-                    })
+                        })
+                    end)
+                    _G.Executed = false
                     SpawnPad.Main.Color = Color3.fromRGB(124,92,70)
                     SpawnPad.Main.Material = Enum.Material.WoodPlanks
                 end

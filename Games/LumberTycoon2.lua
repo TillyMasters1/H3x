@@ -186,7 +186,7 @@ end)
  
 
 -- Slot Category
-local Slot = library:Tab("Slot","rbxthumb://type=Asset&id=" .. 9074783212 .. "&w=420&h=420","","");
+local Slot = library:Tab("Slot","rbxthumb://type=Asset&id=" .. 9291264611 .. "&w=420&h=420","","");
 
 Slot:Text("Land")
 Slot:Button("Free Land","Gives you Free Land","rbxthumb://type=Asset&id=" .. 9107894276 .. "&w=420&h=420","Give","","",function()

@@ -226,10 +226,12 @@ Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid:
         })
         workspace.PlayerModels.ChildAdded:connect(function(Added)
             if Spawned == false and Spawning == false then 
+		print("-----------------------")
                 Owner = nil
                 CheckSuccess = false
                 repeat wait() 
                     if Added:FindFirstChild("Owner") and Added:FindFirstChild("Type") and Added.Type.Value == "Vehicle" and Added:FindFirstChild("Settings") and Added.Settings:FindFirstChild("Color") then
+			print("IsCar")
                         CheckSuccess = true
                         Owner = Added.Owner.Value
                     end
@@ -240,9 +242,11 @@ Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid:
                     Added:FindFirstChild("Settings")
                     Added.Settings:FindFirstChild("Color")
                     if tostring(Added.Settings.Color.Value) == tostring(1032) then
+			print("IsPink")
                         Spawned = true
                         Spawning = false
                     elseif tostring(Added.Settings.Color.Value) ~= tostring(1032) then
+			print("RespawningCar")
                         if SpawnPad:FindFirstChild("ButtonRemote_SpawnButton") and SpawnPad:FindFirstChild("Owner") then 
                             if SpawnPad.Owner.Value == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(SpawnPad.Owner.Value) == true then 
                                 Spawning = false

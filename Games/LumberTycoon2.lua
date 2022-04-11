@@ -6,6 +6,7 @@ repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Charac
 -- Variables
 local plrs = game.Players
 local plr = plrs.LocalPlayer
+local Character = plr.Character
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local ctrl = {f = 0, b = 0, l = 0, r = 0}
 local lastctrl = {f = 0, b = 0, l = 0, r = 0}
@@ -15,6 +16,7 @@ local WalkSpeed = plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
 local JumpPower = plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
 local torso
 local Tree
+local SelectedPlayer
 
 -- Bool Variables
 local flying = false
@@ -48,6 +50,12 @@ for _,v in ipairs(game.Workspace:GetChildren()) do
             end
         end
     end
+end
+
+local Players = {}
+
+for _,v in ipairs(game.Players:GetChildren()) do
+    table.insert(Players, v.Name)
 end
 
 local Box = Instance.new("SelectionBox",game.Workspace)
@@ -213,101 +221,7 @@ end)
 
 Slot:Text("Pink Car Spawner")
 Slot:Button("Spawn Pink Car","Respawns car until a pink car spawns","rbxassetid://3926305904","Spawn","340, 4","24, 24",function()
-    if _G.Executed == false or _G.Executed == nil then
-        _G.Executed = true
-        Spawned = false
-        Spawning = false
-        SpawnPad = nil
-        SelectingSpawnPad = true
-        spawn(function()
-            notify.push({
-                Title = "H3x",
-                Text = "Select SpawnPad",
-                Duration = 5,
-            })
-        end)
-        workspace.PlayerModels.ChildAdded:connect(function(Added)
-            if Spawned == false and Spawning == false then 
-		print("-----------------------")
-                Owner = nil
-                CheckSuccess = false
-                repeat wait() 
-                    if Added:FindFirstChild("Owner") and Added:FindFirstChild("Type") and Added.Type.Value == "Vehicle" and Added:FindFirstChild("Settings") and Added.Settings:FindFirstChild("Color") then
-			print("IsCar")
-                        CheckSuccess = true
-                        Owner = Added.Owner.Value
-                    end
-                until CheckSuccess == true
-                if Owner == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(Owner) == true and CheckSuccess == true then
-                    CheckSuccess = false
-                    Spawning = true
-                    Added:FindFirstChild("Settings")
-                    Added.Settings:FindFirstChild("Color")
-                    if tostring(Added.Settings.Color.Value) == tostring(1032) then
-			print("IsPink")
-                        Spawned = true
-                        Spawning = false
-                    elseif tostring(Added.Settings.Color.Value) ~= tostring(1032) then
-			print("RespawningCar")
-                        if SpawnPad:FindFirstChild("ButtonRemote_SpawnButton") and SpawnPad:FindFirstChild("Owner") then 
-                            if SpawnPad.Owner.Value == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(SpawnPad.Owner.Value) == true then 
-                                Spawning = false
-                                game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(SpawnPad.ButtonRemote_SpawnButton)
-                            end
-                        end
-                    end
-                end
-            end
-        end)
-
-        spawn(function()
-            repeat wait()
-                if Spawned == true then
-                    Spawning = false
-                    spawn(function()				
-                        notify.push({
-                        Title = "H3x",
-                        Text = "Pink Car\nSuccessfully Spawned",
-                        Duration = 5,
-                        })
-                    end)
-                    _G.Executed = false
-                    SpawnPad.Main.Color = Color3.fromRGB(124,92,70)
-                    SpawnPad.Main.Material = Enum.Material.WoodPlanks
-                end
-            until Spawned == true
-        end)
-
-        spawn(function()
-            while wait() do
-                if not SelectingSpawnPad == true then return end
-                if Mouse.Target.Parent then if Mouse.Target.Parent:FindFirstChild("ButtonRemote_SpawnButton") then
-                    local part = Mouse.Target.Parent:FindFirstChild("Main")
-                    print("IsSpawnPad")
-                    Mouse.Target.Parent:FindFirstChild("Main").Color = Color3.fromRGB(0,255,0)
-                    Mouse.Target.Parent:FindFirstChild("Main").Material = Enum.Material.Neon
-                    repeat wait() until Mouse.Target.Parent:FindFirstChild("Main") ~= part or not SelectingSpawnPad
-                    if SelectingSpawnPad then
-                        print("NoLongerSpawnPad")
-                        part.Color = Color3.fromRGB(124,92,70)
-                        part.Material = Enum.Material.WoodPlanks
-                    end
-                end end
-            end
-        end)
-
-        Mouse.Button1Down:Connect(function(part)
-            if not SelectingSpawnPad == true then return end
-            if Mouse.Target.Parent then if Mouse.Target.Parent:FindFirstChild("ButtonRemote_SpawnButton") then
-                SelectingSpawnPad = false
-                Mouse.Target.Parent:FindFirstChild("Main").Color = Color3.fromRGB(255,0,0)
-                SpawnPad = Mouse.Target.Parent
-                Spawned = false
-                Spawning = false
-                game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(Mouse.Target.Parent.ButtonRemote_SpawnButton)
-            end end
-        end)
-    end
+    SpawnPink()
 end)
 
 
@@ -326,10 +240,41 @@ end)
 end) ]]--
 
 
+-- Troll Category
+local Troll = library:Tab("Troll","rbxthumb://type=Asset&id=" .. 9339634838 .. "&w=420&h=420","","");
+
+local PlayerDropDown = Troll:Dropdown("Select Player","Select Player to get effected by an action.","rbxthumb://type=Asset&id=" .. 9339634838 .. "&w=420&h=420",Players[1],Players,function(e)
+    SelectedPlayer = e
+end)
+
+Troll:Button("Kick","Kicks selected player from game.","rbxthumb://type=Asset&id=" .. 9339634838 .. "&w=420&h=420","Kick","","",function()
+    Kick(SelectedPlayer)
+end)
+
+
+
+
 
 
 
 -- Scripts
+
+
+-- Update Player Count
+plrs.PlayerAdded:Connect(function(Player)
+    PlayerNum:Set("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers)
+    table.insert(Players, Player.Name)
+    PlayerDropDown:refresh(Players)
+end)
+plrs.PlayerRemoving:Connect(function(Player)
+    PlayerNum:Set("               Players:        "..#game.Players:GetChildren().." / "..game.Players.MaxPlayers)
+    for i,v in pairs(Players) do
+	    if v == Player.Name then
+    		table.remove(Players, i)
+    	end
+    end
+    PlayerDropDown:refresh(Players)
+end)
 
 
 -- Toggle ui Visiblity 
@@ -834,4 +779,187 @@ function ModWood()
         end
         ButtonDown:Disconnect()
     end)
+end
+
+
+-- GetAxes
+
+function GetAxes()
+    local Axes={};
+    local Tools=plr.Backpack:GetChildren();
+    local CharacterTools=plr.Character:GetChildren();
+    for i=1,#Tools do 
+        local Axe=Tools[i]
+        if Axe:FindFirstChild'CuttingTool'then
+            Axes[#Axes+1]=Axe;
+        end;
+    end;
+    for i=1,#CharacterTools do 
+        local Axe=CharacterTools[i]
+        if Axe:FindFirstChild'CuttingTool'then
+            Axes[#Axes+1]=Axe;
+        end;
+    end;
+    return Axes
+end
+
+
+-- PinkCar Spawner
+function SpawnPink()
+    if _G.Executed == false or _G.Executed == nil then
+        _G.Executed = true
+        Spawned = false
+        Spawning = false
+        SpawnPad = nil
+        SelectingSpawnPad = true
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Select SpawnPad",
+                Duration = 5,
+            })
+        end)
+        workspace.PlayerModels.ChildAdded:connect(function(Added)
+            if Spawned == false and Spawning == false then 
+		print("-----------------------")
+                Owner = nil
+                CheckSuccess = false
+                repeat wait() 
+                    if Added:FindFirstChild("Owner") and Added:FindFirstChild("Type") and Added.Type.Value == "Vehicle" and Added:FindFirstChild("Settings") and Added.Settings:FindFirstChild("Color") then
+			print("IsCar")
+                        CheckSuccess = true
+                        Owner = Added.Owner.Value
+                    end
+                until CheckSuccess == true
+                if Owner == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(Owner) == true and CheckSuccess == true then
+                    CheckSuccess = false
+                    Spawning = true
+                    Added:FindFirstChild("Settings")
+                    Added.Settings:FindFirstChild("Color")
+                    if tostring(Added.Settings.Color.Value) == tostring(1032) then
+			print("IsPink")
+                        Spawned = true
+                        Spawning = false
+                    elseif tostring(Added.Settings.Color.Value) ~= tostring(1032) then
+			print("RespawningCar")
+                        if SpawnPad:FindFirstChild("ButtonRemote_SpawnButton") and SpawnPad:FindFirstChild("Owner") then 
+                            if SpawnPad.Owner.Value == game.Players.LocalPlayer or game.ReplicatedStorage.Interaction.ClientIsWhitelisted:InvokeServer(SpawnPad.Owner.Value) == true then 
+                                Spawning = false
+                                game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(SpawnPad.ButtonRemote_SpawnButton)
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+
+        spawn(function()
+            repeat wait()
+                if Spawned == true then
+                    Spawning = false
+                    spawn(function()				
+                        notify.push({
+                        Title = "H3x",
+                        Text = "Pink Car\nSuccessfully Spawned",
+                        Duration = 5,
+                        })
+                    end)
+                    _G.Executed = false
+                    SpawnPad.Main.Color = Color3.fromRGB(124,92,70)
+                    SpawnPad.Main.Material = Enum.Material.WoodPlanks
+                end
+            until Spawned == true
+        end)
+
+        spawn(function()
+            while wait() do
+                if not SelectingSpawnPad == true then return end
+                if Mouse.Target.Parent then if Mouse.Target.Parent:FindFirstChild("ButtonRemote_SpawnButton") then
+                    local part = Mouse.Target.Parent:FindFirstChild("Main")
+                    print("IsSpawnPad")
+                    Mouse.Target.Parent:FindFirstChild("Main").Color = Color3.fromRGB(0,255,0)
+                    Mouse.Target.Parent:FindFirstChild("Main").Material = Enum.Material.Neon
+                    repeat wait() until Mouse.Target.Parent:FindFirstChild("Main") ~= part or not SelectingSpawnPad
+                    if SelectingSpawnPad then
+                        print("NoLongerSpawnPad")
+                        part.Color = Color3.fromRGB(124,92,70)
+                        part.Material = Enum.Material.WoodPlanks
+                    end
+                end end
+            end
+        end)
+
+        Mouse.Button1Down:Connect(function(part)
+            if not SelectingSpawnPad == true then return end
+            if Mouse.Target.Parent then if Mouse.Target.Parent:FindFirstChild("ButtonRemote_SpawnButton") then
+                SelectingSpawnPad = false
+                Mouse.Target.Parent:FindFirstChild("Main").Color = Color3.fromRGB(255,0,0)
+                SpawnPad = Mouse.Target.Parent
+                Spawned = false
+                Spawning = false
+                game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(Mouse.Target.Parent.ButtonRemote_SpawnButton)
+            end end
+        end)
+    end
+end
+
+
+-- Kick
+function Kick(Player)
+    GetAxe()
+    if not Axe then 
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "You need an axe to perform this action.",
+                Duration = 5,
+            })
+        end)
+        return false;
+    end;
+    if Player == plr.Name then 
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "You Cannot Perform This Action On Yourself!",
+                Duration = 5,
+            })
+        end)
+        return false;
+    end;
+    if not plrs:FindFirstChild(Player) then 
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Selected Player Has Left The Game!",
+                Duration = 5,
+            })
+        end)
+        return false;
+    end;
+    if plrs:FindFirstChild(Player).Character.Humanoid.Sit then 
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Selected Player Is Seated!",
+                Duration = 5,
+            })
+        end)
+        return false;
+    end;
+    local Humanoid = plr.Character.Humanoid;
+    if not Character:FindFirstChild'Tool'then 
+        local Tools = GetAxes();
+        Tools[1].Parent = plr.Character;
+    end;
+    repeat game:GetService("RunService").RenderStepped:wait() until plr.Character:FindFirstChild'Tool';
+    local Axe = plr.Character:FindFirstChild('Tool');
+    local NewHumanoid = Humanoid:Clone();
+    Humanoid:Destroy();
+    NewHumanoid.Parent = plr.Character;
+    Axe.Owner:Destroy();
+    repeat task.wait() game.Players:FindFirstChild(Player).Character.HumanoidRootPart.CFrame = Axe.Handle.CFrame; until Axe.Parent ~= plr;
+    game:GetService('ReplicatedStorage').Interaction.DestroyStructure:FireServer(Axe);
+    repeat game:GetService("RunService").RenderStepped:wait() until not plr.Character:FindFirstChild('Tool')
+    plr.Character:Destroy();
 end

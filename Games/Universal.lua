@@ -217,20 +217,15 @@ end)
 
 
 -- Keep WalkSpeed/JumpPower Changed
-local mt; mt = hookmetamethod(game, "__newindex", newcclosure(function(self, index, value)
-        if not checkcaller() and self:IsDescendantOf(plr) and index == "WalkSpeed" then
-            plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = WalkSpeed
-            return
-        end
-    return mt(self, index, value)
-end))
-local mt; mt = hookmetamethod(game, "__newindex", newcclosure(function(self, index, value)
-    if not checkcaller() and self:IsDescendantOf(plr) and index == "JumpPower" then
-        plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
-        return
+spawn(function()
+    while wait() do
+       pcall(function()
+          repeat wait() until plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= WalkSpeed or plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower ~= JumpPower
+          plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = WalkSpeed
+          plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
+       end)
     end
-return mt(self, index, value)
-end))
+end)
 
 
 -- InfJump

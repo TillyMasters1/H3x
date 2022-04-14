@@ -241,7 +241,7 @@ end) ]]--
 
 
 -- Troll Category
-local Troll = library:Tab("Troll","rbxthumb://type=Asset&id=" .. 9339634838 .. "&w=420&h=420","","");
+local Troll = library:Tab("Troll","rbxthumb://type=Asset&id=" .. 9361580765 .. "&w=420&h=420","","");
 
 local PlayerDropDown = Troll:Dropdown("Select Player","Select Player to get effected by an action.","rbxthumb://type=Asset&id=" .. 9339634838 .. "&w=420&h=420",Players[1],Players,function(e)
     SelectedPlayer = e

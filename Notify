@@ -49,8 +49,6 @@ insertContainer()
 
 function module.push(table)
 	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("H3x") ~= nil then
-	
-		local txt = {}
 		
 		local duration
 
@@ -428,12 +426,6 @@ function module.push(table)
 					Name.Position = UDim2.new(0.0229124241, 0, 0.0874615163, 0)
 					Name.Size = UDim2.new(0.134419546, 0, 0.253638417, 0)
 					Notification1:TweenSize(UDim2.new(1, 0, 0.096, 0))
-				end
-				
-				function txt:Del()
-					Notification1:TweenSize(UDim2.new(0, 0, 0, 0))
-					wait(1.1)
-					Notification1:Destroy()
 				end
 
 				wait(duration)

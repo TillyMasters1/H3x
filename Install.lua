@@ -7,7 +7,7 @@ if not isfile("H3x/Modules/Maid.lua") then writefile("H3x/Modules/Maid.lua", gam
 if not isfolder("H3x/Config") then makefolder("H3x/Config") end
 if not isfile("H3x/Config/UISettings.txt") then writefile("H3x/Config/UISettings.txt", "P") end
 
-local ui = request({Url = "https://h3x.wtf/Dependancies/UI.lua", Method = "GET"}).Body
+local ui = rq({Url = "https://h3x.wtf/Dependancies/UI.lua", Method = "GET"}).Body
 if not isfile("H3x/Modules/UI.lua") or not (readfile("H3x/Modules/UI.lua") == ui) then 
   writefile("H3x/Modules/UI.lua", ui) 
 end

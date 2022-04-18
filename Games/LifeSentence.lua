@@ -26,6 +26,7 @@ local OldPos
 local flying = false
 local InfJump = false
 local AutoCollectVault = false
+local AutoDumbell = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.Q
@@ -187,6 +188,25 @@ AutoFarm:Switch("AutoCollect Vaults","Toggles Automaticly collecting vaults","rb
         AutoCollectVault = e
     end
 end)
+AutoFarm:Switch("Auto-Dumbell", "Automaticly curls the dumbell","rbxthumb://type=Asset&id=" .. 9403879039 .. "&w=420&h=420",false,"","",function(e)
+    if e == true or e == false then
+        AutoDumbell = e
+    end
+end)
+
+
+local Misc = library:Tab("Misc","rbxthumb://type=Asset&id=" .. 9190494867 .. "&w=420&h=420","","");
+
+Misc:Button("Get Spring", "Gets spring", "", "Get","","", function()
+    GetItem("Spring")
+end)
+Misc:Button("Get Blade", "Gets blade", "", "Get","","", function()
+    GetItem("Blade")
+end)
+Misc:Button("Get Gear", "Gets gear", "", "Get","","", function()
+    GetItem("Gear")
+end)
+
 
 
 -- Scripts
@@ -440,3 +460,39 @@ game:service'Players'.LocalPlayer.Idled:connect(function()
     bb:CaptureController()
     bb:ClickButton2(Vector2.new())
 end)
+
+
+-- AutoDumbell
+spawn(function()
+    while wait() do
+        if AutoDumbell then
+            if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dumbell") then
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dumbell"):Activate()
+            end
+        end
+    end
+end)
+
+
+-- GetItem
+function GetItem(item)
+    for _,v in ipairs(game:GetService("Workspace").LootSpawns:GetDescendants()) do
+        if v.Name == tostring(item) then
+           if v.Transparency == 0 then
+               local old = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+               wait(0.2)
+               fireproximityprompt(v.Parent.Part.Attachment.ProximityPrompt, 20)
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = old
+               return
+           end
+        end
+    end  
+    spawn(function()
+        notify.push({
+            Title = "H3x",
+            Text = "Couldnt find any "..item.."'s in the server\nTry again soon",
+            Duration = 10;
+        })
+    end)
+end

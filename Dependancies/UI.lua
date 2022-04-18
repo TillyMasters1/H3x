@@ -1,4 +1,3 @@
--- gg
 local library = (...) or {title = "H3x"; description = "Loaded for Lumber Tycoon 2"}
 
 do -- loadup

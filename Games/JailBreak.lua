@@ -1,5 +1,5 @@
 loadstring(game:HttpGet("https://h3x.wtf/Install.lua"))(); loadstring(readfile("H3x/Modules/ENV.lua"))()
-local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded Universal Script!"});
+local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!"});
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") and game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")
 
@@ -69,7 +69,7 @@ CasinoDoor.Transparency = 1
 local Home = library:Tab("Home","rbxassetid://3926305904","964, 204","36, 36");
 
 Home:Activate();
-Home:Text("Welcome to H3x! You've successfully loaded H3x Universal Script!");
+Home:Text("Welcome to H3x! You've successfully loaded H3x for "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!");
 Home:Text("We want you to have the best experience here, so please join our Discord!");
 Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!","164, 404","36, 36", function()
   spawn(function()

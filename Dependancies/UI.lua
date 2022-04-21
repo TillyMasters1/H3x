@@ -2964,6 +2964,199 @@ function library:Tab(name,image,IRO,IRS)
 			SortOrder = Enum.SortOrder.LayoutOrder;
 			Padding = UDim.new(0, 1)
 		})
+		
+		function Window:Switch(name,description,image,default,IRO,IRS,callback)
+        IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
+		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
+		image = image or "rbxassetid://3926305904";
+		default = default or false;
+		callback = callback or function() end;
+
+		local switch = {value = default}
+
+		switch.Main = library:create("ImageButton",{
+			Name = "Switch";
+			Parent = section.Held;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			Position = UDim2.new(0, 0, 1, 1);
+			Size = UDim2.new(0, 788, 0, 67);
+			Image = "rbxassetid://2790382281";
+			ImageColor3 = Color3.fromRGB(43, 43, 43);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(4, 4, 252, 252)
+		})
+
+		switch.Click = library:create("ImageButton",{
+			Name = "Switchy";
+			Parent = switch.Main;
+			AnchorPoint = Vector2.new(0, 0.5);
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			Position = UDim2.new(0, 715, 0.5, 0);
+			Size = UDim2.new(0, 45, 0, 20);
+			ZIndex = 2;
+			Image = "rbxassetid://3570695787";
+			ImageColor3 = Color3.fromRGB(43, 43, 43);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(100, 100, 100, 100);
+			SliceScale = 0.120
+		})
+
+		switch.ClickOut = library:create("ImageButton",{
+			Name = "Outline";
+			Parent = switch.Click;
+			AnchorPoint = Vector2.new(0.5, 0.5);
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			BorderSizePixel = 0;
+			Position = UDim2.new(0.5, 0, 0.5, 0);
+			Size = UDim2.new(1, 2, 1, 2);
+			Image = "rbxassetid://3570695787";
+			ImageColor3 = Color3.fromRGB(170, 170, 170);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(100, 100, 100, 100);
+			SliceScale = 0.120
+		})
+
+		switch.ClickCircle = library:create("ImageButton",{
+			Name = "Circle";
+			Parent = switch.Click;
+			AnchorPoint = Vector2.new(0, 0.5);
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderColor3 = Color3.fromRGB(27, 42, 53);
+			BorderSizePixel = 0;
+			Position = UDim2.new(0.0700000003, 0, 0.504000008, 0);
+			Size = UDim2.new(0, 15, 0, 15);
+			ZIndex = 3;
+			Image = "rbxassetid://3570695787";
+			ImageColor3 = Color3.fromRGB(170, 170, 170);
+			ScaleType = Enum.ScaleType.Slice;
+			SliceCenter = Rect.new(100, 100, 100, 100);
+			SliceScale = 0.120
+		})
+
+		switch.Description = library:create("TextLabel",{
+			Name = "Description";
+			Parent = switch.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderSizePixel = 0;
+			Position = UDim2.new(0, 67, 0, 39);
+			Size = UDim2.new(0, 591, 0, 20);
+			Font = Enum.Font.ArialBold;
+			Text = description;
+			TextColor3 = Color3.fromRGB(216, 216, 216);
+			TextSize = 14.000;
+			TextXAlignment = Enum.TextXAlignment.Left;
+			TextYAlignment = Enum.TextYAlignment.Top
+		})
+
+		switch.Title = library:create("TextLabel",{
+			Name = "Title";
+			Parent = switch.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			BorderSizePixel = 0;
+			Position = UDim2.new(0, 67, 0, 4);
+			Size = UDim2.new(0, 710, 0, 35);
+			Font = Enum.Font.ArialBold;
+			Text = name;
+			TextColor3 = Color3.fromRGB(255, 255, 255);
+			TextSize = 17.000;
+			TextXAlignment = Enum.TextXAlignment.Left
+		})
+
+		switch.Image = library:create("ImageLabel",{
+			Name = "img";
+			Parent = switch.Main;
+			BackgroundTransparency = 1.000;
+			LayoutOrder = 15;
+			Position = UDim2.new(0.0215736032, 0, 0.25373134, 0);
+			Size = UDim2.new(0, 32, 0, 32);
+			ZIndex = 2;
+			Image = image;
+			ImageRectOffset = IRO;
+			ImageRectSize = IRS
+		})
+
+		switch.SwitchText = library:create("TextLabel",{
+			Name = "SwitchText";
+			Parent = switch.Main;
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundTransparency = 1.000;
+			Position = UDim2.new(0, 599, 0, 19);
+			Size = UDim2.new(0, 184, 0, 26);
+			ZIndex = 3;
+			Font = Enum.Font.ArialBold;
+			Text = "Off";
+			TextColor3 = Color3.fromRGB(170, 170, 170);
+			TextSize = 16.000
+		})
+
+		function switch:Set(state)
+				if state == false then
+					tween(switch.Click,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+					tween(switch.ClickCircle,0.3,{ImageColor3 = Color3.fromRGB(170, 170, 170), Position = UDim2.new(0.07, 0,0.5, 0)});
+					switch.SwitchText.Text = "Off";
+				else
+					tween(switch.Click,0.3,{ImageColor3 = Color3.fromRGB(170, 170, 170)});
+					tween(switch.ClickCircle,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43), Position = UDim2.new(0.6, 0,0.5, 0)});
+					switch.SwitchText.Text = "On";
+				end
+				callback(state);
+				switch.value = state
+			end
+
+			switch:Set(switch.value)
+
+			local held = false;
+			switch.Main.MouseButton1Down:Connect(function()
+				held = true;
+				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(100,100,100)})
+			end)
+			switch.Main.MouseButton1Up:Connect(function()
+				if held then
+					tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+					switch:Set(not switch.value)
+				end
+			end)
+			switch.Click.MouseButton1Down:Connect(function()
+				held = true;
+				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(100,100,100)})
+			end)
+			switch.Click.MouseButton1Up:Connect(function()
+				if held then
+					tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+					switch:Set(not switch.value)
+				end
+			end)
+			switch.ClickCircle.MouseButton1Down:Connect(function()
+				held = true;
+				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(100,100,100)})
+			end)
+			switch.ClickCircle.MouseButton1Up:Connect(function()
+				if held then
+					tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+					switch:Set(not switch.value)
+				end
+			end)
+			switch.Main.MouseEnter:Connect(function()
+				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(100,100,100)})
+			end)
+			switch.Main.MouseLeave:Connect(function()
+				held = false;
+				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+			end)
+
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+
+			return switch;
+		end
 
 		function section:Button(name,clicktext,callback)
 			callback = callback or function() end;

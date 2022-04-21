@@ -2965,7 +2965,7 @@ function library:Tab(name,image,IRO,IRS)
 			Padding = UDim.new(0, 1)
 		})
 		
-		function Window:Switch(name,description,image,default,IRO,IRS,callback)
+		function section:Switch(name,description,image,default,IRO,IRS,callback)
         IRO = Vector2.new(IRO:match("(.+), (.+)")) or Vector2.new(0, 0);
 		IRS = Vector2.new(IRS:match("(.+), (.+)")) or Vector2.new(0, 0);
 		image = image or "rbxassetid://3926305904";

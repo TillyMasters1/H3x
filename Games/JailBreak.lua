@@ -179,7 +179,7 @@ end)
 
 -- Jewelry Assistant
 local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
-Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
+Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
     if e == true then
         DisarmJewLasers()
         JewDisarmLasers = true

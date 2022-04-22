@@ -20,9 +20,10 @@ local flying = false
 local InfJump = false
 local AutoOpenDoor = false
 local CasinoDoorTouch = false
+local JewDisarmLasers = false
 
 -- KeyBinds
-local FlyToggle = Enum.KeyCode.Q
+local FlyToggle = Enum.KeyCode.H
 local HoldToSelect  = Enum.KeyCode.LeftControl
 local HoldToUndoAll = Enum.KeyCode.LeftAlt
 local ToggleUI = Enum.KeyCode.RightControl
@@ -141,7 +142,7 @@ Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",
         InfJump = e
     end
 end)
-Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.Q,"","",function(e)
+Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.H,"","",function(e)
     if e ~= true and e ~= false then
         FlyToggle = e
     end
@@ -166,11 +167,22 @@ end)
 
 
 -- Rob Assistant
-local RobAssistant = library:Tab("Rob Assistant","rbxassetid://3926307971","884, 4","36, 36");
-RobAssistant:Text("Casino")
-RobAssistant:Switch("Auto Open Door","Toggles auto open door for the casino","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
+local RobAssistant = library:Tab("Robbery Assistant","rbxassetid://3926307971","884, 4","36, 36");
+
+-- Casino Assistant
+local Casino = RobAssistant:Section("Casino Assistants","","rbxthumb://type=Asset&id=" .. 9427340203 .. "&w=420&h=420","","")
+Casino:Switch("Auto Open Door","Toggles auto open door for the casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
     if e == true or e == false then
         AutoOpenDoor = e
+    end
+end)
+
+-- Jewelry Assistant
+local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
+Jewelry:Switch("Remove Lasers","Removes all lasers and cameras from jewelry","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
+    if e == true then
+        DisarmJewLasers()
+        JewDisarmLasers = true
     end
 end)
   
@@ -352,4 +364,69 @@ spawn(function()
         wait(1)
         CasinoDoorTouch = false    
     end)
+end)
+
+
+-- Disarm Jewelrys Lasers
+function DisarmJewLasers()
+    wait(0.5)
+    for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model"):GetChildren()) do
+        if v.Name == "BarbedWire" then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            if v:FindFirstChild("TouchInterest") then
+                v.TouchInterest:Destroy()
+            end
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model"):FindFirstChild("Lasers"):GetChildren()) do
+        v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+        for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+            if v.Name == "TouchInterest" then
+                v:Destroy()
+            end
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model"):GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            for _,v in ipairs(v:GetChildren()) do
+                if v.Name == "TouchInterest" then
+                    v:Destroy()
+                end
+            end
+        end
+    end
+    
+    if game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model"):FindFirstChild("Cameras") then
+        for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model").Cameras:GetChildren()) do
+            for _,v in ipairs(v.InnerModel:GetChildren()) do
+                if v.Name == "Lens" then
+                    v.Color = Color3.fromRGB(31, 128, 29)
+                elseif v:FindFirstChild("TouchInterest") then
+                    v.Color = Color3.fromRGB(0, 255, 0)
+                    for _,v in ipairs(v:GetChildren()) do
+                        if v.Name == "TouchInterest" then
+                            v:Destroy()
+                        end
+                    end
+                elseif not v:FindFirstChild("TouchInterest") and v.Name == "Part" then
+                    v.Color = Color3.fromRGB(75, 151, 75) 
+                end
+            end
+        end
+    end
+end
+game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors.ChildAdded:Connect(function()
+    spawn(function()
+        notify.push({
+            Title = "H3x",
+            Text = "Jewelry just Opened",
+            Duration = 10;
+        })
+    end)
+    if JewDisarmLasers == true then
+        DisarmJewLasers()
+    end
 end)

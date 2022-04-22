@@ -417,6 +417,15 @@ function DisarmJewLasers()
             end
         end
     end
+    
+    if game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model"):FindFirstChild("LaserFloor") then
+        for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors:FindFirstChildWhichIsA("Model"):FindFirstChild("LaserFloor"):GetChildren()) do
+            if v:FindFirstChild("TouchInterest") then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                v.TouchInterest:Destroy()
+            end
+        end
+    end
 end
 game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors.ChildAdded:Connect(function()
     spawn(function()

@@ -163,7 +163,7 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id=" .. 9454557677 .. "&w=420&h=420","","");
 
     -- Notify Store Status
-    RobAssistant:Switch("Notify Store Status","Sends a notification to you when a store opens.","rbxthumb://type=Asset&id=" .. 9455170304 .. "&w=420&h=420",false,"","",function(e)
+    RobAssistant:Switch("Notify Store Status","Sends a notification to you when a store opens.","rbxthumb://type=Asset&id=" .. 9455170304 .. "&w=420&h=420",true,"","",function(e)
         if e == true or e == false then
             StoreStatusNotify = e
         end

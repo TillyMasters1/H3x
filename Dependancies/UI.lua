@@ -406,7 +406,7 @@ function library:Tab(name,image,IRO,IRS)
 	Window.ContainerList = library:create("UIListLayout",{
 		Parent = Window.Container;
 		SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0, 4);
+		Padding = UDim.new(0, 6);
 	})
 
 	Window.Title = library:create("TextButton",{
@@ -430,7 +430,7 @@ function library:Tab(name,image,IRO,IRS)
 		Parent = library.SettingsList;
 		HorizontalAlignment = Enum.HorizontalAlignment.Right;
 		SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0, 6)
+		Padding = UDim.new(0, 4)
 	})
 
 	Window.SideTab = library:create("ImageButton",{

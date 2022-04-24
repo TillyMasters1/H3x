@@ -430,7 +430,7 @@ function library:Tab(name,image,IRO,IRS)
 		Parent = library.SettingsList;
 		HorizontalAlignment = Enum.HorizontalAlignment.Right;
 		SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0, 4)
+		Padding = UDim.new(0, 6)
 	})
 
 	Window.SideTab = library:create("ImageButton",{

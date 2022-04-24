@@ -498,7 +498,7 @@ game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildA
             Duration = 10;
         })
     end)
-    if BanlDisarmLasers == true then
+    if BankDisarmLasers == true then
         DisarmBankLasers()
     end
 end)

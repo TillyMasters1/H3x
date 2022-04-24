@@ -21,6 +21,7 @@ local InfJump = false
 local AutoOpenDoor = false
 local CasinoDoorTouch = false
 local JewDisarmLasers = false
+local BankDisarmLasers = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -183,6 +184,15 @@ Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbx
     if e == true then
         DisarmJewLasers()
         JewDisarmLasers = true
+    end
+end)
+
+-- Bank Assistant
+local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
+Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    if e == true then
+        DisarmBankLasers()
+        BankDisarmLasers = true
     end
 end)
   
@@ -437,5 +447,58 @@ game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors.Chi
     end)
     if JewDisarmLasers == true then
         DisarmJewLasers()
+    end
+end)
+
+
+-- Disarm Bank Lasers
+function DisarmBankLasers()
+    wait(0.5)
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Lasers:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+        else
+            if v:FindFirstChild("Part") then
+                v.Part.Color = Color3.fromRGB(0, 255, 0)
+                v.Part:FindFirstChild("TouchInterest"):Destroy()  
+            end
+        end
+    end
+    
+    --[[
+    if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater").EscapeRoutes.BankDoor.Door.Model then
+        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+            if v:FindFirstChild("TouchInterest") then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                v.TouchInterest:Destroy()
+            end
+        end
+    end]]--
+    
+    if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater") then
+        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Underwater.Lasers:GetChildren()) do
+            if v:FindFirstChild("TouchInterest") then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                v.TouchInterest:Destroy()
+            else
+                if v:FindFirstChild("Part") then
+                    v.Part.Color = Color3.fromRGB(0, 255, 0)
+                    v.Part:FindFirstChild("TouchInterest"):Destroy()  
+                end
+            end
+        end
+    end
+end
+game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildAdded:Connect(function()
+    spawn(function()
+        notify.push({
+            Title = "H3x",
+            Text = "Bank just Opened",
+            Duration = 10;
+        })
+    end)
+    if BanlDisarmLasers == true then
+        DisarmBankLasers()
     end
 end)

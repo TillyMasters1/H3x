@@ -22,6 +22,7 @@ local AutoOpenDoor = false
 local CasinoDoorTouch = false
 local JewDisarmLasers = false
 local BankDisarmLasers = false
+local StoreStatusNotify = true
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -57,15 +58,6 @@ Sound0.Volume = 1;
 Sound0.Looped = false;
 Sound0.archivable = false;
 Sound0.Parent = game.Workspace;
-
-local CasinoDoor = Instance.new("Part")
-CasinoDoor.Parent = game:GetService("Workspace").Casino.RobberyDoor
-CasinoDoor.CFrame = CFrame.new(54.1812134, 20.8244991, -4708.33691, -0.961297989, 0, -0.275510818, 0, 1, 0, 0.275510818, 0, -0.961297989)
-CasinoDoor.Size = Vector3.new(10.0019, 30, 8.99407)
-CasinoDoor.Color = Color3.fromRGB(196, 40, 28)
-CasinoDoor.Anchored = true
-CasinoDoor.CanCollide = false
-CasinoDoor.Transparency = 1
 
 
 local Home = library:Tab("Home","rbxassetid://3926305904","964, 204","36, 36");
@@ -111,6 +103,7 @@ Home:Button("Rejoin Server", "Rejoin's the same server your in.", "rbxassetid://
     local ts = game:GetService("TeleportService")
     ts:Teleport(game.PlaceId, plr)
 end)
+
 local About = Home:SubTab("About","Menu specifications, Game specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
 local MenuInfo = About:Section("Menu specifications","","rbxassetid://3926305904","44, 644","36, 36")
 MenuInfo:Text("               Version:            1",Enum.TextXAlignment.Left)
@@ -130,76 +123,82 @@ Credit:Text("Inspired from Windows 11 Settings")
 
 local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36");
 
--- Movement
-Player:Text("Movement")
-Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
-    WalkSpeed = e
-end)
-Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
-    JumpPower = e
-end)
-Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
-    if e == true or e == false then
-        InfJump = e
-    end
-end)
-Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.H,"","",function(e)
-    if e ~= true and e ~= false then
-        FlyToggle = e
-    end
-end)
-Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxthumb://type=Asset&id=" .. 9059787706 .. "&w=420&h=420",0,100,600,"","",function(e)
-    maxspeed = e
-end)
+    -- Movement
+    Player:Text("Movement")
+    Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
+        WalkSpeed = e
+    end)
+    Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
+        JumpPower = e
+    end)
+    Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
+        if e == true or e == false then
+            InfJump = e
+        end
+    end)
+    Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.H,"","",function(e)
+        if e ~= true and e ~= false then
+            FlyToggle = e
+        end
+    end)
+    Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxthumb://type=Asset&id=" .. 9059787706 .. "&w=420&h=420",0,100,600,"","",function(e)
+        maxspeed = e
+    end)
 
-
--- DeleteTool
-Player:Text("Delete Tool")
-Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,"644, 724","36, 36",function(e)
-    if e ~= true and e ~= false then
-        HoldToSelect = e
-    end
-end)
-Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,"124, 564","36, 36",function(e)
-    if e ~= true and e ~= false then
-        HoldToUndoAll = e
-    end
-end)
+    -- DeleteTool
+    Player:Text("Delete Tool")
+    Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,"644, 724","36, 36",function(e)
+        if e ~= true and e ~= false then
+            HoldToSelect = e
+        end
+    end)
+    Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,"124, 564","36, 36",function(e)
+        if e ~= true and e ~= false then
+            HoldToUndoAll = e
+        end
+    end)
 
 
 -- Rob Assistant
 local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id=" .. 9454557677 .. "&w=420&h=420","","");
 
--- Casino Assistant
-local Casino = RobAssistant:Section("Casino Assistants","","rbxthumb://type=Asset&id=" .. 9427340203 .. "&w=420&h=420","","")
-Casino:Switch("Auto Open Door","Toggles auto open door for the casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
-    if e == true or e == false then
-        AutoOpenDoor = e
-    end
-end)
-Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
-    if e == true then
-        DisarmCasinoLasers()
-    end
-end)
+    -- Notify Store Status
+    RobAssistant:Switch("Notify Store Status","Sends a notification to you when a store opens.","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            StoreStatusNotify = e
+        end
+    end)
 
--- Jewelry Assistant
-local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
-Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
-    if e == true then
-        DisarmJewLasers()
-        JewDisarmLasers = true
-    end
-end)
+    -- Casino Assistant
+    local Casino = RobAssistant:Section("Casino Assistants","","rbxthumb://type=Asset&id=" .. 9427340203 .. "&w=420&h=420","","")
+    Casino:Switch("Auto Open Door","Toggles auto open door for the casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            AutoOpenDoor = e
+        end
+    end)
+    Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+        if e == true then
+            DisarmCasinoLasers()
+        end
+    end)
 
--- Bank Assistant
-local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
-Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
-    if e == true then
-        DisarmBankLasers()
-        BankDisarmLasers = true
-    end
-end)
+    -- Jewelry Assistant
+    local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
+    Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+        if e == true then
+            DisarmJewLasers()
+            JewDisarmLasers = true
+        end
+    end)
+
+    -- Bank Assistant
+    local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
+    Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+        if e == true then
+            DisarmBankLasers()
+            BankDisarmLasers = true
+        end
+    end)
   
 
 
@@ -354,6 +353,14 @@ Fly()
 
 -- AutoOpenDoor Casino
 spawn(function()
+    local CasinoDoor = Instance.new("Part")
+    CasinoDoor.Parent = game:GetService("Workspace").Casino.RobberyDoor
+    CasinoDoor.CFrame = CFrame.new(54.1812134, 20.8244991, -4708.33691, -0.961297989, 0, -0.275510818, 0, 1, 0, 0.275510818, 0, -0.961297989)
+    CasinoDoor.Size = Vector3.new(10.0019, 30, 8.99407)
+    CasinoDoor.Color = Color3.fromRGB(196, 40, 28)
+    CasinoDoor.Anchored = true
+    CasinoDoor.CanCollide = false
+    CasinoDoor.Transparency = 1       
     CasinoDoor.Touched:connect(function()
         if AutoOpenDoor == true and CasinoDoorTouch == false then
             CasinoDoorTouch = true
@@ -443,13 +450,15 @@ function DisarmJewLasers()
     end
 end
 game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model").Floors.ChildAdded:Connect(function()
-    spawn(function()
-        notify.push({
-            Title = "H3x",
-            Text = "Jewelry just Opened",
-            Duration = 10;
-        })
-    end)
+    if StoreStatusNotify then
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Jewelry just Opened",
+                Duration = 10;
+            })
+        end)
+    end
     if JewDisarmLasers == true then
         DisarmJewLasers()
     end
@@ -496,13 +505,15 @@ function DisarmBankLasers()
     end
 end
 game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildAdded:Connect(function()
-    spawn(function()
-        notify.push({
-            Title = "H3x",
-            Text = "Bank just Opened",
-            Duration = 10;
-        })
-    end)
+    if StoreStatusNotify then
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Bank just Opened",
+                Duration = 10;
+            })
+        end)
+    end
     if BankDisarmLasers == true then
         DisarmBankLasers()
     end

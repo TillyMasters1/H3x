@@ -168,7 +168,7 @@ end)
 
 
 -- Rob Assistant
-local RobAssistant = library:Tab("Robbery Assistant","rbxassetid://3926307971","884, 4","36, 36");
+local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id=" .. 9454510370 .. "&w=420&h=420","","");
 
 -- Casino Assistant
 local Casino = RobAssistant:Section("Casino Assistants","","rbxthumb://type=Asset&id=" .. 9427340203 .. "&w=420&h=420","","")

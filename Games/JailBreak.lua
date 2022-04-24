@@ -193,7 +193,7 @@ Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbx
 end)
 
 -- Bank Assistant
-local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
+local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
 Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
     if e == true then
         DisarmBankLasers()

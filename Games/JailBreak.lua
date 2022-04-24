@@ -177,6 +177,11 @@ Casino:Switch("Auto Open Door","Toggles auto open door for the casino","rbxthumb
         AutoOpenDoor = e
     end
 end)
+Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    if e == true then
+        DisarmCasinoLasers()
+    end
+end)
 
 -- Jewelry Assistant
 local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
@@ -502,3 +507,57 @@ game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildA
         DisarmBankLasers()
     end
 end)
+
+
+-- Disarm Casino Lasers
+function DisarmCasinoLasers()
+    wait(0.5)
+    for _,v in ipairs(game:GetService("Workspace").Casino.Lasers:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.LasersMoving:GetChildren()) do
+        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
+            v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+            v.InnerModel.Part.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.LaserCarousel.InnerModel:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            for _,v in ipairs(v:GetChildren()) do
+                if v.Name == "TouchInterest" then
+                    v:Destroy()
+                end
+            end
+        else
+            if v:FindFirstChild("Part") then
+                v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        v:Destroy()
+                    end
+                end
+            end
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.CamerasMoving:GetChildren()) do
+        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
+            v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
+            v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
+            v.InnerModel.Part.TouchInterest:Destroy()
+        end
+    end
+end

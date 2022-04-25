@@ -220,7 +220,7 @@ Misc:Button("Get Gear", "Gets gear", "", "Get","","", function()
     GetItem("Gear")
 end)
 
-Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,20,"924, 684","36, 36",function(e)
+Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,1,20,"924, 684","36, 36",function(e)
     Amount = e
 end)
 Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "", "Purchase","","", function()

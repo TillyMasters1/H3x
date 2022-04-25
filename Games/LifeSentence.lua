@@ -21,6 +21,7 @@ local torso
 local Touched
 local Touched2
 local OldPos
+local Amount = 1
 
 -- Bool Variables
 local flying = false
@@ -73,6 +74,18 @@ Sound0.Volume = 1;
 Sound0.Looped = false;
 Sound0.archivable = false;
 Sound0.Parent = game.Workspace;
+
+local Prices = {
+    Glock = 20,
+    Spaz = 25,
+    ["Assault Rifle"] = 40,
+    Garand = 35,
+    Revolver = 30,
+    ["TEC-9"] = 40,
+    Uzi = 30,
+    Flare = 30,
+    ["Sawed-Off"] = 25
+}
 
 
 local Home = library:Tab("Home","rbxassetid://3926305904","964, 204","36, 36");
@@ -207,6 +220,12 @@ Misc:Button("Get Gear", "Gets gear", "", "Get","","", function()
     GetItem("Gear")
 end)
 
+Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,20,"924, 684","36, 36",function(e)
+    Amount = e
+end)
+Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "", "Purchase","","", function()
+    BuyAmmo(Amount)
+end)
 
 
 -- Scripts
@@ -495,4 +514,32 @@ function GetItem(item)
             Duration = 10;
         })
     end)
+end
+
+
+-- Buy Ammo
+function BuyAmmo(Amount)
+    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType") then
+        if Prices[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType").Value] * Amount < tonumber(game:GetService("Players").LocalPlayer.PlayerGui.HUD.CashLabel.Text:split('$')[2]) then
+            for count = 1, Amount do
+                game.ReplicatedStorage:WaitForChild("Events").WeaponEvent:FireServer("BuyAmmo", game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name)
+            end
+        else 
+            spawn(function()
+                notify.push({
+                    Title = "H3x",
+                    Text = "You do not currently have enough cash to buy that amount of ammo",
+                    Duration = 10;
+                })
+            end)
+        end
+    else
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "To buy ammo please hold a gun you want to buy ammo for",
+                Duration = 10;
+            })
+        end)
+    end
 end

@@ -159,6 +159,50 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
     end)
 
 
+-- Environment
+local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
+
+Environment:Switch("Remove Doors","Removes all doors","rbxassetid://3926307971",false,"364, 524","36, 36",function(e)
+    if e == true or e == false then
+        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+            if v.Name == "Cell" then
+                v.Door.Model.Open.CanCollide = false
+                for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
+                    v.Transparency = 0.6
+                end
+            end
+        end
+
+        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+            if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
+                v.Model.TheDoor.CanCollide = false
+                v.Model.TheGlass.CanCollide = false
+                v.Model.TheDoor.Transparency = 0.5
+                v.Model.TheGlass.Transparency = 0.94
+            elseif v.Name == "SwingDoor" then
+                for _,v in ipairs(v.Model:GetChildren()) do
+                    if v:IsA("Part") then
+                        v.CanCollide = false
+                        v.Transparency = 0.6
+                    end
+                end    
+            end
+        end
+
+        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+            if v.Name == "SlideDoor" then
+                for _,v in ipairs(v.Model:GetChildren()) do
+                    if v:IsA("Part") or v:IsA("MeshPart") then
+                        v.CanCollide = false
+                        v.Transparency = 0.6
+                    end
+                end
+            end
+        end
+    end
+end)
+
+
 -- Rob Assistant
 local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id=" .. 9454557677 .. "&w=420&h=420","","");
 

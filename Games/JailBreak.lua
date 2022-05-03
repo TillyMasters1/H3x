@@ -162,7 +162,7 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 -- Environment
 local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
 
-Environment:Switch("Remove Doors","Removes all doors","rbxassetid://3926307971",false,"364, 524","36, 36",function(e)
+Environment:Switch("Remove Doors","Removes all doors","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
     if e == true then
         RemoveDoors()
     end

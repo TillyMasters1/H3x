@@ -163,7 +163,7 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
 
 Environment:Switch("Remove Doors","Removes all doors","rbxassetid://3926307971",false,"364, 524","36, 36",function(e)
-    if e == true or e == false then
+    if e == true then
         RemoveDoors()
     end
 end)

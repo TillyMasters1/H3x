@@ -164,41 +164,7 @@ local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 84
 
 Environment:Switch("Remove Doors","Removes all doors","rbxassetid://3926307971",false,"364, 524","36, 36",function(e)
     if e == true or e == false then
-        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
-            if v.Name == "Cell" then
-                v.Door.Model.Open.CanCollide = false
-                for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
-                    v.Transparency = 0.6
-                end
-            end
-        end
-
-        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
-            if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
-                v.Model.TheDoor.CanCollide = false
-                v.Model.TheGlass.CanCollide = false
-                v.Model.TheDoor.Transparency = 0.5
-                v.Model.TheGlass.Transparency = 0.94
-            elseif v.Name == "SwingDoor" then
-                for _,v in ipairs(v.Model:GetChildren()) do
-                    if v:IsA("Part") then
-                        v.CanCollide = false
-                        v.Transparency = 0.6
-                    end
-                end    
-            end
-        end
-
-        for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
-            if v.Name == "SlideDoor" then
-                for _,v in ipairs(v.Model:GetChildren()) do
-                    if v:IsA("Part") or v:IsA("MeshPart") then
-                        v.CanCollide = false
-                        v.Transparency = 0.6
-                    end
-                end
-            end
-        end
+        RemoveDoors()
     end
 end)
 
@@ -624,6 +590,47 @@ function DisarmCasinoLasers()
         end
     end
 end
+
+
+-- Remove Doors
+function RemoveDoors()
+    for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "Cell" then
+            v.Door.Model.Open.CanCollide = false
+            for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
+                v.Transparency = 0.6
+            end
+        end
+    end
+
+    for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
+            v.Model.TheDoor.CanCollide = false
+            v.Model.TheGlass.CanCollide = false
+            v.Model.TheDoor.Transparency = 0.5
+            v.Model.TheGlass.Transparency = 0.94
+        elseif v.Name == "SwingDoor" then
+            for _,v in ipairs(v.Model:GetChildren()) do
+                if v:IsA("Part") then
+                    v.CanCollide = false
+                    v.Transparency = 0.6
+                end
+            end    
+        end
+    end
+
+    for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "SlideDoor" then
+            for _,v in ipairs(v.Model:GetChildren()) do
+                if v:IsA("Part") or v:IsA("MeshPart") then
+                    v.CanCollide = false
+                    v.Transparency = 0.6
+                end
+            end
+        end
+    end
+end
+
 
 -- Disarm Tomb Spikes
 function DisarmTombSpikes()

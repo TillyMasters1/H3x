@@ -596,7 +596,7 @@ end
 function RemoveDoors(state)
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" then
-            if state = true then
+            if state == true then
                 v.Door.Model.Open.CanCollide = false
                 for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
                     v.Transparency = 0.6
@@ -612,7 +612,7 @@ function RemoveDoors(state)
 
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
-            if state = true then
+            if state == true then
                 v.Model.TheDoor.CanCollide = false
                 v.Model.TheGlass.CanCollide = false
                 v.Model.TheDoor.Transparency = 0.5
@@ -626,7 +626,7 @@ function RemoveDoors(state)
         elseif v.Name == "SwingDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") then
-                    if state = true then
+                    if state == true then
                         v.CanCollide = false
                         v.Transparency = v.Transparency + 0.6
                     else
@@ -642,7 +642,7 @@ function RemoveDoors(state)
         if v.Name == "SlideDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") or v:IsA("MeshPart") then
-                    if state = true then
+                    if state == true then
                         v.CanCollide = false
                         v.Transparency = 0.6
                     else

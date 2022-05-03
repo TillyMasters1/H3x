@@ -163,8 +163,8 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
 
 Environment:Switch("Remove Doors","Removes all doors","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
-    if e == true then
-        RemoveDoors()
+    if e == true or e == false then
+        RemoveDoors(e)
     end
 end)
 
@@ -593,27 +593,46 @@ end
 
 
 -- Remove Doors
-function RemoveDoors()
+function RemoveDoors(state)
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" then
-            v.Door.Model.Open.CanCollide = false
-            for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
-                v.Transparency = 0.6
+            if state = true then
+                v.Door.Model.Open.CanCollide = false
+                for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
+                    v.Transparency = 0.6
+                end
+            else
+                v.Door.Model.Open.CanCollide = true
+                for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
+                    v.Transparency = 0
+                end
             end
         end
     end
 
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
-            v.Model.TheDoor.CanCollide = false
-            v.Model.TheGlass.CanCollide = false
-            v.Model.TheDoor.Transparency = 0.5
-            v.Model.TheGlass.Transparency = 0.94
+            if state = true then
+                v.Model.TheDoor.CanCollide = false
+                v.Model.TheGlass.CanCollide = false
+                v.Model.TheDoor.Transparency = 0.5
+                v.Model.TheGlass.Transparency = 0.94
+            else
+                v.Model.TheDoor.CanCollide = true
+                v.Model.TheGlass.CanCollide = true
+                v.Model.TheDoor.Transparency = 0
+                v.Model.TheGlass.Transparency = 0.8
+            end
         elseif v.Name == "SwingDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") then
-                    v.CanCollide = false
-                    v.Transparency = 0.6
+                    if state = true then
+                        v.CanCollide = false
+                        v.Transparency = v.Transparency + 0.6
+                    else
+                        v.CanCollide = true
+                        v.Transparency = v.Transparency - 0.6    
+                    end
                 end
             end    
         end
@@ -623,8 +642,13 @@ function RemoveDoors()
         if v.Name == "SlideDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") or v:IsA("MeshPart") then
-                    v.CanCollide = false
-                    v.Transparency = 0.6
+                    if state = true then
+                        v.CanCollide = false
+                        v.Transparency = 0.6
+                    else
+                        v.CanCollide = true
+                        v.Transparency = 0 
+                    end
                 end
             end
         end

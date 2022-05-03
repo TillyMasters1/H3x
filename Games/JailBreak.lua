@@ -243,6 +243,14 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
             BankDisarmLasers = true
         end
     end)
+
+    -- Tomb Assistant
+    local Tomb = RobAssistant:Section("Tomb Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
+    Tomb:Switch("Disarm Spikes","Disarm all Spikes","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+        if e == true then
+            DisarmTombSpikes()
+        end
+    end)
   
 
 
@@ -613,6 +621,34 @@ function DisarmCasinoLasers()
             v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
             v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
             v.InnerModel.Part.TouchInterest:Destroy()
+        end
+    end
+end
+
+-- Disarm Tomb Spikes
+function DisarmTombSpikes()
+    for _,v in ipairs(game:GetService("Workspace").RobberyTomb.SpikeRoom.Spikes:GetChildren()) do
+        for _,v in ipairs(v:GetChildren()) do
+            v.Model.InnerModel.Door.TouchInterest:Destroy()
+            v.Model.InnerModel.Spikes.MeshId = "rbxassetid://5547038744"
+            v.Model.InnerModel.Spikes.Size = Vector3.new(30, 15, 30)
+            local SurfaceAppearance = Instance.new("SurfaceAppearance")
+            SurfaceAppearance.Parent = v.Model.InnerModel.Spikes
+            SurfaceAppearance.AlphaMode = Enum.AlphaMode.Transparency
+            SurfaceAppearance.ColorMap = "rbxassetid://5164021540"
+            SurfaceAppearance.MetalnessMap = "rbxassetid://6036394111"
+            SurfaceAppearance.NormalMap = "rbxassetid://5164022093"
+            SurfaceAppearance.RoughnessMap = "rbxassetid://5164022409"
+        end
+    end
+
+    while wait() do
+        for _,v in ipairs(game:GetService("Workspace").RobberyTomb.SpikeRoom.Spikes:GetChildren()) do
+            for _,v in ipairs(v:GetChildren()) do
+                if v.Tile.Color == Color3.fromRGB(186, 124, 111) then
+                    v.Tile.Color = Color3.fromRGB(0, 255, 0)
+                end
+            end
         end
     end
 end

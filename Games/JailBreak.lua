@@ -297,6 +297,7 @@ end)
 game:GetService("UserInputService").JumpRequest:connect(function()
    if InfJump then
        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+       repeat wait() until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
    end
 end)
 

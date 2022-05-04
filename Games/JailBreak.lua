@@ -161,12 +161,12 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 
 -- Environment
 local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
-
+--[[
 Environment:Switch("Remove Doors","Removes all doors","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
     if e == true or e == false then
         RemoveDoors(e)
     end
-end)
+end)]]--
 
 
 -- Rob Assistant
@@ -211,12 +211,12 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
     end)
 
     -- Tomb Assistant
-    local Tomb = RobAssistant:Section("Tomb Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
+    --[[local Tomb = RobAssistant:Section("Tomb Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
     Tomb:Switch("Disarm Spikes","Disarm all Spikes","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
         if e == true then
             DisarmTombSpikes()
         end
-    end)
+    end)]]--
   
 
 
@@ -593,7 +593,7 @@ end
 
 
 -- Remove Doors
-function RemoveDoors(state)
+--[[function RemoveDoors(state)
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" then
             if state == true then
@@ -653,11 +653,11 @@ function RemoveDoors(state)
             end
         end
     end
-end
+end]]--
 
 
 -- Disarm Tomb Spikes
-function DisarmTombSpikes()
+--[[function DisarmTombSpikes()
     for _,v in ipairs(game:GetService("Workspace").RobberyTomb.SpikeRoom.Spikes:GetChildren()) do
         for _,v in ipairs(v:GetChildren()) do
             v.Model.InnerModel.Door.TouchInterest:Destroy()
@@ -682,4 +682,4 @@ function DisarmTombSpikes()
             end
         end
     end
-end
+end]]--

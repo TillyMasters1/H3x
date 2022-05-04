@@ -126,10 +126,10 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
     -- Movement
     Player:Text("Movement")
     Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
-        WalkSpeed = e
+        --WalkSpeed = e
     end)
     Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
-        JumpPower = e
+        --JumpPower = e
     end)
     Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
         if e == true or e == false then

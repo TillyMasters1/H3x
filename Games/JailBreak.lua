@@ -298,6 +298,7 @@ while wait() do
         repeat 
             print("Holding") 
         until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+        print("Let go")
     end
 end
 

@@ -59,7 +59,7 @@ Sound0.Parent = game.Workspace;
 local Home = library:Tab("Home","rbxassetid://3926305904","964, 204","36, 36");
 
 Home:Activate();
-Home:Text("Welcome to H3x! You've successfully loaded H3x Universal Script!");
+Home:Text("Welcome to H3x! You've successfully loaded H3x for "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!");
 Home:Text("We want you to have the best experience here, so please join our Discord!");
 Home:Button("Join Our Discord", "Click this to join our discord!", "rbxassetid://3926305904", "Join!","164, 404","36, 36", function()
   spawn(function()

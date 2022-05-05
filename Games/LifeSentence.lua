@@ -232,7 +232,6 @@ end)
 
 -- Anti-Mod
 spawn(function()
-    print("------------------------------------------------------------------------------------")
     local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
     local Group_ID = PlaceInfo.Creator.CreatorTargetId
     local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
@@ -256,8 +255,8 @@ spawn(function()
         if Ranks[A_1:GetRoleInGroup(Group_ID)] > 2 then 
             plr:Kick("Mod " .. A_1.Name .. " joined your game.")
         else
-            print("--------------------------------------------------")
-            print("Checked ".. A_1.Name ..": Not mod")
+            -- print("--------------------------------------------------")
+            -- print("Checked ".. A_1.Name ..": Not mod")
         end
     end
     for _, A_1 in next, plrs:GetPlayers() do
@@ -438,28 +437,28 @@ spawn(function()
             for _,v in ipairs(game:GetService("Workspace").Robbable:GetChildren()) do
                 if v.Door.Attachment.ProximityPrompt.Enabled == true and debouce == false then
                     debouce = true
-                    print("--------------------------------------------------")
-                    print("Safe")
+                    --print("--------------------------------------------------")
+                    --print("Safe")
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame
                     wait(0.2)
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 20)
                     local Cash1Detected
                     Touched = v.CashSpawnSpot.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
-                            print("Cash 1 Detected")
+                            --print("Cash 1 Detected")
                             part.Name = "Cash1"
                             Cash1Detected = true
                             fireproximityprompt(part.ProximityPrompt, 20)
-                            print("--Collected Cash 1")
+                            --print("--Collected Cash 1")
                             Touched:Disconnect()
                         end
                     end)
                     Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
                         repeat wait() until Cash1Detected == true
                         if part.Name == "DroppedCash" then
-                            print("Cash 2 Detected")
+                            --print("Cash 2 Detected")
                             fireproximityprompt(part.ProximityPrompt, 20)
-                            print("--Collected Cash 2")
+                            --print("--Collected Cash 2")
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
                             debouce = false
                             Cash1Detected = false

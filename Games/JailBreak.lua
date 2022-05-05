@@ -293,6 +293,14 @@ spawn(function()
 end)
 
 
+while wait() do
+    if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == true then
+        repeat 
+            print("Holding") 
+        until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+    end
+end
+
 -- InfJump
 game:GetService("UserInputService").JumpRequest:connect(function()
    if InfJump then

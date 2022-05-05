@@ -14,6 +14,7 @@ local speed = 0
 local WalkSpeed = plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
 local JumpPower = plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
 local torso
+local SlidingDoorParts = {}
 
 -- Bool Variables
 local flying = false
@@ -24,6 +25,7 @@ local JewDisarmLasers = false
 local BankDisarmLasers = false
 local StoreStatusNotify = true
 local Jumping = false
+local RemoveDoors = true
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -162,12 +164,15 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
 
 -- Environment
 local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 844","36, 36");
---[[
-Environment:Switch("Remove Doors","Removes all doors","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
-    if e == true or e == false then
-        RemoveDoors(e)
-    end
-end)]]--
+
+    Environment:Switch("Remove Doors","Removes all doors","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            RemoveDoors = e
+            if RemoveDoorsFunction ~= nil then
+                RemoveDoorsFunction()
+            end
+        end
+    end)
 
 
 -- Rob Assistant
@@ -182,12 +187,12 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
 
     -- Casino Assistant
     local Casino = RobAssistant:Section("Casino Assistants","","rbxthumb://type=Asset&id=" .. 9427340203 .. "&w=420&h=420","","")
-    Casino:Switch("Auto Open Door","Toggles auto open door for the casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
+    Casino:Switch("Auto Open Door","Toggles auto open door for the Casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
         if e == true or e == false then
             AutoOpenDoor = e
         end
     end)
-    Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from Casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
         if e == true then
             DisarmCasinoLasers()
         end
@@ -195,7 +200,7 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
 
     -- Jewelry Assistant
     local Jewelry = RobAssistant:Section("Jewelry Assistants","","rbxthumb://type=Asset&id=" .. 9427244377 .. "&w=420&h=420","","")
-    Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from jewelry","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    Jewelry:Switch("Disarm Lasers","Disarm all lasers and cameras from Jewelry","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
         if e == true then
             DisarmJewLasers()
             JewDisarmLasers = true
@@ -204,7 +209,7 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
 
     -- Bank Assistant
     local Bank = RobAssistant:Section("Bank Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
-    Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    Bank:Switch("Disarm Lasers","Disarm all lasers and cameras from Bank","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
         if e == true then
             DisarmBankLasers()
             BankDisarmLasers = true
@@ -212,12 +217,12 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
     end)
 
     -- Tomb Assistant
-    --[[local Tomb = RobAssistant:Section("Tomb Assistants","","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420","","")
-    Tomb:Switch("Disarm Spikes","Disarm all Spikes","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
+    local Tomb = RobAssistant:Section("Tomb Assistants","","rbxthumb://type=Asset&id=" .. 9548325862 .. "&w=420&h=420","","")
+    Tomb:Switch("Disarm Spikes","Disarm all Spikes in the Tomb","rbxthumb://type=Asset&id=" .. 9548377640 .. "&w=420&h=420",false,"","",function(e)
         if e == true then
             DisarmTombSpikes()
         end
-    end)]]--
+    end)
   
 
 
@@ -597,10 +602,10 @@ end
 
 
 -- Remove Doors
---[[function RemoveDoors(state)
+function RemoveDoorsFunction()
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" then
-            if state == true then
+            if RemoveDoors == true then
                 v.Door.Model.Open.CanCollide = false
                 for _,v in ipairs(v.Door.Model.Open:GetChildren()) do
                     v.Transparency = 0.6
@@ -616,7 +621,7 @@ end
 
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "SwingDoor" and v.Model:FindFirstChild("TheDoor") then
-            if state == true then
+            if RemoveDoors == true then
                 v.Model.TheDoor.CanCollide = false
                 v.Model.TheGlass.CanCollide = false
                 v.Model.TheDoor.Transparency = 0.5
@@ -630,15 +635,25 @@ end
         elseif v.Name == "SwingDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") then
-                    if state == true then
+                    if RemoveDoors == true then
+                        if v.Transparency ~= 1 then
+                            SlidingDoorParts[v] = v.Transparency
+                            v.Transparency = v.Transparency + 0.6
+                        end
                         v.CanCollide = false
-                        v.Transparency = v.Transparency + 0.6
                     else
+                        if v.Transparency ~= 1 then
+                            v.Transparency = SlidingDoorParts[v]   
+                        end
                         v.CanCollide = true
-                        v.Transparency = v.Transparency - 0.6    
                     end
                 end
-            end    
+            end 
+            for _,v in ipairs(v.Model:GetDescendants()) do
+                if v:IsA("Texture") then
+                    v.Transparency = 0.6
+                end
+            end   
         end
     end
 
@@ -646,22 +661,32 @@ end
         if v.Name == "SlideDoor" then
             for _,v in ipairs(v.Model:GetChildren()) do
                 if v:IsA("Part") or v:IsA("MeshPart") then
-                    if state == true then
+                    if RemoveDoors == true then
+                        if v.Transparency ~= 1 then
+                            SlidingDoorParts[v] = v.Transparency
+                            v.Transparency = 0.6
+                        end
                         v.CanCollide = false
-                        v.Transparency = 0.6
                     else
+                        if v.Transparency ~= 1 then
+                            v.Transparency = SlidingDoorParts[v]
+                        end
                         v.CanCollide = true
-                        v.Transparency = 0 
                     end
+                end
+            end
+            for _,v in ipairs(v.Model:GetDescendants()) do
+                if v:IsA("Texture") then
+                    v.Transparency = 0.6
                 end
             end
         end
     end
-end]]--
+end
 
 
 -- Disarm Tomb Spikes
---[[function DisarmTombSpikes()
+function DisarmTombSpikes()
     for _,v in ipairs(game:GetService("Workspace").RobberyTomb.SpikeRoom.Spikes:GetChildren()) do
         for _,v in ipairs(v:GetChildren()) do
             v.Model.InnerModel.Door.TouchInterest:Destroy()
@@ -681,9 +706,9 @@ end]]--
         for _,v in ipairs(game:GetService("Workspace").RobberyTomb.SpikeRoom.Spikes:GetChildren()) do
             for _,v in ipairs(v:GetChildren()) do
                 if v.Tile.Color == Color3.fromRGB(186, 124, 111) then
-                    v.Tile.Color = Color3.fromRGB(0, 255, 0)
+                    v.Tile.Color = Color3.fromRGB(124, 156, 107)
                 end
             end
         end
     end
-end]]--
+end

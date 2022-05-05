@@ -23,6 +23,7 @@ local CasinoDoorTouch = false
 local JewDisarmLasers = false
 local BankDisarmLasers = false
 local StoreStatusNotify = true
+local Jumping = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -293,20 +294,13 @@ spawn(function()
 end)
 
 
-while wait() do
-    if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == true then
-        repeat wait()
-            print("Holding") 
-        until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
-        print("Let go")
-    end
-end
-
 -- InfJump
 game:GetService("UserInputService").JumpRequest:connect(function()
-   if InfJump then
+   if InfJump == true and Jumping == false then
+       Jumping = true
        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-       repeat wait(1) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+       repeat wait(0.1) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+       Jumping = false
    end
 end)
 

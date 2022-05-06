@@ -26,6 +26,8 @@ local Amount = 1
 -- Bool Variables
 local flying = false
 local InfJump = false
+local AntiAfk = false
+local Jumping = false
 local AutoCollectVault = false
 local AutoDumbell = false
 
@@ -131,6 +133,11 @@ Home:Button("Rejoin Server", "Rejoin's the same server your in.", "rbxassetid://
     local ts = game:GetService("TeleportService")
     ts:Teleport(game.PlaceId, plr)
 end)
+Home:Switch("AntiAfk","Enables and Disables AntiAfk","rbxthumb://type=Asset&id=" .. 9554563465 .. "&w=420&h=420",false,"","",function(e)
+    if e == true or e == false then
+        AntiAfk = e
+    end
+end)
 local About = Home:SubTab("About","Menu specifications, Game specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
 local MenuInfo = About:Section("Menu specifications","","rbxassetid://3926305904","44, 644","36, 36")
 MenuInfo:Text("               Version:            1",Enum.TextXAlignment.Left)
@@ -208,7 +215,7 @@ local AutoFarm = library:Tab("AutoFarm","rbxthumb://type=Asset&id=" .. 919049486
     end)
 
 
-local Misc = library:Tab("Misc","rbxthumb://type=Asset&id=" .. 9190494867 .. "&w=420&h=420","","");
+local Misc = library:Tab("Misc","rbxassetid://3926305904","924, 244","36, 36");
 
     Misc:Button("Get Spring", "Gets spring", "rbxthumb://type=Asset&id=" .. 9548689432 .. "&w=420&h=420", "Get","","", function()
         GetItem("Spring")
@@ -220,10 +227,10 @@ local Misc = library:Tab("Misc","rbxthumb://type=Asset&id=" .. 9190494867 .. "&w
         GetItem("Gear")
     end)
 
-    Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,1,20,"924, 684","36, 36",function(e)
+    Misc:Slider("Sets of ammo","Purchase ammo","rbxthumb://type=Asset&id=" .. 9555947380 .. "&w=420&h=420",1,1,20,"","",function(e)
         Amount = e
     end)
-    Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "", "Purchase","","", function()
+    Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "rbxassetid://3926305904", "Purchase","4, 524","36, 36", function()
         BuyAmmo(Amount)
     end)
 
@@ -355,8 +362,11 @@ end)
 
 -- InfJump
 game:GetService("UserInputService").JumpRequest:connect(function()
-   if InfJump then
+   if InfJump == true and Jumping == false then
+       Jumping = true
        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+       repeat wait(0.1) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+       Jumping = false
    end
 end)
 
@@ -437,28 +447,28 @@ spawn(function()
             for _,v in ipairs(game:GetService("Workspace").Robbable:GetChildren()) do
                 if v.Door.Attachment.ProximityPrompt.Enabled == true and debouce == false then
                     debouce = true
-                    --print("--------------------------------------------------")
-                    --print("Safe")
+                    print("--------------------------------------------------")
+                    print("Safe")
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Door.CFrame
                     wait(0.2)
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 20)
                     local Cash1Detected
                     Touched = v.CashSpawnSpot.Touched:connect(function(part)
                         if part.Name == "DroppedCash" then
-                            --print("Cash 1 Detected")
+                            print("Cash 1 Detected")
                             part.Name = "Cash1"
                             Cash1Detected = true
                             fireproximityprompt(part.ProximityPrompt, 20)
-                            --print("--Collected Cash 1")
+                            print("--Collected Cash 1")
                             Touched:Disconnect()
                         end
                     end)
                     Touched2 = v.CashSpawnSpot2.Touched:connect(function(part)
                         repeat wait() until Cash1Detected == true
                         if part.Name == "DroppedCash" then
-                            --print("Cash 2 Detected")
+                            print("Cash 2 Detected")
                             fireproximityprompt(part.ProximityPrompt, 20)
-                            --print("--Collected Cash 2")
+                            print("--Collected Cash 2")
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
                             debouce = false
                             Cash1Detected = false
@@ -475,8 +485,10 @@ end)
 -- Anti-AFK
 local bb=game:service'VirtualUser'
 game:service'Players'.LocalPlayer.Idled:connect(function()
-    bb:CaptureController()
-    bb:ClickButton2(Vector2.new())
+    if AntiAfk then
+        bb:CaptureController()
+        bb:ClickButton2(Vector2.new())
+    end
 end)
 
 

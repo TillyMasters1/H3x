@@ -150,82 +150,82 @@ Credit:Text("Inspired from Windows 11 Settings")
 
 local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36");
 
--- Movement
-Player:Text("Movement")
-Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
-    WalkSpeed = e
-end)
-Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
-    JumpPower = e
-end)
-Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
-    if e == true or e == false then
-        InfJump = e
-    end
-end)
-Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.Q,"","",function(e)
-    if e ~= true and e ~= false then
-        FlyToggle = e
-    end
-end)
-Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxthumb://type=Asset&id=" .. 9059787706 .. "&w=420&h=420",0,100,600,"","",function(e)
-    maxspeed = e
-end)
+    -- Movement
+    Player:Text("Movement")
+    Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
+        WalkSpeed = e
+    end)
+    Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
+        JumpPower = e
+    end)
+    Player:Switch("Infinite Jump","Toggles infinite jump","rbxassetid://3926307971",false,"164, 84","36, 36",function(e)
+        if e == true or e == false then
+            InfJump = e
+        end
+    end)
+    Player:Bind("Fly","Key to toggle flying","rbxthumb://type=Asset&id=" .. 9050262743 .. "&w=420&h=420",Enum.KeyCode.Q,"","",function(e)
+        if e ~= true and e ~= false then
+            FlyToggle = e
+        end
+    end)
+    Player:Slider("Fly Speed","Changes your flyspeed via slider","rbxthumb://type=Asset&id=" .. 9059787706 .. "&w=420&h=420",0,100,600,"","",function(e)
+        maxspeed = e
+    end)
 
 
--- DeleteTool
-Player:Text("Delete Tool")
-Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,"644, 724","36, 36",function(e)
-    if e ~= true and e ~= false then
-        HoldToSelect = e
-    end
-end)
-Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,"124, 564","36, 36",function(e)
-    if e ~= true and e ~= false then
-        HoldToUndoAll = e
-    end
-end)
+    -- DeleteTool
+    Player:Text("Delete Tool")
+    Player:Bind("Select","Key to select part to delete","rbxassetid://3926305904",Enum.KeyCode.LeftControl,"644, 724","36, 36",function(e)
+        if e ~= true and e ~= false then
+            HoldToSelect = e
+        end
+    end)
+    Player:Bind("Undo","Hold down or press keybind to undo deleted parts","rbxassetid://3926305904",Enum.KeyCode.LeftAlt,"124, 564","36, 36",function(e)
+        if e ~= true and e ~= false then
+            HoldToUndoAll = e
+        end
+    end)
 
 
 local AutoFarm = library:Tab("AutoFarm","rbxthumb://type=Asset&id=" .. 9190494867 .. "&w=420&h=420","","");
 
-AutoFarm:Switch("AutoCollect Vaults","Toggles Automaticly collecting vaults","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420",false,"","",function(e)
-    if e == true then
-        OldPos = plr.Character.HumanoidRootPart.CFrame
-        plr.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
-        Controls:Disable()
-        AutoCollectVault = e
-    elseif e == false then
-        if OldPos then plr.Character.HumanoidRootPart.CFrame = OldPos end
-        Controls:Enable()
-        AutoCollectVault = e
-    end
-end)
-AutoFarm:Switch("Auto-Dumbell", "Automaticly curls the dumbell","rbxthumb://type=Asset&id=" .. 9403879039 .. "&w=420&h=420",false,"","",function(e)
-    if e == true or e == false then
-        AutoDumbell = e
-    end
-end)
+    AutoFarm:Switch("AutoCollect Vaults","Toggles Automaticly collecting vaults","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420",false,"","",function(e)
+        if e == true then
+            OldPos = plr.Character.HumanoidRootPart.CFrame
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
+            Controls:Disable()
+            AutoCollectVault = e
+        elseif e == false then
+            if OldPos then plr.Character.HumanoidRootPart.CFrame = OldPos end
+            Controls:Enable()
+            AutoCollectVault = e
+        end
+    end)
+    AutoFarm:Switch("Auto-Dumbell", "Automaticly curls the dumbell","rbxthumb://type=Asset&id=" .. 9403879039 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            AutoDumbell = e
+        end
+    end)
 
 
 local Misc = library:Tab("Misc","rbxthumb://type=Asset&id=" .. 9190494867 .. "&w=420&h=420","","");
 
-Misc:Button("Get Spring", "Gets spring", "", "Get","","", function()
-    GetItem("Spring")
-end)
-Misc:Button("Get Blade", "Gets blade", "", "Get","","", function()
-    GetItem("Blade")
-end)
-Misc:Button("Get Gear", "Gets gear", "", "Get","","", function()
-    GetItem("Gear")
-end)
+    Misc:Button("Get Spring", "Gets spring", "rbxthumb://type=Asset&id=" .. 9548689432 .. "&w=420&h=420", "Get","","", function()
+        GetItem("Spring")
+    end)
+    Misc:Button("Get Blade", "Gets blade", "rbxthumb://type=Asset&id=" .. 9548688276 .. "&w=420&h=420", "Get","","", function()
+        GetItem("Blade")
+    end)
+    Misc:Button("Get Gear", "Gets gear", "rbxthumb://type=Asset&id=" .. 9548687578 .. "&w=420&h=420", "Get","","", function()
+        GetItem("Gear")
+    end)
 
-Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,1,20,"924, 684","36, 36",function(e)
-    Amount = e
-end)
-Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "", "Purchase","","", function()
-    BuyAmmo(Amount)
-end)
+    Misc:Slider("Sets of ammo","Purchase ammo","rbxassetid://3926305904",1,1,20,"924, 684","36, 36",function(e)
+        Amount = e
+    end)
+    Misc:Button("Purchase Ammo", "Purchases the amount of ammo specified in the Sets of ammo slider", "", "Purchase","","", function()
+        BuyAmmo(Amount)
+    end)
 
 
 -- Scripts

@@ -604,7 +604,7 @@ end
 -- Remove Doors
 function RemoveDoorsFunction()
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
-        if v.Name == "Cell" then
+        if v.Name == "Cell" and v:FindFirstChild("Door")then
             if RemoveDoors == true then
                 v.Door.Model.Open.CanCollide = false
                 for _,v in ipairs(v.Door.Model.Open:GetChildren()) do

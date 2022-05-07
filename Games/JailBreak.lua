@@ -502,6 +502,13 @@ function DisarmBankLasers()
                 v.TouchInterest:Destroy()  
             end
             v.CanCollide = false
+        elseif v.Name == "LaserTrack" then
+            for _,v in ipairs(v.Lasers:GetChildren()) do
+                v.Color = Color3.fromRGB(0, 255, 0)
+                if v:FindFirstChild("TouchInterest") then
+                    v.TouchInterest:Destroy()  
+                end
+            end
         else
             if v:FindFirstChild("Part") then
                 v.Part.Color = Color3.fromRGB(0, 255, 0)

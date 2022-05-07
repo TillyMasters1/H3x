@@ -499,31 +499,21 @@ function DisarmBankLasers()
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
             v.TouchInterest:Destroy()
+            v.CanCollide = false
         else
             if v:FindFirstChild("Part") then
                 v.Part.Color = Color3.fromRGB(0, 255, 0)
                 v.Part:FindFirstChild("TouchInterest"):Destroy()  
+                v.Part.CanCollide = false
             end
         end
     end
     
-    if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater") then
-        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
-            if v:FindFirstChild("TouchInterest") then
-                v.Color = Color3.fromRGB(0, 255, 0)
-                v.TouchInterest:Destroy()
-            end
-        end
-        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Underwater.Lasers:GetChildren()) do
-            if v:FindFirstChild("TouchInterest") then
-                v.Color = Color3.fromRGB(0, 255, 0)
-                v.TouchInterest:Destroy()
-            else
-                if v:FindFirstChild("Part") then
-                    v.Part.Color = Color3.fromRGB(0, 255, 0)
-                    v.Part:FindFirstChild("TouchInterest"):Destroy()  
-                end
-            end
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+            v.CanCollide = false
         end
     end
 end

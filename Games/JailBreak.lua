@@ -498,12 +498,16 @@ function DisarmBankLasers()
     for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Lasers:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
+            if v:FindFirstChild("TouchInterest") then
+                v.TouchInterest:Destroy()  
+            end
             v.CanCollide = false
         else
             if v:FindFirstChild("Part") then
                 v.Part.Color = Color3.fromRGB(0, 255, 0)
-                v.Part:FindFirstChild("TouchInterest"):Destroy()  
+                if v.Part:FindFirstChild("TouchInterest") then
+                    v.Part.TouchInterest:Destroy()  
+                end
                 v.Part.CanCollide = false
             end
         end
@@ -512,7 +516,9 @@ function DisarmBankLasers()
     for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
+            if v:FindFirstChild("TouchInterest") then
+                v.TouchInterest:Destroy()  
+            end
             v.CanCollide = false
         end
     end

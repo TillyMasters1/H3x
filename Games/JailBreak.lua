@@ -508,7 +508,7 @@ function DisarmBankLasers()
     end
     
     if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater") then
-        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Underwater.EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+        for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
             if v:FindFirstChild("TouchInterest") then
                 v.Color = Color3.fromRGB(0, 255, 0)
                 v.TouchInterest:Destroy()

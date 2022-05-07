@@ -507,15 +507,14 @@ function DisarmBankLasers()
         end
     end
     
-    --[[
-    if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater").EscapeRoutes.BankDoor.Door.Model then
+    if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater") then
         for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
             if v:FindFirstChild("TouchInterest") then
                 v.Color = Color3.fromRGB(0, 255, 0)
                 v.TouchInterest:Destroy()
             end
         end
-    end]]--
+    end
     
     if game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):FindFirstChild("Underwater") then
         for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").Underwater.Lasers:GetChildren()) do
@@ -543,6 +542,15 @@ game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildA
     end
     if BankDisarmLasers == true then
         DisarmBankLasers()
+    end
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+        if RemoveDoors == true then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        else
+            v.CanCollide = true
+            v.Transparency = 0
+        end
     end
 end)
 
@@ -603,6 +611,34 @@ end
 
 -- Remove Doors
 function RemoveDoorsFunction()
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+        for _,v in ipairs(v:GetChildren()) do
+            if RemoveDoors == true then
+                v.CanCollide = false
+                v.Transparency = 0.6
+            else
+                v.CanCollide = true
+                v.Transparency = 0
+            end
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model"):GetChildren()) do
+        if v.Name == "SwingDoor" then
+            if RemoveDoors == true then
+                v.Model.TheDoor.CanCollide = false
+                v.Model.TheGlass.CanCollide = false
+                v.Model.TheDoor.Transparency = 0.5
+                v.Model.TheGlass.Transparency = 0.94
+            else
+                v.Model.TheDoor.CanCollide = true
+                v.Model.TheGlass.CanCollide = true
+                v.Model.TheDoor.Transparency = 0
+                v.Model.TheGlass.Transparency = 0.8
+            end
+        end
+    end
+    
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" and v:FindFirstChild("Door")then
             if RemoveDoors == true then

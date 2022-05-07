@@ -610,19 +610,7 @@ end
 
 
 -- Remove Doors
-function RemoveDoorsFunction()
-    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
-        for _,v in ipairs(v:GetChildren()) do
-            if RemoveDoors == true then
-                v.CanCollide = false
-                v.Transparency = 0.6
-            else
-                v.CanCollide = true
-                v.Transparency = 0
-            end
-        end
-    end
-    
+function RemoveDoorsFunction()   
     for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model"):GetChildren()) do
         if v.Name == "SwingDoor" then
             if RemoveDoors == true then

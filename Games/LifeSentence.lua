@@ -22,6 +22,7 @@ local Touched
 local Touched2
 local OldPos
 local Amount = 1
+local CashEarned = 0
 
 -- Bool Variables
 local flying = false
@@ -208,6 +209,7 @@ local AutoFarm = library:Tab("AutoFarm","rbxthumb://type=Asset&id=" .. 919049486
             AutoCollectVault = e
         end
     end)
+    local MoneyEarned = AutoFarm:Text("Money Earned: "..CashEarned)
     AutoFarm:Switch("Auto-Dumbell", "Automaticly curls the dumbell","rbxthumb://type=Asset&id=" .. 9403879039 .. "&w=420&h=420",false,"","",function(e)
         if e == true or e == false then
             AutoDumbell = e
@@ -444,7 +446,6 @@ spawn(function()
     local debouce = false
     while wait() do
         if AutoCollectVault then
-            flying = false
             for _,v in ipairs(game:GetService("Workspace").Robbable:GetChildren()) do
                 if v.Door.Attachment.ProximityPrompt.Enabled == true and debouce == false then
                     debouce = true
@@ -461,6 +462,9 @@ spawn(function()
                             Cash1Detected = true
                             fireproximityprompt(part.ProximityPrompt, 20)
                             print("--Collected Cash 1")
+                            spawn(function()
+                                CashEarned = CashEarned + part.Amount.Value
+                            end)
                             Touched:Disconnect()
                         end
                     end)
@@ -470,6 +474,8 @@ spawn(function()
                             print("Cash 2 Detected")
                             fireproximityprompt(part.ProximityPrompt, 20)
                             print("--Collected Cash 2")
+                            CashEarned = CashEarned + part.Amount.Value
+                            MoneyEarned:Set("Money Earned: "..CashEarned)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.470322, 29.957304, 82.6706848)
                             debouce = false
                             Cash1Detected = false

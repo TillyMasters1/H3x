@@ -288,6 +288,7 @@ end)
 
 
 -- Keep WalkSpeed/JumpPower Changed
+--[[
 spawn(function()
     while wait() do
        pcall(function()
@@ -296,7 +297,7 @@ spawn(function()
           plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
        end)
     end
-end)
+end)]]--
 
 
 -- InfJump

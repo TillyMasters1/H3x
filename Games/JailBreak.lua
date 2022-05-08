@@ -26,6 +26,7 @@ local BankDisarmLasers = false
 local StoreStatusNotify = true
 local Jumping = false
 local RemoveDoors = true
+local HoldingShift = false
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -291,7 +292,7 @@ end)
 spawn(function()
     while wait() do
        pcall(function()
-          if plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= 16 or plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= 24 then
+          if not HoldingShift then
               repeat wait() until plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= WalkSpeed or plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower ~= JumpPower
               plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = WalkSpeed
               plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
@@ -301,6 +302,16 @@ spawn(function()
 end)
 
 
+-- Check if sprinting
+game:GetService("UserInputService").InputBegan:Connect(function(key)
+    if key.KeyCode == Enum.KeyCode.LeftShift then
+        HoldingShift = true
+        repeat wait() until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift) == false
+        HoldingShift = false
+    end
+end
+    
+    
 -- InfJump
 game:GetService("UserInputService").JumpRequest:connect(function()
    if InfJump == true and Jumping == false then

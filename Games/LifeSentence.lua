@@ -407,7 +407,7 @@ end
 
 game:GetService("UserInputService").InputBegan:Connect(function(key,gameProcessedEvent)
     if gameProcessedEvent then return end
-    if key.KeyCode == FlyToggle then
+    if key.KeyCode == FlyToggle and AutoCollectVault == false then
         if flying then 
             flying = false
         else
@@ -444,6 +444,7 @@ spawn(function()
     local debouce = false
     while wait() do
         if AutoCollectVault then
+            flying = false
             for _,v in ipairs(game:GetService("Workspace").Robbable:GetChildren()) do
                 if v.Door.Attachment.ProximityPrompt.Enabled == true and debouce == false then
                     debouce = true

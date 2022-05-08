@@ -130,7 +130,7 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
     -- Movement
     Player:Text("Movement")
     Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
-        --WalkSpeed = e
+        WalkSpeed = e
     end)
     Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
         --JumpPower = e
@@ -292,7 +292,7 @@ end)
 spawn(function()
     while wait() do
        pcall(function()
-          if not HoldingShift then
+          if HoldingShift == false then
               repeat wait() until plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed ~= WalkSpeed or plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower ~= JumpPower
               plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed = WalkSpeed
               plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower = JumpPower
@@ -303,13 +303,13 @@ end)
 
 
 -- Check if sprinting
-game:GetService("UserInputService").InputBegan:Connect(function(key)
+game:GetService("UserInputService").InputBegan:Connect(function(key, gameProcessedEvent)
     if key.KeyCode == Enum.KeyCode.LeftShift then
         HoldingShift = true
         repeat wait() until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftShift) == false
         HoldingShift = false
     end
-end
+end)
     
     
 -- InfJump

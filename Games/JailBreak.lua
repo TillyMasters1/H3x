@@ -19,6 +19,7 @@ local SlidingDoorParts = {}
 -- Bool Variables
 local flying = false
 local InfJump = false
+local AntiAfk = false
 local AutoOpenDoor = false
 local CasinoDoorTouch = false
 local JewDisarmLasers = false
@@ -247,6 +248,16 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
         game:GetService("CoreGui").RobloxLoadingGui.Holder.Visible = true
       end
   end
+end)
+
+
+-- Anti-AFK
+local bb=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+    if AntiAfk then
+        bb:CaptureController()
+        bb:ClickButton2(Vector2.new())
+    end
 end)
 
 

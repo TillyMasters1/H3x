@@ -108,6 +108,11 @@ Home:Button("Rejoin Server", "Rejoin's the same server your in.", "rbxassetid://
     local ts = game:GetService("TeleportService")
     ts:Teleport(game.PlaceId, plr)
 end)
+Home:Switch("AntiAfk","Enables and Disables AntiAfk","rbxthumb://type=Asset&id=" .. 9554563465 .. "&w=420&h=420",false,"","",function(e)
+    if e == true or e == false then
+        AntiAfk = e
+    end
+end)
 
 local About = Home:SubTab("About","Menu specifications, Game specifications, Credits","rbxassetid://3926305904","204, 444","36, 36")
 local MenuInfo = About:Section("Menu specifications","","rbxassetid://3926305904","44, 644","36, 36")

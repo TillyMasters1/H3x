@@ -136,7 +136,7 @@ local Player = library:Tab("Player","rbxassetid://3926307971","884, 4","36, 36")
     -- Movement
     Player:Text("Movement")
     Player:Slider("WalkSpeed","Changes your WalkSpeed via slider","rbxassetid://3926305904",plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed,300,"924, 684","36, 36",function(e)
-        WalkSpeed = e
+        --WalkSpeed = e
     end)
     Player:Slider("JumpPower","Changes your JumpPower via slider","rbxthumb://type=Asset&id=" .. 9050394095 .. "&w=420&h=420",plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower,500,"","",function(e)
         --JumpPower = e
@@ -333,7 +333,7 @@ game:GetService("UserInputService").JumpRequest:connect(function()
    if InfJump == true and Jumping == false then
        Jumping = true
        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-       repeat wait(0.1) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+       repeat wait(0.5) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
        Jumping = false
    end
 end)

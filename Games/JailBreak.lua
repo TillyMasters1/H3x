@@ -636,7 +636,30 @@ function DisarmCasinoLasers()
         end
     end
 end
-
+game:GetService("Workspace").Casino.ChildAdded:Connect(function(Child)
+    if Child.Name == "VaultLaserControl" then
+        for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
+            if v:FindFirstChild("TouchInterest") then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        v:Destroy()
+                    end
+                end
+            else
+                if v:FindFirstChild("Part") then
+                    v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                    for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                        if v.Name == "TouchInterest" then
+                            v:Destroy()
+                        end
+                    end
+                end
+            end
+        end    
+    end
+end
+    
 
 -- Remove Doors
 function RemoveDoorsFunction()   

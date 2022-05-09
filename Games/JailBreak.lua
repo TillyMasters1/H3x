@@ -658,7 +658,7 @@ game:GetService("Workspace").Casino.ChildAdded:Connect(function(Child)
             end
         end    
     end
-end
+end)
     
 
 -- Remove Doors

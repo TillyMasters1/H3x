@@ -295,7 +295,7 @@ spawn(function()
             end;
             pcall(function()
                 Parts[c].Part.Parent = Parts[c].Parent
-                table.remove(Parts,c)
+                Parts[c] = nil
                 Sound1:Play()
             end)
             wait(.1)

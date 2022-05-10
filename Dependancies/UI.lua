@@ -3433,6 +3433,8 @@ end)
 			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			held = false;
 		end)
+		
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
 
 		return section;
 

@@ -28,6 +28,10 @@ local StoreStatusNotify = true
 local Jumping = false
 local RemoveDoors = true
 local HoldingShift = false
+local TombDisarmDarts = false
+
+-- Tables
+local DartDamage = {}
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -230,6 +234,14 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
             DisarmTombSpikes()
         end
     end)
+    Tomb:Switch("Disarm Darts","Disarm all Dispensers in the Tomb","rbxthumb://type=Asset&id=" .. 9592730478 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            TombDisarmDarts = e
+            if DisarmTombDarts ~= nil then
+                DisarmTombDarts()
+            end
+        end
+    end)
   
 
 
@@ -277,9 +289,11 @@ spawn(function()
 
     Mouse.Button1Down:connect(function()
         if game:GetService("UserInputService"):IsKeyDown(HoldToSelect) then 
-            Parts[Mouse.Target] = {Part = Mouse.Target, Parent = Mouse.Target.Parent}
-            Mouse.Target.Parent = game.CoreGui;
-            Sound0:Play()
+            if not Mouse.Target:IsA("Terrain") then
+                Parts[Mouse.Target] = {Part = Mouse.Target, Parent = Mouse.Target.Parent}
+                Mouse.Target.Parent = game.CoreGui;
+                Sound0:Play()
+            end
         end 
     end)
 
@@ -798,3 +812,60 @@ function DisarmTombSpikes()
         end
     end
 end
+
+
+-- Disarm Tomb Darts
+function DisarmTombDarts()
+    if TombDisarmDarts then
+        for _,v in ipairs(game:GetService("Workspace").RobberyTomb.DartRoom.Darts:GetChildren()) do
+            if v:FindFirstChild("DartDamage") then
+                DartDamage[v.DartDamage] = {Part = v.DartDamage, Parent = v.DartDamage.Parent}
+                v.DartDamage.Parent = game.CoreGui
+            end
+        end
+        spawn(function()
+            repeat wait()
+                for _,v in ipairs(game:GetService("Workspace").Darts:GetChildren()) do
+                    for _,v in ipairs(v:GetChildren()) do
+                        for _,v in ipairs(v:GetChildren()) do
+                            if v.Name == "Decal" then
+                                v.Color3 = Color3.fromRGB(0,255,0)
+                            end
+                        end
+                    end
+                end
+            until game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes.Material ~= Enum.Material.Neon or TombDisarmDarts == false
+        end)
+    else
+        for _,v in pairs(DartDamage) do    
+            v.Part.Parent = v.Parent    
+            DartDamage[v] = nil
+        end
+    end
+end
+game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes:GetPropertyChangedSignal("Material"):Connect(function()
+    if StoreStatusNotify and game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes.Material == Enum.Material.Neon then
+        spawn(function()
+            notify.push({
+                Title = "H3x",
+                Text = "Tomb just Opened",
+                Duration = 10;
+            })
+        end)
+    end
+    if TombDisarmDarts then
+        spawn(function()
+            repeat wait()
+                for _,v in ipairs(game:GetService("Workspace").Darts:GetChildren()) do
+                    for _,v in ipairs(v:GetChildren()) do
+                        for _,v in ipairs(v:GetChildren()) do
+                            if v.Name == "Decal" then
+                                v.Color3 = Color3.fromRGB(0,255,0)
+                            end
+                        end
+                    end
+                end
+            until game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes.Material ~= Enum.Material.Neon or TombDisarmDarts == false
+        end)
+    end
+end)

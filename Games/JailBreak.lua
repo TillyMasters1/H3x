@@ -347,7 +347,7 @@ game:GetService("UserInputService").JumpRequest:connect(function()
    if InfJump == true and Jumping == false then
        Jumping = true
        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-       repeat wait(0.5) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
+       repeat wait(0.1) until game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) == false
        Jumping = false
    end
 end)

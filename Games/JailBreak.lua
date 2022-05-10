@@ -277,7 +277,7 @@ spawn(function()
 
     Mouse.Button1Down:connect(function()
         if game:GetService("UserInputService"):IsKeyDown(HoldToSelect) then 
-            table.insert(Parts,Mouse.Target)
+            Parts[Mouse.Target] = {Part = Mouse.Target, Parent = Mouse.Target.Parent}
             Mouse.Target.Parent = game.CoreGui;
             Sound0:Play()
         end 
@@ -294,7 +294,7 @@ spawn(function()
                 c = a 
             end;
             pcall(function()
-                Parts[c].Parent = workspace;
+                Parts[c].Part.Parent = Parts[c].Parent
                 table.remove(Parts,c)
                 Sound1:Play()
             end)

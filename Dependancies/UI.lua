@@ -3420,7 +3420,7 @@ section.Main.MouseButton1Up:Connect(function()
 			tween(section.Open,0.3,{Rotation = 0})
 		else
 			tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
-			tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.UIListLayout.AbsoluteContentSize.Y+10)})
+			tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
 			tween(section.Open,0.3,{Rotation = 180})
 		end
 		held = false;

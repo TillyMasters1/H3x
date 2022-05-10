@@ -703,6 +703,22 @@ function RemoveDoorsFunction()
         end
     end
     
+    for _,v in ipairs(game:GetService("Workspace").Jewelrys:FindFirstChildWhichIsA("Model"):GetChildren()) do
+        if v.Name == "SwingDoor" then
+            if RemoveDoors == true then
+                v.Model.TheDoor.CanCollide = false
+                v.Model.TheGlass.CanCollide = false
+                v.Model.TheDoor.Transparency = 0.5
+                v.Model.TheGlass.Transparency = 0.94
+            else
+                v.Model.TheDoor.CanCollide = true
+                v.Model.TheGlass.CanCollide = true
+                v.Model.TheDoor.Transparency = 0
+                v.Model.TheGlass.Transparency = 0.8
+            end
+        end
+    end
+    
     for _,v in ipairs(game:GetService("Workspace"):GetChildren()) do
         if v.Name == "Cell" and v:FindFirstChild("Door")then
             if RemoveDoors == true then

@@ -850,6 +850,11 @@ function DisarmTombDarts()
                         end
                     end
                 end
+                for _,v in ipairs(game:GetService("Workspace").RobberyTomb.DartRoom.Pillars:GetChildren()) do
+                    if v.InnerModel.Platform.Color == Color3.fromRGB(253, 123, 97) then
+                        v.InnerModel.Platform.Color = Color3.fromRGB(124, 156, 107)
+                    end
+                end
             until game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes.Material ~= Enum.Material.Neon or TombDisarmDarts == false
         end)
     else

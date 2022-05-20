@@ -21,14 +21,15 @@ local flying = false
 local InfJump = false
 local AntiAfk = false
 local AutoOpenDoor = false
-local CasinoDoorTouch = false
 local JewDisarmLasers = false
 local BankDisarmLasers = false
+local CasinoDisarmLasers = false
 local StoreStatusNotify = true
 local Jumping = false
 local RemoveDoors = true
 local HoldingShift = false
 local TombDisarmDarts = false
+local CasinoStatus = false
 
 -- Tables
 local DartDamage = {}
@@ -204,8 +205,11 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
         end
     end)
     Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from Casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
-        if e == true then
-            DisarmCasinoLasers()
+        if e == true or e == false then
+            CasinoDisarmLasers = e
+            if DisarmCasinoLasers ~= nil then
+                DisarmCasinoLasers()
+            end
         end
     end)
 
@@ -423,39 +427,118 @@ Fly()
 
 -- AutoOpenDoor Casino
 spawn(function()
-    local CasinoDoor = Instance.new("Part")
-    CasinoDoor.Parent = game:GetService("Workspace").Casino.RobberyDoor
-    CasinoDoor.CFrame = CFrame.new(54.1812134, 20.8244991, -4708.33691, -0.961297989, 0, -0.275510818, 0, 1, 0, 0.275510818, 0, -0.961297989)
-    CasinoDoor.Size = Vector3.new(10.0019, 30, 8.99407)
-    CasinoDoor.Color = Color3.fromRGB(196, 40, 28)
-    CasinoDoor.Anchored = true
-    CasinoDoor.CanCollide = false
-    CasinoDoor.Transparency = 1       
-    CasinoDoor.Touched:connect(function()
-        if AutoOpenDoor == true and CasinoDoorTouch == false then
-            CasinoDoorTouch = true
+    while wait() do
+        if AutoOpenDoor and game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").Casino.RobberyDoor.Door.InnerModel.TheDoor.Position) < 15 then
             for _,v in ipairs(game:GetService("Workspace").Casino.RobberyDoor.Codes:GetChildren()) do
                if v:GetChildren()[1].SurfaceGui.TextLabel.Text ~= "" then
                    Digits = {v:GetChildren()[1].SurfaceGui.TextLabel.Text, v:GetChildren()[2].SurfaceGui.TextLabel.Text, v:GetChildren()[3].SurfaceGui.TextLabel.Text, v:GetChildren()[4].SurfaceGui.TextLabel.Text}
                    repeat wait()
                         game:GetService("Workspace").Casino.RobberyDoor.Keypad.Pad.CasinoKeypadSubmit:FireServer(table.concat(Digits, ''))
-                   until CasinoDoorTouch == false
-                   return
+                   until game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").Casino.RobberyDoor.Door.InnerModel.TheDoor.Position) >= 15
+                   CasinoStatus = true
                end
             end
+            if CasinoStatus == false then
+                spawn(function()
+                    notify.push({
+                        Title = "H3x",
+                        Text = "The Casino is currently closed.",
+                        Duration = 10;
+                    })
+                end)
+                repeat wait() until game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").Casino.RobberyDoor.Door.InnerModel.TheDoor.Position) >= 15
+            end
+            CasinoStatus = false
+        end
+    end
+end)
+
+
+-- Disarm Casino Lasers
+function DisarmCasinoLasers()
+    wait(0.5)
+    for _,v in ipairs(game:GetService("Workspace").Casino.Lasers:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.LasersMoving:GetChildren()) do
+        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
+            v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+            v.InnerModel.Part.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.LaserCarousel.InnerModel:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            v.TouchInterest:Destroy()
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
+        if v:FindFirstChild("TouchInterest") then
+            v.Color = Color3.fromRGB(0, 255, 0)
+            for _,v in ipairs(v:GetChildren()) do
+                if v.Name == "TouchInterest" then
+                    v:Destroy()
+                end
+            end
+        else
+            if v:FindFirstChild("Part") then
+                v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        v:Destroy()
+                    end
+                end
+            end
+        end
+    end
+    
+    for _,v in ipairs(game:GetService("Workspace").Casino.CamerasMoving:GetChildren()) do
+        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
+            v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
+            v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
+            v.InnerModel.Part.TouchInterest:Destroy()
+        end
+    end
+end
+game:GetService("Workspace").Casino.OpenIndicators.Part:GetPropertyChangedSignal("Material"):Connect(function()
+    if game:GetService("Workspace").Casino.OpenIndicators.Part.Material == Enum.Material.Neon then
+        DisarmCasinoLasers()   
+        if StoreStatusNotify then
             spawn(function()
                 notify.push({
                     Title = "H3x",
-                    Text = "The Casino is currently closed.",
+                    Text = "Casino just Opened",
                     Duration = 10;
                 })
-            end)
+            end) 
         end
-    end)
-    CasinoDoor.TouchEnded:connect(function()
-        wait(1)
-        CasinoDoorTouch = false    
-    end)
+    elseif CasinoDisarmLasers then
+        for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
+            if v:FindFirstChild("TouchInterest") then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        v:Destroy()
+                    end
+                end
+            else
+                if v:FindFirstChild("Part") then
+                    v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                    for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                        if v.Name == "TouchInterest" then
+                            v:Destroy()
+                        end
+                    end
+                end
+            end
+        end
+    end
 end)
 
 
@@ -594,83 +677,6 @@ game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildA
             v.CanCollide = true
             v.Transparency = 0
         end
-    end
-end)
-
-
--- Disarm Casino Lasers
-function DisarmCasinoLasers()
-    wait(0.5)
-    for _,v in ipairs(game:GetService("Workspace").Casino.Lasers:GetChildren()) do
-        if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
-        end
-    end
-    
-    for _,v in ipairs(game:GetService("Workspace").Casino.LasersMoving:GetChildren()) do
-        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
-            v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
-            v.InnerModel.Part.TouchInterest:Destroy()
-        end
-    end
-    
-    for _,v in ipairs(game:GetService("Workspace").Casino.LaserCarousel.InnerModel:GetChildren()) do
-        if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
-        end
-    end
-    
-    for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
-        if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            for _,v in ipairs(v:GetChildren()) do
-                if v.Name == "TouchInterest" then
-                    v:Destroy()
-                end
-            end
-        else
-            if v:FindFirstChild("Part") then
-                v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
-                for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
-                    if v.Name == "TouchInterest" then
-                        v:Destroy()
-                    end
-                end
-            end
-        end
-    end
-    
-    for _,v in ipairs(game:GetService("Workspace").Casino.CamerasMoving:GetChildren()) do
-        if v.InnerModel.Part:FindFirstChild("TouchInterest") then
-            v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
-            v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
-            v.InnerModel.Part.TouchInterest:Destroy()
-        end
-    end
-end
-game:GetService("Workspace").Casino.ChildAdded:Connect(function(Child)
-    if Child.Name == "VaultLaserControl" then
-        for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
-            if v:FindFirstChild("TouchInterest") then
-                v.Color = Color3.fromRGB(0, 255, 0)
-                for _,v in ipairs(v:GetChildren()) do
-                    if v.Name == "TouchInterest" then
-                        v:Destroy()
-                    end
-                end
-            else
-                if v:FindFirstChild("Part") then
-                    v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
-                    for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
-                        if v.Name == "TouchInterest" then
-                            v:Destroy()
-                        end
-                    end
-                end
-            end
-        end    
     end
 end)
     

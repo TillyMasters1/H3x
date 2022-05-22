@@ -538,7 +538,7 @@ end
 -- Buy Ammo
 function BuyAmmo(Amount)
     if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType") then
-        if Prices[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType").Value] * Amount < tonumber(game:GetService("Players").LocalPlayer.PlayerGui.HUD.CashLabel.Text:split('$')[2]) then
+        if Prices[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType").Value] * Amount < tonumber(string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.HUD.CashLabel.Text:split('$')[2], ",", ""):split(' ')[1]) then
             for count = 1, Amount do
                 game.ReplicatedStorage:WaitForChild("Events").WeaponEvent:FireServer("BuyAmmo", game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name)
             end

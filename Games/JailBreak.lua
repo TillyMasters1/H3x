@@ -30,6 +30,7 @@ local RemoveDoors = true
 local HoldingShift = false
 local TombDisarmDarts = false
 local CasinoStatus = false
+local CasinoAutoCrackVaults
 
 -- Tables
 local DartDamage = {}
@@ -202,6 +203,11 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
     Casino:Switch("Auto Open Door","Toggles auto open door for the Casino","rbxthumb://type=Asset&id=" .. 9426988006 .. "&w=420&h=420",false,"","",function(e)
         if e == true or e == false then
             AutoOpenDoor = e
+        end
+    end)
+    Casino:Switch("Auto Crack Vaults","Automaticly Crack the vaults after you start it!","rbxthumb://type=Asset&id=" .. 9188665128 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            CasinoAutoCrackVaults = e
         end
     end)
     Casino:Switch("Disarm Lasers","Disarm all lasers and cameras from Casino","rbxthumb://type=Asset&id=" .. 9432917379 .. "&w=420&h=420",false,"","",function(e)
@@ -894,5 +900,23 @@ game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes:GetPropertyChange
                 end
             until game:GetService("Workspace").RobberyTomb.Guardians.Statue.Eyes.Material ~= Enum.Material.Neon or TombDisarmDarts == false
         end)
+    end
+end)
+
+
+-- Casino Auto Crack Vaults
+for _,v in ipairs(game:GetService("Workspace").Casino.HackableVaults:GetChildren()) do
+    if v.Name == "VaultDoorSlider" then
+        v.InnerModel.Model.Light:GetPropertyChangedSignal("Color"):Connect(function()
+            if v.InnerModel.Model.Light.Color == Color3.fromRGB(0,255,0) and CasinoAutoCrackVaults then
+                v.InnerModel.Puzzle.UpdateDirection:FireServer()
+            end
+        end)
+    end
+end
+
+game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED:GetPropertyChangedSignal("Color"):Connect(function()
+    if game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED.Color == Color3.fromRGB(0,255,0) and CasinoAutoCrackVaults then
+        game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
     end
 end)

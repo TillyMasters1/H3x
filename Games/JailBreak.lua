@@ -467,6 +467,7 @@ function DisarmCasinoLasers()
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
             v.TouchInterest:Destroy()
+            v.CanCollide = false
         end
     end
     
@@ -474,6 +475,7 @@ function DisarmCasinoLasers()
         if v.InnerModel.Part:FindFirstChild("TouchInterest") then
             v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
             v.InnerModel.Part.TouchInterest:Destroy()
+            v.InnerModel.Part.CanCollide = false
         end
     end
     
@@ -481,12 +483,14 @@ function DisarmCasinoLasers()
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
             v.TouchInterest:Destroy()
+            v.CanCollide = false
         end
     end
     
     for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
             v.Color = Color3.fromRGB(0, 255, 0)
+            v.CanCollide = false
             for _,v in ipairs(v:GetChildren()) do
                 if v.Name == "TouchInterest" then
                     v:Destroy()
@@ -495,6 +499,7 @@ function DisarmCasinoLasers()
         else
             if v:FindFirstChild("Part") then
                 v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                v.InnerModel.Part.CanCollide = false
                 for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
                     if v.Name == "TouchInterest" then
                         v:Destroy()
@@ -507,6 +512,7 @@ function DisarmCasinoLasers()
     for _,v in ipairs(game:GetService("Workspace").Casino.CamerasMoving:GetChildren()) do
         if v.InnerModel.Part:FindFirstChild("TouchInterest") then
             v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
+            v.InnerModel.Part.CanCollide = false
             v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
             v.InnerModel.Part.TouchInterest:Destroy()
         end
@@ -633,7 +639,6 @@ function DisarmBankLasers()
             if v:FindFirstChild("TouchInterest") then
                 v.TouchInterest:Destroy()  
             end
-            v.CanCollide = false
         elseif v.Name == "LaserTrack" then
             for _,v in ipairs(v.Lasers:GetChildren()) do
                 v.Color = Color3.fromRGB(0, 255, 0)
@@ -647,7 +652,6 @@ function DisarmBankLasers()
                 if v.Part:FindFirstChild("TouchInterest") then
                     v.Part.TouchInterest:Destroy()  
                 end
-                v.Part.CanCollide = false
             end
         end
     end
@@ -658,7 +662,6 @@ function DisarmBankLasers()
             if v:FindFirstChild("TouchInterest") then
                 v.TouchInterest:Destroy()  
             end
-            v.CanCollide = false
         end
     end
 end

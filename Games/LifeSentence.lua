@@ -462,9 +462,7 @@ spawn(function()
                             Cash1Detected = true
                             fireproximityprompt(part.ProximityPrompt, 20)
                             print("--Collected Cash 1")
-                            spawn(function()
-                                CashEarned = CashEarned + part.Amount.Value
-                            end)
+                            CashEarned = CashEarned + part.Amount.Value
                             Touched:Disconnect()
                         end
                     end)

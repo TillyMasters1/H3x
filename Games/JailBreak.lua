@@ -34,6 +34,7 @@ local CasinoAutoCrackVaults
 
 -- Tables
 local DartDamage = {}
+local CasinoDamage = {}
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -465,44 +466,58 @@ function DisarmCasinoLasers()
     wait(0.5)
     for _,v in ipairs(game:GetService("Workspace").Casino.Lasers:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
+            if CasinoDisarmLasers then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                CasinoDamage[v.TouchInterest] = {Part = v.TouchInterest, Parent = v.TouchInterest.Parent}
+                v.TouchInterest = game.CoreGui
+            end
             v.CanCollide = false
         end
     end
     
     for _,v in ipairs(game:GetService("Workspace").Casino.LasersMoving:GetChildren()) do
         if v.InnerModel.Part:FindFirstChild("TouchInterest") then
-            v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
-            v.InnerModel.Part.TouchInterest:Destroy()
+            if CasinoDisarmLasers then
+                v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                CasinoDamage[v.InnerModel.Part.TouchInterest] = {Part = v.InnerModel.Part.TouchInterest, Parent = v.InnerModel.Part.TouchInterest.Parent}
+                v.InnerModel.Part.TouchInterest = game.CoreGui
+            end
             v.InnerModel.Part.CanCollide = false
         end
     end
     
     for _,v in ipairs(game:GetService("Workspace").Casino.LaserCarousel.InnerModel:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            v.TouchInterest:Destroy()
+            if CasinoDisarmLasers then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                CasinoDamage[v.TouchInterest] = {Part = v.TouchInterest, Parent = v.TouchInterest.Parent}
+                v.TouchInterest = game.CoreGui
+            end
             v.CanCollide = false
         end
     end
     
     for _,v in ipairs(game:GetService("Workspace").Casino.VaultLaserControl:GetChildren()) do
         if v:FindFirstChild("TouchInterest") then
-            v.Color = Color3.fromRGB(0, 255, 0)
-            v.CanCollide = false
-            for _,v in ipairs(v:GetChildren()) do
-                if v.Name == "TouchInterest" then
-                    v:Destroy()
+            if CasinoDisarmLasers then
+                v.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        CasinoDamage[v] = {Part = v, Parent = v.Parent}
+                        v = game.CoreGui
+                    end
                 end
             end
+            v.CanCollide = false
         else
             if v:FindFirstChild("Part") then
-                v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
-                v.InnerModel.Part.CanCollide = false
-                for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
-                    if v.Name == "TouchInterest" then
-                        v:Destroy()
+                if CasinoDisarmLasers then
+                    v.InnerModel.Part.Color = Color3.fromRGB(0, 255, 0)
+                    for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                        if v.Name == "TouchInterest" then
+                            CasinoDamage[v.InnerModel.Part] = {Part = v.InnerModel.Part, Parent = v.InnerModel.Part.Parent}
+                            v.InnerModel.Part = game.CoreGui
+                        end
                     end
                 end
             end
@@ -513,14 +528,31 @@ function DisarmCasinoLasers()
         if v.InnerModel.Part:FindFirstChild("TouchInterest") then
             v.InnerModel.Part.Color = Color3.fromRGB(31, 128, 29)
             v.InnerModel.Part.CanCollide = false
-            v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
-            v.InnerModel.Part.TouchInterest:Destroy()
+            if  then
+                v.InnerModel.Shadow.Color = Color3.fromRGB(0, 255, 0)
+                for _,v in ipairs(v.InnerModel.Part:GetChildren()) do
+                    if v.Name == "TouchInterest" then
+                        CasinoDamage[v.InnerModel.Part] = {Part = v.InnerModel.Part, Parent = v.InnerModel.Part.Parent}
+                        v.InnerModel.Part = game.CoreGui
+                    end
+                end
+            end
         end
+    end
+    
+    if not CasinoDisarmLasers then
+        v.Color = Color3.fromRGB(255, 0, 0)
+        for _,v in pairs(CasinoDamage) do    
+            v.Part.Parent = v.Parent    
+            CasinoDamage[v] = nil
+        end    
     end
 end
 game:GetService("Workspace").Casino.OpenIndicators.Part:GetPropertyChangedSignal("Material"):Connect(function()
     if game:GetService("Workspace").Casino.OpenIndicators.Part.Material == Enum.Material.Neon then
-        DisarmCasinoLasers()   
+        if CasinoDisarmLasers then
+            DisarmCasinoLasers()   
+        end
         if StoreStatusNotify then
             spawn(function()
                 notify.push({

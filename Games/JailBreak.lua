@@ -14,7 +14,6 @@ local speed = 0
 local WalkSpeed = plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
 local JumpPower = plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
 local torso
-local SlidingDoorParts = {}
 
 -- Bool Variables
 local flying = false
@@ -31,9 +30,11 @@ local HoldingShift = false
 local TombDisarmDarts = false
 local CasinoStatus = false
 local CasinoAutoCrackVaults
+local ShipTurretsDisarm = false
 
 -- Tables
 local DartDamage = {}
+local SlidingDoorParts = {}
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -249,6 +250,17 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
             TombDisarmDarts = e
             if DisarmTombDarts ~= nil then
                 DisarmTombDarts()
+            end
+        end
+    end)
+
+    -- CargoShip Assistant
+    local CargoShip = RobAssistant:Section("CargoShip Assistants","","rbxthumb://type=Asset&id=" .. 9735574541 .. "&w=420&h=420","","")
+    CargoShip:Switch("Disarm Turrets","Disarm all Turrets on the CargoShip","rbxthumb://type=Asset&id=" .. 9735575183 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            ShipTurretsDisarm = e
+            if DisarmShipTurrets ~= nil then
+                DisarmShipTurrets()
             end
         end
     end)
@@ -678,7 +690,7 @@ game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout.ChildA
     if BankDisarmLasers == true then
         DisarmBankLasers()
     end
-    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model").EscapeRoutes.BankDoor.Door.Model:GetChildren()) do
+    for _,v in ipairs(game:GetService("Workspace").Banks:FindFirstChildWhichIsA("Model").Layout:FindFirstChildWhichIsA("Model"):WaitForChild("EscapeRoutes").BankDoor.Door.Model:GetChildren()) do
         if RemoveDoors == true then
             v.CanCollide = false
             v.Transparency = 0.6
@@ -856,15 +868,17 @@ function DisarmTombDarts()
         end
         spawn(function()
             repeat wait()
-                for _,v in ipairs(game:GetService("Workspace").Darts:GetChildren()) do
-                    for _,v in ipairs(v:GetChildren()) do
+                spawn(function()
+                    for _,v in ipairs(game:GetService("Workspace").Darts:GetChildren()) do
                         for _,v in ipairs(v:GetChildren()) do
-                            if v.Name == "Decal" then
-                                v.Color3 = Color3.fromRGB(0,255,0)
+                            for _,v in ipairs(v:GetChildren()) do
+                                if v.Name == "Decal" then
+                                    v.Color3 = Color3.fromRGB(0,255,0)
+                                end
                             end
                         end
                     end
-                end
+                end)
                 for _,v in ipairs(game:GetService("Workspace").RobberyTomb.DartRoom.Pillars:GetChildren()) do
                     if v.InnerModel.Platform.Color == Color3.fromRGB(253, 123, 97) then
                         v.InnerModel.Platform.Color = Color3.fromRGB(124, 156, 107)
@@ -921,5 +935,87 @@ end
 game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED:GetPropertyChangedSignal("Color"):Connect(function()
     if game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED.Color == Color3.fromRGB(0,255,0) and CasinoAutoCrackVaults then
         game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()
+    end
+end)
+
+
+-- CargoShip Disarm Turrets
+function DisarmShipTurrets()
+	if ShipTurretsDisarm and game.Workspace:FindFirstChild("CargoShip") then
+		local Cork = Instance.new("MeshPart")
+		Cork.Name = "Cork"
+		Cork.Parent = game.Workspace.CargoShip.TurretFront.Arm
+		Cork.MeshId = "rbxassetid://6874611209"
+		Cork.Size = Vector3.new(0.1,0.05,0.1)
+		Cork.Position = game.Workspace.CargoShip.TurretFront.Arm.Tip.Position
+		Cork.Orientation = Vector3.new(game.Workspace.CargoShip.TurretFront.Arm.Tip.Orientation.X - 90,game.Workspace.CargoShip.TurretFront.Arm.Tip.Orientation.Y,game.Workspace.CargoShip.TurretFront.Arm.Tip.Orientation.Z)
+        game.Workspace.CargoShip.TurretFront.Arm.Tip.Parent = game.CoreGui
+		local WeldConstraint = Instance.new("WeldConstraint")
+		WeldConstraint.Parent = Cork
+		WeldConstraint.Part0 = Cork
+		WeldConstraint.Part1 = game.Workspace.CargoShip.TurretFront.Arm.Barrel
+		local SurfaceAppearance = Instance.new("SurfaceAppearance")
+		SurfaceAppearance.Parent = Cork
+		SurfaceAppearance.AlphaMode = Enum.AlphaMode.Overlay
+		SurfaceAppearance.ColorMap = "rbxassetid://6874617462"
+		SurfaceAppearance.MetalnessMap = "rbxassetid://6874620077"
+		SurfaceAppearance.NormalMap = "rbxassetid://6874616351"
+		SurfaceAppearance.RoughnessMap = "rbxassetid://6874618816"
+        local Fire = Instance.new("Fire")
+        Fire.Parent = game.Workspace.CargoShip.TurretFront.Base.Detail
+        Fire.Size = 30
+		local Cork1 = Instance.new("MeshPart")
+		Cork1.Name = "Cork1"
+		Cork1.Parent = game.Workspace.CargoShip.TurretBack.Arm
+		Cork1.MeshId = "rbxassetid://6874611209"
+		Cork1.Size = Vector3.new(0.1,0.05,0.1)
+		Cork1.Position = game.Workspace.CargoShip.TurretBack.Arm.Tip.Position
+		Cork1.Orientation = Vector3.new(game.Workspace.CargoShip.TurretBack.Arm.Tip.Orientation.X - 90,game.Workspace.CargoShip.TurretBack.Arm.Tip.Orientation.Y,game.Workspace.CargoShip.TurretBack.Arm.Tip.Orientation.Z)
+        game.Workspace.CargoShip.TurretBack.Arm.Tip.Parent = game.CoreGui
+		local SurfaceAppearance = Instance.new("SurfaceAppearance")
+		SurfaceAppearance.Parent = Cork1
+		SurfaceAppearance.AlphaMode = Enum.AlphaMode.Overlay
+		SurfaceAppearance.ColorMap = "rbxassetid://6874617462"
+		SurfaceAppearance.MetalnessMap = "rbxassetid://6874620077"
+		SurfaceAppearance.NormalMap = "rbxassetid://6874616351"
+		SurfaceAppearance.RoughnessMap = "rbxassetid://6874618816"
+		local WeldConstraint = Instance.new("WeldConstraint")
+		local WeldConstraint = Instance.new("WeldConstraint")
+		WeldConstraint.Parent = Cork1
+		WeldConstraint.Part0 = Cork1
+		WeldConstraint.Part1 = game.Workspace.CargoShip.TurretBack.Arm.Barrel
+        local Fire = Instance.new("Fire")
+        Fire.Parent = game.Workspace.CargoShip.TurretBack.Base.Detail
+        Fire.Size = 30
+    else
+        if game.Workspace:FindFirstChild("CargoShip") and not game.Workspace.CargoShip.TurretFront.Arm:FindFirstChild("Tip") then
+            game.CoreGui.Tip.Parent = game.Workspace.CargoShip.TurretFront.Arm
+            game.Workspace.CargoShip.TurretFront.Arm.Cork:Destroy()
+            game.Workspace.CargoShip.TurretFront.Base.Detail.Fire:Destroy()
+        elseif game.CoreGui:FindFirstChild("Tip") then
+            game.CoreGui.Tip:Destroy()
+        end
+        if game.Workspace:FindFirstChild("CargoShip") and not game.Workspace.CargoShip.TurretBack.Arm:FindFirstChild("Tip") then
+            game.CoreGui.Tip.Parent = game.Workspace.CargoShip.TurretBack.Arm
+            game.Workspace.CargoShip.TurretBack.Arm.Cork1:Destroy()
+            game.Workspace.CargoShip.TurretBack.Base.Detail.Fire:Destroy()
+        elseif game.CoreGui:FindFirstChild("Tip") then
+            game.CoreGui.Tip:Destroy()
+        end
+    end
+end
+game.Workspace.ChildAdded:Connect(function(model)
+    if model.Name == "CargoShip" and ShipTurretsDisarm then
+        if StoreStatusNotify then
+            spawn(function()
+                notify.push({
+                    Title = "H3x",
+                    Text = "CargoShip just Entered the map",
+                    Duration = 10;
+                })
+            end)
+        end
+        wait(1)
+        DisarmShipTurrets()
     end
 end)

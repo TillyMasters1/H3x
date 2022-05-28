@@ -3411,21 +3411,25 @@ function library:Tab(name,image,IRO,IRS)
 			held = true;
 			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(170,170,170)})
 		end)
-section.Main.MouseButton1Up:Connect(function()
-	if held then
-		tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
-		if section.Open.Rotation == 180 then
-			tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
-			tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
-			tween(section.Open,0.3,{Rotation = 0})
-		else
-			tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
-			tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
-			tween(section.Open,0.3,{Rotation = 180})
-		end
-		held = false;
-	end
-end)
+		
+		section.Main.MouseButton1Up:Connect(function()
+			if held then
+				tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
+				if section.Open.Rotation == 180 then
+					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
+					wait(0.35)
+					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+					tween(section.Open,0.3,{Rotation = 0})
+				else
+					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
+					wait(0.35)
+					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+					tween(section.Open,0.3,{Rotation = 180})
+				end
+				held = false;
+			end
+		end)
+		
 		section.Main.MouseEnter:Connect(function()
 			tween(section.Main,0.2,{ImageColor3 = Color3.fromRGB(63,63,63)})
 		end)

@@ -870,7 +870,7 @@ function library:Tab(name,image,IRO,IRS)
 			tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return switch;
 	end
@@ -1024,7 +1024,7 @@ function library:Tab(name,image,IRO,IRS)
 			end
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return box;
 	end
@@ -1229,7 +1229,7 @@ function library:Tab(name,image,IRO,IRS)
 			end
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return bind;
 	end
@@ -1493,7 +1493,7 @@ function library:Tab(name,image,IRO,IRS)
 
 		slider:Set(default)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return slider;
 	end
@@ -1519,7 +1519,7 @@ function library:Tab(name,image,IRO,IRS)
 			txt.Main.Text = val;
 		end
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return txt;
 
@@ -1863,7 +1863,7 @@ function library:Tab(name,image,IRO,IRS)
 			end
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return dropdown;
 	end
@@ -2845,7 +2845,7 @@ function library:Tab(name,image,IRO,IRS)
 			tween(colorpicker.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return colorpicker;
 	end
@@ -3153,7 +3153,7 @@ function library:Tab(name,image,IRO,IRS)
 				tween(switch.Main,0.3,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			end)
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 			return switch;
 		end
@@ -3255,7 +3255,7 @@ function library:Tab(name,image,IRO,IRS)
 				tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			end)
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 			return button;
 		end
@@ -3283,7 +3283,7 @@ function library:Tab(name,image,IRO,IRS)
 				txt.Main.Text = val;
 			end
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 			return txt;
 
@@ -3401,7 +3401,7 @@ function library:Tab(name,image,IRO,IRS)
 				tween(toggle.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 			end)
 
-			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+			Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 			return toggle;
 		end
@@ -3438,7 +3438,7 @@ function library:Tab(name,image,IRO,IRS)
 			held = false;
 		end)
 		
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return section;
 

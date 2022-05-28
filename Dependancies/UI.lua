@@ -677,7 +677,7 @@ function library:Tab(name,image,IRO,IRS)
 			tween(button.Main,0.2,{ImageColor3 = Color3.fromRGB(43, 43, 43)});
 		end)
 
-		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y);
+		Window.Container.CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10);
 
 		return button;
 	end

@@ -3418,12 +3418,12 @@ function library:Tab(name,image,IRO,IRS)
 				if section.Open.Rotation == 180 then
 					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, section.HeldList.AbsoluteContentSize.Y+67)})
 					wait(0.35)
-					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10)})
 					tween(section.Open,0.3,{Rotation = 0})
 				else
 					tween(section.SectionHolder,0.3,{Size = UDim2.new(0, 788, 0, 67)})
 					wait(0.35)
-					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y)})
+					tween(Window.Container,0.3,{CanvasSize = UDim2.new(0,0,0,Window.ContainerList.AbsoluteContentSize.Y + 10)})
 					tween(section.Open,0.3,{Rotation = 180})
 				end
 				held = false;

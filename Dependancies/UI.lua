@@ -2533,9 +2533,9 @@ function library:Tab(name,image,IRO,IRS)
 			BorderColor3 = Color3.fromRGB(0, 0, 0);
 			BorderSizePixel = 0;
 			Position = UDim2.new(0.5, 0, 0.5, 0);
-			Size = UDim2.new(0, 4, 0, 4);
+			Size = UDim2.new(0, 15, 0, 15);
 			ZIndex = 9;
-			Image = "rbxassetid://3570695787";
+			Image = "rbxthumb://type=Asset&id=" .. 9769230476 .. "&w=420&h=420";
 			ScaleType = Enum.ScaleType.Slice;
 			SliceCenter = Rect.new(100, 100, 100, 100)
 		})

@@ -922,6 +922,16 @@ end)
 
 
 -- Casino Auto Crack Vaults
+for _,v in ipairs(game:GetService("Workspace").Casino.HackableVaults:GetChildren()) do
+    if v.Name == "VaultDoorSlider" then
+        v.InnerModel.Model.Light:GetPropertyChangedSignal("Color"):Connect(function()
+            if v.InnerModel.Model.Light.Color == Color3.fromRGB(0,255,0) and CasinoAutoCrackVaults then
+                v.InnerModel.Puzzle.UpdateDirection:FireServer()
+            end
+        end)
+    end
+end
+
 game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED:GetPropertyChangedSignal("Color"):Connect(function()
     if game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Model.UnlockedLED.Color == Color3.fromRGB(0,255,0) and CasinoAutoCrackVaults then
         game:GetService("Workspace").Casino.HackableVaults.VaultDoorMain.InnerModel.Puzzle.UpdateDirection:FireServer()

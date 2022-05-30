@@ -2529,7 +2529,6 @@ function library:Tab(name,image,IRO,IRS)
 		colorpicker.RGBCursor = library:create("ImageLabel",{
 			Name = "Cursor";
 			Parent = colorpicker.Gradient;
-			BackgroundColor3 = Color3.fromRGB(157, 55, 63);
 			BackgroundTransparency = 1.000;
 			BorderColor3 = Color3.fromRGB(0, 0, 0);
 			BorderSizePixel = 0;
@@ -2537,7 +2536,6 @@ function library:Tab(name,image,IRO,IRS)
 			Size = UDim2.new(0, 4, 0, 4);
 			ZIndex = 9;
 			Image = "rbxassetid://3570695787";
-			ImageColor3 = Color3.fromRGB(157, 55, 63);
 			ScaleType = Enum.ScaleType.Slice;
 			SliceCenter = Rect.new(100, 100, 100, 100)
 		})

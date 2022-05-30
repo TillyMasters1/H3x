@@ -2583,7 +2583,7 @@ function library:Tab(name,image,IRO,IRS)
 		local function UpdateCursorPosition(h, s)
 			local gradientSize = colorpicker.Gradient.AbsoluteSize
 			local sizeScale = 360 / gradientSize.X
-			colorpicker.RGBCursor.Position = Vector3.new(gradientSize.X - (tonumber(h) * 360) / sizeScale, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
+			colorpicker.RGBCursor.Position = UDim2.new(0, gradientSize.X - (tonumber(h) * 360) / sizeScale, 0, (gradientSize.Y - (tonumber(s) * 360) / sizeScale))
 		end
 
 		local function InBounds()

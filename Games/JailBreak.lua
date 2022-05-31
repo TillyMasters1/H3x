@@ -187,6 +187,13 @@ local Environment = library:Tab("Environment","rbxassetid://3926305904","644, 84
             end
         end
     end)
+    Environment:Switch("Rails No CanCollide","Turns off cancollide on all train rails","rbxthumb://type=Asset&id=" .. 9776594935 .. "&w=420&h=420",false,"","",function(e)
+        if e == true or e == false then
+            if RailsCollide ~= nil then
+                RailsCollide(e)
+            end
+        end
+    end)
 
 
 -- Rob Assistant
@@ -1019,3 +1026,13 @@ game.Workspace.ChildAdded:Connect(function(model)
         DisarmShipTurrets()
     end
 end)
+
+
+-- Rails NoCollide
+function RailsCollide(state)
+	for _,v in ipairs(game.Workspace:GetDescendants()) do
+		if v:IsA("MeshPart") and v.MeshId == "rbxassetid://660632447" then
+			v.CanCollide = state
+		end
+	end	
+end

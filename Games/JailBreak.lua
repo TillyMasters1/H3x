@@ -1031,7 +1031,7 @@ end)
 -- Rails NoCollide
 function RailsCollide(state)
 	for _,v in ipairs(game.Workspace:GetDescendants()) do
-		if v:IsA("MeshPart") and v.MeshId == "rbxassetid://9808983755" or v.MeshId == "rbxassetid://9809036425" then
+		if v:IsA("MeshPart") and v.Material == Enum.Material.Metal and v.Color == Color3.FromRGB(91,93,105) then
 			v.CanCollide = not state
 		end
 	end	

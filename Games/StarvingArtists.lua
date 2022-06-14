@@ -1,4 +1,4 @@
-loadstring(game:HttpGet("https://h3x.wtf/Install.lua"))(); loadstring(readfile("H3x/Modules/ENV.lua"))()
+loadstring(game:HttpGet("https://h3x.wtf/Install.lua"))();
 local library = loadstring(readfile("H3x/Modules/UI.lua"))({title = "H3X", description = "Loaded "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."!"});
 local notify = loadstring(game:HttpGet('https://h3x.wtf/Notify'))()
 repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") and game.Players.LocalPlayer.Character:findFirstChild("Torso") or game.Players.LocalPlayer.Character:findFirstChild("UpperTorso")

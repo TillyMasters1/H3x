@@ -1,10 +1,4 @@
 local library = (...) or {title = "H3x"; description = "Loaded for Lumber Tycoon 2"}
-print("gg")
-print(...)
-print(library)
-for _,v in pairs(library) do
-	print(v)	
-end
 
 do -- loadup
 	if library.title == nil then

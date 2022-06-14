@@ -1,4 +1,5 @@
 local library = (...) or {title = "H3x"; description = "Loaded for Lumber Tycoon 2"}
+print(library)
 for _,v in pairs(library) do
 	print(v)	
 end

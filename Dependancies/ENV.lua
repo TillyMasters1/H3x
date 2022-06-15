@@ -38,7 +38,8 @@ local exploitlist = {
     syn = "Synapse",
     PROTOSMASHER_LOADED = "ProtoSmasher",
     SENTINEL_LOADED = "Sentinel",
-    Sirhurt = "Sirhurt"
+    Sirhurt = "Sirhurt",
+    Krnl = "Krnl"
 }
 
 for i, v in pairs(Services) do

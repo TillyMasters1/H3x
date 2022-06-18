@@ -14,6 +14,7 @@ local speed = 0
 local WalkSpeed = plr.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
 local JumpPower = plr.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
 local torso
+local PuzzlePieces = game:GetService("Workspace").Museum.Puzzle2.Pieces
 
 -- Bool Variables
 local flying = false
@@ -1055,38 +1056,58 @@ function PuzzleMus()
     if AutoPuzzleMus then
         spawn(function()
             for _,v in ipairs(game:GetService("Workspace").Museum.Puzzle1.Spinners:GetChildren()) do
-                repeat
-                    fireclickdetector(v.ClickDetector, 5)
-                    wait(0.2)
-                until v.Orientation == Vector3.new(0, 52, 0)
+                if v.Orientation ~= Vector3.new(0, 52, 0) then
+                    repeat
+                        fireclickdetector(v.ClickDetector, 5)
+                        wait(0.2)
+                    until v.Orientation == Vector3.new(0, 52, 0)
+                end
             end
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, 90) or game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, -90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("3").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("3").Orientation == Vector3.new(0, -38, -90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("10").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("10").Orientation == Vector3.new(0, -38, 90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, 90) or game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, -90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("12").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("12").Orientation == Vector3.new(0, -38, -90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("19").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("19").Orientation == Vector3.new(0, -38, 90)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("20").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("20").Orientation == Vector3.new(0, -38, 180)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("13").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("13").Orientation == Vector3.new(0, -38, 0)
-            repeat wait(0.5)
-                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("14").ClickDetector, 5)
-            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("14").Orientation == Vector3.new(0, -38, -90) 
+            if PuzzlePieces:FindFirstChild("2").Orientation ~= Vector3.new(0, -38, 90) or PuzzlePieces:FindFirstChild("2").Orientation ~= Vector3.new(0, -38, -90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("2").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, 90) or PuzzlePieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, -90)
+            end
+            if PuzzlePieces:FindFirstChild("3").Orientation ~= Vector3.new(0, -38, -90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("3").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("3").Orientation == Vector3.new(0, -38, -90)
+            end
+            if PuzzlePieces:FindFirstChild("10").Orientation ~= Vector3.new(0, -38, 90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("10").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("10").Orientation == Vector3.new(0, -38, 90)
+            end
+            if PuzzlePieces:FindFirstChild("11").Orientation ~= Vector3.new(0, -38, 90) or PuzzlePieces:FindFirstChild("11").Orientation ~= Vector3.new(0, -38, -90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("11").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, 90) or PuzzlePieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, -90)
+            end
+            if PuzzlePieces:FindFirstChild("12").Orientation ~= Vector3.new(0, -38, -90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("12").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("12").Orientation == Vector3.new(0, -38, -90)
+            end
+            if PuzzlePieces:FindFirstChild("19").Orientation ~= Vector3.new(0, -38, 90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("19").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("19").Orientation == Vector3.new(0, -38, 90)
+            end
+            if PuzzlePieces:FindFirstChild("20").Orientation ~= Vector3.new(0, -38, 180) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("20").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("20").Orientation == Vector3.new(0, -38, 180)
+            end
+            if PuzzlePieces:FindFirstChild("13").Orientation ~= Vector3.new(0, -38, 0) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("13").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("13").Orientation == Vector3.new(0, -38, 0)
+            end
+            if PuzzlePieces:FindFirstChild("14").Orientation ~= Vector3.new(0, -38, -90) then
+                repeat wait(0.5)
+                    fireclickdetector(PuzzlePieces:FindFirstChild("14").ClickDetector, 5)
+                until PuzzlePieces:FindFirstChild("14").Orientation == Vector3.new(0, -38, -90) 
+            end
         end)
     end
 end

@@ -275,7 +275,7 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
     end)
     
     -- Museum Assistant
-    local Museum = RobAssistant:Section("Museum Assistants","","rbxthumb://type=Asset&id=" .. 9944267927 .. "&w=420&h=420","","")
+    local Museum = RobAssistant:Section("Museum Assistants","","rbxthumb://type=Asset&id=" .. 9949099692 .. "&w=420&h=420","","")
     Museum:Switch("Auto Puzzles","Automaticly complete the two puzzles to escape.","rbxassetid://3926305904",false,"924, 244","36, 36",function(e)
         if e == true or e == false then
             AutoPuzzleMus = e

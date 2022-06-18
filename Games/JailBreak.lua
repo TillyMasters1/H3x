@@ -31,6 +31,7 @@ local TombDisarmDarts = false
 local CasinoStatus = false
 local CasinoAutoCrackVaults
 local ShipTurretsDisarm = false
+local AutoPuzzleMus = false
 
 -- Tables
 local DartDamage = {}
@@ -268,6 +269,17 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
             ShipTurretsDisarm = e
             if DisarmShipTurrets ~= nil then
                 DisarmShipTurrets()
+            end
+        end
+    end)
+    
+    -- Museum Assistant
+    local Museum = RobAssistant:Section("Museum Assistants","","rbxthumb://type=Asset&id=" .. 9944267927 .. "&w=420&h=420","","")
+    Museum:Switch("Auto Puzzles","Automaticly complete the two puzzles to escape.","rbxassetid://3926305904",false,"924, 244","36, 36",function(e)
+        if e == true or e == false then
+            AutoPuzzleMus = e
+            if PuzzleMus ~= nil then
+                PuzzleMus()
             end
         end
     end)
@@ -1036,3 +1048,52 @@ function RailsCollide(state)
 		end
 	end	
 end
+
+
+-- Auto Complete Puzzles Mus function
+function PuzzleMus()
+    if AutoPuzzleMus then
+        spawn(function()
+            for _,v in ipairs(game:GetService("Workspace").Museum.Puzzle1.Spinners:GetChildren()) do
+                repeat
+                    fireclickdetector(v.ClickDetector, 5)
+                    wait(0.2)
+                until v.Orientation == Vector3.new(0, 52, 0)
+            end
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, 90) or game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("2").Orientation == Vector3.new(0, -38, -90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("3").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("3").Orientation == Vector3.new(0, -38, -90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("10").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("10").Orientation == Vector3.new(0, -38, 90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, 90) or game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("11").Orientation == Vector3.new(0, -38, -90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("12").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("12").Orientation == Vector3.new(0, -38, -90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("19").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("19").Orientation == Vector3.new(0, -38, 90)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("20").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("20").Orientation == Vector3.new(0, -38, 180)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("13").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("13").Orientation == Vector3.new(0, -38, 0)
+            repeat wait(0.5)
+                fireclickdetector(game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("14").ClickDetector, 5)
+            until game:GetService("Workspace").Museum.Puzzle2.Pieces:FindFirstChild("14").Orientation == Vector3.new(0, -38, -90) 
+        end)
+    end
+end
+
+-- Museum hole Transparency changed
+game:GetService("Workspace").Museum.Roof.Hole.RoofPart:GetPropertyChangedSignal("Transparency"):Connect(function()
+    if game:GetService("Workspace").Museum.Roof.Hole.RoofPart.Transparency == 1 then
+        PuzzleMus()
+    end
+end)

@@ -274,6 +274,7 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
         end
     end)
     
+if game.Players.LocalPlayer.Name == "TillyMasters2" then
     -- Museum Assistant
     local Museum = RobAssistant:Section("Museum Assistants","","rbxthumb://type=Asset&id=" .. 9949099692 .. "&w=420&h=420","","")
     Museum:Switch("Auto Puzzles","Automaticly complete the two puzzles to escape.","rbxassetid://3926305904",false,"924, 244","36, 36",function(e)
@@ -284,7 +285,7 @@ local RobAssistant = library:Tab("Robbery Assistant","rbxthumb://type=Asset&id="
             end
         end
     end)
-  
+  end
 
 
 -- Scripts

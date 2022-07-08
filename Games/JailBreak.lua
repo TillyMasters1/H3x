@@ -61,9 +61,7 @@ local MusDiamonds = {
     ["45, 52, 0"] = "3",
     ["30, 52, 0"] = "2",
     ["15, 52, 0"] = "1"
-}for i = 1, 3 do
-    print(i)
-end
+}
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H

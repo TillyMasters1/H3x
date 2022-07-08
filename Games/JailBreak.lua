@@ -37,6 +37,33 @@ local AutoPuzzleMus = false
 -- Tables
 local DartDamage = {}
 local SlidingDoorParts = {}
+local MusDiamonds = {
+    ["-15, 52, 0"] = "23", 
+    ["-30, 52, 0"] = "22",
+    ["-45, 52, 0"] = "21",
+    ["-60, 52, 0"] = "20",
+    ["-75, 51, 0"] = "19",
+    ["-90, 52, 0"] = "18",
+    ["-75, -128, 180"] = "17",
+    ["-60, -128, 180"] = "16",
+    ["-45, -128, -180"] = "15",
+    ["-30, -128, -180"] = "14",
+    ["-15, -128, -180"] = "13",
+    ["0, -128, 180"] = "12",
+    ["15, -128, 180"] = "11",
+    ["30, -128, 180"] = "10",
+    ["45, -128, 180"] = "9",
+    ["60, -128, -180"] = "8",
+    ["75, -129, 179"] = "7",
+    ["90, 52, 0"] = "6",
+    ["75, 52, 0"] = "5",
+    ["60, 52, 0"] = "4",
+    ["45, 52, 0"] = "3",
+    ["30, 52, 0"] = "2",
+    ["15, 52, 0"] = "1"
+}for i = 1, 3 do
+    print(i)
+end
 
 -- KeyBinds
 local FlyToggle = Enum.KeyCode.H
@@ -1052,18 +1079,26 @@ function RailsCollide(state)
 end
 
 
+-- Vector Rounder
+function roundVector(vector, unit)
+    return vector - Vector3.new(vector.X%unit, vector.Y%unit, vector.Z%unit)
+end
+
+
 -- Auto Complete Puzzles Mus function
 function PuzzleMus()
     if AutoPuzzleMus then
         spawn(function()
             for _,v in ipairs(game:GetService("Workspace").Museum.Puzzle1.Spinners:GetChildren()) do
                 if v.Orientation ~= Vector3.new(0, 52, 0) then
-                    repeat
-                        fireclickdetector(v.ClickDetector, 5)
-                        wait(0.2)
-                    until v.Orientation == Vector3.new(0, 52, 0)
+                    for i = 1, MusDiamonds[tostring(roundVector(v.Orientation,1))] do
+		    	fireclickdetector(v.ClickDetector, 5)
+			wait()
+		    end
                 end
             end
+	end)
+	spawn(function()
             if PuzzlePieces:FindFirstChild("2").Orientation ~= Vector3.new(0, -38, 180) or PuzzlePieces:FindFirstChild("2").Orientation ~= Vector3.new(0, -38, 0) then
                 repeat wait(0.5)
                     fireclickdetector(PuzzlePieces:FindFirstChild("2").ClickDetector, 5)
